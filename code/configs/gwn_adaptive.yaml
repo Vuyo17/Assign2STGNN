@@ -31,8 +31,10 @@ trainer:
   # pilot: ~37.6 min/epoch single-process. Kept IDENTICAL epoch budget/patience
   # to gwn_predefined.yaml so the two GWN configs remain a controlled ablation
   # (only learned_adjacency differs) even under the tighter time budget.
-  max_epochs: 12
-  early_stopping_patience: 5
+  # FURTHER REVISED: see gwn_predefined.yaml -- thread-oversubscription fix +
+  # extra epoch-budget safety margin under 4-way concurrent execution.
+  max_epochs: 6
+  early_stopping_patience: 4
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1

@@ -41,6 +41,30 @@
       "started": "2026-08-16 16:41:11",
       "finished": "2026-08-16 16:41:58",
       "notes": "2 epochs, 0.8 min, best_val_mae=5.574030876159668"
+    },
+    "tts_train": {
+      "state": "running",
+      "started": "2026-08-16 17:09:21",
+      "finished": null,
+      "notes": null
+    },
+    "gwn_predefined_train": {
+      "state": "running",
+      "started": "2026-08-16 17:09:52",
+      "finished": null,
+      "notes": null
+    },
+    "gwn_adaptive_train": {
+      "state": "running",
+      "started": "2026-08-16 17:10:25",
+      "finished": null,
+      "notes": null
+    },
+    "agcrn_train": {
+      "state": "running",
+      "started": "2026-08-16 17:10:39",
+      "finished": null,
+      "notes": null
     }
   }
 }

@@ -1,0 +1,9 @@
+[2026-08-16 17:15:24] [build_all_figures] Building whatever figures/tables the currently-available results support...
+[2026-08-16 17:17:07] [build_all_figures] fig01_adjacency_heatmap.png done (predefined graph, always available)
+[2026-08-16 17:17:07] [build_all_figures] Models with overall metrics available: []
+[2026-08-16 17:17:07] [build_all_figures] SKIPPED overall performance table/figures -- no metrics.json exists yet
+[2026-08-16 17:17:07] [build_all_figures] SKIPPED TTS per-station figures -- results/tts/predictions.npz not ready
+[2026-08-16 17:17:07] [build_all_figures] SKIPPED convergence curves -- no training_history.json exists yet
+[2026-08-16 17:17:07] [build_all_figures] SKIPPED per-station cross-model comparison -- fewer than 2 models have predictions.npz
+[2026-08-16 17:17:07] [build_all_figures] SKIPPED learned-adjacency figures/table -- results/gwn_adaptive/learned_adjacency.npy not ready
+[2026-08-16 17:17:07] [build_all_figures] build_all_figures pass complete.

@@ -43,8 +43,12 @@ trainer:
   # enough ceiling + early stopping), with the chosen/justified epoch count
   # read off its actual validation curve afterwards
   # (results/agcrn/training_history.json) rather than run twice.
-  max_epochs: 25
-  early_stopping_patience: 8
+  # FURTHER REVISED: thread-oversubscription fix (code/experiments/train.py)
+  # + extra epoch-budget safety margin under 4-way concurrent execution
+  # (observed 2.8x slowdown for TTS before the fix; budget sized conservatively
+  # assuming the fix only partially recovers throughput).
+  max_epochs: 16
+  early_stopping_patience: 6
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1

@@ -1,0 +1,3 @@
+[2026-08-16 17:10:19] [gwn_adaptive] === Q2 GWN (predefined+adaptive): full training run starting (config: code/configs/gwn_adaptive.yaml) ===
+[2026-08-16 17:10:25] [gwn_adaptive] Building predictor (lr=0.001, max_epochs=12, seed=42)
+[2026-08-16 17:10:27] [gwn_adaptive] Training started (max_epochs=12, accelerator=CPUAccelerator)

@@ -40,8 +40,15 @@ trainer:
   # packaging. This is a deliberate, documented computational+time-budget
   # limitation (see report Section 2 / Section 4.3) -- NOT the epoch count that
   # would be used given unlimited time (the original plan was max_epochs=30).
-  max_epochs: 12
-  early_stopping_patience: 5
+  # FURTHER REVISED: running all 4 experiments concurrently on this 20-core CPU
+  # caused thread oversubscription (observed TTS epoch time 2.0min isolated ->
+  # 5.6min under 4-way contention, a 2.8x slowdown). Fixed by capping each
+  # process to ~5 threads (code/experiments/train.py); epoch budget still cut
+  # further as a safety margin against the fix only partially recovering
+  # throughput. Kept IDENTICAL to gwn_adaptive.yaml's budget so the two
+  # configs remain a controlled ablation.
+  max_epochs: 6
+  early_stopping_patience: 4
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1

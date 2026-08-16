@@ -7,11 +7,26 @@ what makes the cross-model comparison fair.
 from __future__ import annotations
 
 import json
+import os
 import time
 from pathlib import Path
 
 import pandas as pd
 import torch
+
+# Running all 4 experiments concurrently (this project's deadline-driven
+# strategy -- see PROGRESS_LOG.md ~17:18) means each process must NOT try to
+# claim all logical CPUs, or the 4 processes thrash each other via thread
+# oversubscription (observed: TTS epoch time went 2.0min isolated -> 5.6min
+# under 4-way contention with default unbounded threading, a 2.8x slowdown
+# far worse than the 4-way share alone would predict). Cap each process to a
+# fair share of the 20 logical CPUs on this machine. Safe to import even when
+# only one experiment runs at a time.
+_N_THREADS = max(1, (os.cpu_count() or 4) // 4)
+os.environ.setdefault("OMP_NUM_THREADS", str(_N_THREADS))
+os.environ.setdefault("MKL_NUM_THREADS", str(_N_THREADS))
+os.environ.setdefault("OPENBLAS_NUM_THREADS", str(_N_THREADS))
+torch.set_num_threads(_N_THREADS)
 
 from code.experiments.callbacks import ProgressLogCallback
 from code.utils import status as status_mod

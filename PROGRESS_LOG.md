@@ -42,3 +42,25 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 16:41:58] [timing_pilot] [agcrn] pilot done: ~2.34s/batch, 385 batches/epoch => est. 15.0 min/epoch
 - [2026-08-16 16:41:58] [timing_pilot] Timing pilot complete for all 4 models.
 - [2026-08-16 16:42:43] [timing_pilot] PILOT RESULTS: TTS 0.31s/batch (~2.0 min/epoch); GWN-predefined 5.29s/batch (~33.9 min/epoch); GWN-adaptive 5.86s/batch (~37.6 min/epoch); AGCRN 2.34s/batch (~15.0 min/epoch). 385 batches/epoch for all (same dataloader). GWN is ~17x more expensive per epoch than TTS on this CPU -- this drives the epoch-budget decision for the full training runs.
+- [2026-08-16 17:09:14] [tts] === Q1 TTS: full training run starting (config: code/configs/tts.yaml) ===
+- [2026-08-16 17:09:21] [tts] Building predictor (lr=0.001, max_epochs=60, seed=42)
+- [2026-08-16 17:09:22] [tts] Training started (max_epochs=60, accelerator=CPUAccelerator)
+- [2026-08-16 17:09:49] [gwn_predefined] === Q2 GWN (predefined only): full training run starting (config: code/configs/gwn_predefined.yaml) ===
+- [2026-08-16 17:09:52] [gwn_predefined] Building predictor (lr=0.001, max_epochs=12, seed=42)
+- [2026-08-16 17:09:52] [gwn_predefined] Training started (max_epochs=12, accelerator=CPUAccelerator)
+- [2026-08-16 17:10:19] [gwn_adaptive] === Q2 GWN (predefined+adaptive): full training run starting (config: code/configs/gwn_adaptive.yaml) ===
+- [2026-08-16 17:10:25] [gwn_adaptive] Building predictor (lr=0.001, max_epochs=12, seed=42)
+- [2026-08-16 17:10:27] [agcrn] === Q3 AGCRN: full training run starting (config: code/configs/agcrn.yaml) ===
+- [2026-08-16 17:10:27] [gwn_adaptive] Training started (max_epochs=12, accelerator=CPUAccelerator)
+- [2026-08-16 17:10:39] [agcrn] Building predictor (lr=0.001, max_epochs=25, seed=42)
+- [2026-08-16 17:10:42] [agcrn] Training started (max_epochs=25, accelerator=CPUAccelerator)
+- [2026-08-16 17:14:59] [tts] epoch 0 val_mae=3.1467 (337.0s)
+- [2026-08-16 17:15:24] [build_all_figures] Building whatever figures/tables the currently-available results support...
+- [2026-08-16 17:17:07] [build_all_figures] fig01_adjacency_heatmap.png done (predefined graph, always available)
+- [2026-08-16 17:17:07] [build_all_figures] Models with overall metrics available: []
+- [2026-08-16 17:17:07] [build_all_figures] SKIPPED overall performance table/figures -- no metrics.json exists yet
+- [2026-08-16 17:17:07] [build_all_figures] SKIPPED TTS per-station figures -- results/tts/predictions.npz not ready
+- [2026-08-16 17:17:07] [build_all_figures] SKIPPED convergence curves -- no training_history.json exists yet
+- [2026-08-16 17:17:07] [build_all_figures] SKIPPED per-station cross-model comparison -- fewer than 2 models have predictions.npz
+- [2026-08-16 17:17:07] [build_all_figures] SKIPPED learned-adjacency figures/table -- results/gwn_adaptive/learned_adjacency.npy not ready
+- [2026-08-16 17:17:07] [build_all_figures] build_all_figures pass complete.
