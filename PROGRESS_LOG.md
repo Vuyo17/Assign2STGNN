@@ -105,3 +105,15 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 17:54:06] [build_all_figures] fig03_tts_station{1,2,3}_actual_vs_predicted.png done
 - [2026-08-16 17:54:07] [build_all_figures] fig05_convergence_curves.png done for ['TTS']
 - [2026-08-16 17:54:53] [build_all_figures] Building whatever figures/tables the currently-available results support...
+- [2026-08-16 17:55:34] [build_all_figures] fig01_adjacency_heatmap.png done (predefined graph, always available)
+- [2026-08-16 17:55:34] [build_all_figures] Models with overall metrics available: ['TTS']
+- [2026-08-16 17:55:37] [build_all_figures] Overall performance table + horizon-trend figures done for ['TTS']
+- [2026-08-16 17:55:39] [build_all_figures] fig03_tts_station{1,2,3}_actual_vs_predicted.png done
+- [2026-08-16 17:55:40] [build_all_figures] fig05_convergence_curves.png done for ['TTS']
+- [2026-08-16 17:55:40] [build_all_figures] SKIPPED per-station cross-model comparison -- fewer than 2 models have predictions.npz
+- [2026-08-16 17:55:40] [build_all_figures] SKIPPED learned-adjacency figures/table -- results/gwn_adaptive/learned_adjacency.npy not ready
+- [2026-08-16 17:55:40] [build_all_figures] build_all_figures pass complete.
+- [2026-08-16 17:55:54] [build_tables] Wrote report/tables/overall_performance.md
+- [2026-08-16 17:55:54] [build_tables] Wrote report/tables/per_station.md
+- [2026-08-16 17:55:54] [build_tables] Wrote report/tables/training_time.md
+- [2026-08-16 17:55:54] [build_tables] SKIPPED top15_influential_nodes.md -- dependency not ready yet
