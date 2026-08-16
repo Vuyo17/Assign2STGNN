@@ -236,7 +236,55 @@ attributable to that component, not to some other confounding hyperparameter cha
 [PENDING — Table 3 (training time) + Figure 5 (loss curves)]
 
 ### 4.4 Comparison With Wu et al. (2019)
-[PENDING — explicit statement of what is/isn't comparable]
+
+The original Graph WaveNet paper (Wu et al., 2019) reports the following on METR-LA
+(widely reproduced/cross-cited figure, e.g. Zhang, 2019, *"Incrementally Improving
+Graph WaveNet Performance on Traffic Prediction"*, arXiv:1912.07390, which explicitly
+tabulates the original paper's numbers alongside its own reproduction):
+
+| Horizon | MAE | RMSE | MAPE |
+|---|---|---|---|
+| 15 min | 2.69 | 5.15 | 6.90% |
+| 30 min | 3.07 | 6.22 | 8.37% |
+| 60 min | 3.53 | 7.37 | 10.01% |
+
+**What is comparable:** the dataset (full METR-LA, 207 sensors), the split ratio
+(Wu et al. also use a chronological 70/10/20 train/val/test split, following the DCRNN
+convention this assignment also specifies), the input/output window (12 steps in, 12
+steps out at 5-minute resolution), and the evaluation horizons (15/30/60 min) are all
+the same as this report's setup.
+
+**What is NOT directly comparable, and why:**
+- **Metric scale**: the original paper reports **RMSE**; this report's tables use
+  **MSE**. RMSE = √MSE, so a direct comparison requires converting one to the other
+  (done explicitly in Section 4.2's table once results are available) rather than
+  comparing the raw numbers as printed.
+- **Training compute and epoch budget**: the original paper trains on GPU hardware for
+  as many epochs as needed to converge; this report's GWN runs are capped at 6 epochs
+  each (Section 2.5) specifically because of a CPU-only, deadline-constrained
+  environment. Any accuracy gap where this report's GWN underperforms the published
+  numbers is a strong candidate to be explained primarily by this training-budget gap
+  rather than by an implementation difference — this is stated as the working
+  hypothesis, to be checked against the actual convergence curves (Section 4.3) once
+  training completes: a model whose validation loss is still visibly decreasing when
+  training stops is evidence *for* this explanation; a model whose validation loss had
+  already plateaued is evidence against it.
+- **Optimiser schedule**: the original paper uses a learning-rate schedule (decay);
+  this report uses a fixed learning rate (Section 2.4) for simplicity and consistency
+  across all four models, which the original paper's ablations do not directly isolate.
+- **Software stack**: the original paper's official implementation predates
+  `torch-spatiotemporal`; this report uses tsl's re-implementation of the architecture,
+  which the tsl authors state follows the original paper but is not guaranteed to be
+  bit-identical (different weight initialisation, minor architectural
+  interpretation choices, etc.).
+- **Random seed / single run**: this report (like most course-scale reproductions)
+  reports a single training run per configuration; the original paper does not specify
+  whether its numbers are averaged over multiple seeds.
+
+Given these differences, this report treats the original paper's numbers as a
+**directional reference point** (is our GWN in the right ballpark, and does it show the
+expected ordering relative to TTS/AGCRN) rather than as a number that our results
+should be expected to match exactly.
 
 ### 4.5 Per-Station Analysis
 [PENDING — Figure 6, Table 4]
