@@ -77,3 +77,7 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 17:24:03] [agcrn] Building predictor (lr=0.001, max_epochs=16, seed=42)
 - [2026-08-16 17:24:05] [agcrn] Training started (max_epochs=16, accelerator=CPUAccelerator)
 - [2026-08-16 17:26:37] [tts] epoch 0 val_mae=3.1422 (232.2s)
+- [2026-08-16 17:31:10] [build_tables] SKIPPED overall_performance.md -- dependency not ready yet
+- [2026-08-16 17:31:10] [build_tables] SKIPPED per_station.md -- dependency not ready yet
+- [2026-08-16 17:31:10] [build_tables] SKIPPED training_time.md -- dependency not ready yet
+- [2026-08-16 17:31:10] [build_tables] SKIPPED top15_influential_nodes.md -- dependency not ready yet
