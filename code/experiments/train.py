@@ -136,20 +136,23 @@ def run_training(
     trainer = pl.Trainer(**trainer_kwargs)
 
     if resume_from_checkpoint:
-        # PyTorch >=2.6 defaults torch.load(weights_only=True) for security,
-        # which Lightning's own ckpt_path= resume path does not override.
-        # Our checkpoints embed tsl's metric objects (MaskedMAE etc.) inside
-        # the Predictor's state, which weights_only=True refuses to unpickle
-        # by default. Allowlisting these specific, known, trusted classes
-        # (rather than disabling weights_only globally) is the officially
-        # recommended fix.
-        from tsl.metrics.torch import MaskedMAE, MaskedMAPE, MaskedMSE
-
-        torch.serialization.add_safe_globals([MaskedMAE, MaskedMAPE, MaskedMSE])
         log.milestone(f"Resuming from checkpoint {resume_from_checkpoint} (new ceiling max_epochs={max_epochs})")
 
     t0 = time.time()
-    trainer.fit(predictor, datamodule=dm, ckpt_path=resume_from_checkpoint)
+    if resume_from_checkpoint:
+        # PyTorch >=2.6 defaults torch.load(weights_only=True) for security,
+        # which refuses to unpickle several tsl/torchmetrics internal objects
+        # embedded in this checkpoint's saved hyperparameters (confirmed by
+        # trial: MaskedMAE, then a torchmetrics-internal function, each
+        # requiring its own allowlist entry). Rather than allowlisting an
+        # open-ended set of internal library globals one at a time, this
+        # explicitly sets weights_only=False for this specific, self-created
+        # checkpoint -- produced by this project's own training run on this
+        # same machine minutes earlier, not a third-party or untrusted file,
+        # which is exactly the case PyTorch's own warning says this is safe for.
+        trainer.fit(predictor, datamodule=dm, ckpt_path=resume_from_checkpoint, weights_only=False)
+    else:
+        trainer.fit(predictor, datamodule=dm)
     total_seconds = time.time() - t0
 
     best_ckpt_path = checkpoint_cb.best_model_path
