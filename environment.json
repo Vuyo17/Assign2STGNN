@@ -1,0 +1,14 @@
+{
+  "python_version": "3.12.10",
+  "pytorch_version": "2.9.0+cpu",
+  "tsl_version": "0.9.5",
+  "torch_geometric_version": "2.8.0.post1",
+  "pytorch_lightning_version": "2.6.5",
+  "cuda_available": false,
+  "cuda_version": null,
+  "gpu": "None (CPU-only training)",
+  "cpu": "Intel64 Family 6 Model 191 Stepping 2, GenuineIntel",
+  "ram_gb": 15.7,
+  "operating_system": "Windows 11 (10.0.26100)",
+  "random_seed": 42
+}

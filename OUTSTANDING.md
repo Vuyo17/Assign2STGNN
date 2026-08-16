@@ -2,14 +2,14 @@
 
 **Auto-generated** by `code/utils/update_outstanding.py` -- do not hand-edit; it is overwritten after every pipeline stage. Reflects `results/status.json` cross-checked against files actually present on disk.
 
-Progress: **0/28** stages complete.
+Progress: **2/28** stages complete.
 
-Last regenerated: 2026-08-16 16:07:08
+Last regenerated: 2026-08-16 16:35:56
 
 ## Setup
 
-- ⬜ **env_setup**: Python venv + torch/tsl/PyG installed, versions recorded
-- ⬜ **data_pipeline_verified**: METR-LA loaded, splits/scaler verified (no leakage)
+- ✅ **env_setup**: Python venv + torch/tsl/PyG installed, versions recorded -- Python 3.12.10, torch 2.9.0+cpu, torch_geometric 2.8.0.post1, tsl 0.9.5, pandas pinned 2.2.3 (tsl 0.9.5 uses deprecated 5T freq alias removed in pandas 3.0), no GPU (Intel CPU, 15.7GB RAM)
+- ✅ **data_pipeline_verified**: METR-LA loaded, splits/scaler verified (no leakage) -- 207 nodes; split 24648/2728/6849 (0.720/0.080/0.200 realised vs 0.7/0.1/0.2 configured, due to windowing edge effects); scaler.bias=58.478 (train-fold-only) vs full-series mean=58.368 -- confirms train-only fit
 - ⬜ **timing_pilot**: CPU timing pilot run for all 4 architectures
 
 ## Q1 TimeThenSpace
