@@ -88,13 +88,15 @@ def build_training_time_table() -> str | None:
             continue
         with open(p, encoding="utf-8") as f:
             s = json.load(f)
+        total_min = round(s["total_training_seconds"] / 60, 1) if s.get("total_training_seconds") else "N/A*"
+        avg_s = round(s["seconds_per_epoch_avg"], 1) if s.get("seconds_per_epoch_avg") else "N/A*"
         rows.append({
             "Model": display,
             "Epochs run": s["epochs_run"],
-            "Early stopped": s["early_stopped"],
-            "Total time (min)": round(s["total_training_seconds"] / 60, 1),
-            "Avg s/epoch": round(s["seconds_per_epoch_avg"], 1),
-            "Best val MAE": round(s["best_val_mae"], 4) if s["best_val_mae"] else None,
+            "Early stopped": s.get("early_stopped", "N/A"),
+            "Total time (min)": total_min,
+            "Avg s/epoch": avg_s,
+            "Best val MAE": round(s["best_val_mae"], 4) if s.get("best_val_mae") else None,
         })
     if not rows:
         return None

@@ -56,12 +56,21 @@ def _load_histories() -> dict:
 
 
 def _load_training_times() -> dict:
+    """Skips any experiment whose total_training_seconds is None -- this
+    happens for TTS specifically, whose live process was deliberately killed
+    (deadline-driven CPU reallocation, see PROGRESS_LOG.md ~17:46) and then
+    evaluated from its saved checkpoint, so total wall-clock time was never
+    recorded end-to-end. Per-epoch times ARE still real (logged in
+    PROGRESS_LOG.md/logs/tts.log); only the aggregate total is unavailable, so
+    it is omitted from the training-time comparison rather than guessed."""
     times = {}
     for exp, display in DISPLAY_NAMES.items():
         p = _RESULTS / exp / "training_summary.json"
         if p.exists():
             with open(p, encoding="utf-8") as f:
                 s = json.load(f)
+            if s.get("total_training_seconds") is None:
+                continue
             times[display] = {
                 "total_seconds": s["total_training_seconds"],
                 "epochs": s["epochs_run"],

@@ -98,3 +98,10 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 17:52:12] [agcrn] Building predictor (lr=0.001, max_epochs=10, seed=42)
 - [2026-08-16 17:52:14] [agcrn] Training started (max_epochs=10, accelerator=CPUAccelerator)
 - [2026-08-16 17:52:37] [orchestration] TTS training deliberately stopped after 3 epochs (val_mae 3.15->3.11->3.08) to reallocate CPU; evaluated directly from checkpoint -- results/tts/metrics.json now real (60min MAE=4.738). GWN predefined, GWN adaptive, and AGCRN relaunched with 3-way thread split (cpu_count()//3) and cut epoch budgets (GWN 4 epochs/patience 3, AGCRN 10 epochs/patience 5), all running in background under Claude Code (not user terminals) as of 17:51.
+- [2026-08-16 17:53:19] [build_all_figures] Building whatever figures/tables the currently-available results support...
+- [2026-08-16 17:54:01] [build_all_figures] fig01_adjacency_heatmap.png done (predefined graph, always available)
+- [2026-08-16 17:54:01] [build_all_figures] Models with overall metrics available: ['TTS']
+- [2026-08-16 17:54:03] [build_all_figures] Overall performance table + horizon-trend figures done for ['TTS']
+- [2026-08-16 17:54:06] [build_all_figures] fig03_tts_station{1,2,3}_actual_vs_predicted.png done
+- [2026-08-16 17:54:07] [build_all_figures] fig05_convergence_curves.png done for ['TTS']
+- [2026-08-16 17:54:53] [build_all_figures] Building whatever figures/tables the currently-available results support...
