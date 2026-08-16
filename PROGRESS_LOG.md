@@ -121,3 +121,33 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 19:05:17] [gwn_predefined] epoch 0 val_mae=3.1619 (4433.1s)
 - [2026-08-16 19:07:43] [agcrn] epoch 1 train_loss=4.0603 val_mae=3.0250 (2315.8s)
 - [2026-08-16 19:18:31] [gwn_adaptive] epoch 0 val_mae=3.0616 (5209.7s)
+- [2026-08-16 19:48:58] [agcrn] epoch 2 train_loss=3.5176 val_mae=2.9497 (2474.4s)
+- [2026-08-16 20:22:26] [gwn_predefined] epoch 1 train_loss=3.7653 val_mae=3.0186 (4628.4s)
+- [2026-08-16 20:24:09] [agcrn] epoch 3 train_loss=3.4309 val_mae=2.8844 (2111.7s)
+- [2026-08-16 20:44:01] [gwn_adaptive] epoch 1 train_loss=3.7546 val_mae=2.9309 (5129.8s)
+- [2026-08-16 20:59:41] [agcrn] epoch 4 train_loss=3.3468 val_mae=2.8586 (2131.7s)
+- [2026-08-16 21:37:42] [gwn_predefined] epoch 2 train_loss=3.5508 val_mae=2.9361 (4515.8s)
+- [2026-08-16 21:38:48] [agcrn] epoch 5 train_loss=3.2768 val_mae=2.8200 (2346.5s)
+- [2026-08-16 22:14:00] [gwn_adaptive] epoch 2 train_loss=3.4583 val_mae=2.8304 (5399.0s)
+- [2026-08-16 22:19:41] [agcrn] epoch 6 train_loss=3.2216 val_mae=2.8018 (2453.2s)
+- [2026-08-16 22:59:44] [gwn_predefined] epoch 3 train_loss=3.4814 val_mae=2.9510 (4921.4s)
+- [2026-08-16 22:59:44] [gwn_predefined] Training finished after 5 epochs, 308.4 min total
+- [2026-08-16 22:59:44] [gwn_predefined] Training complete: 5 epochs, 308.4 min total, best_val_mae=2.9360733032226562, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\gwn_predefined\checkpoints\best-epoch=2-val_mae=2.9361.ckpt
+- [2026-08-16 22:59:45] [agcrn] epoch 7 train_loss=3.1758 val_mae=2.7674 (2403.8s)
+- [2026-08-16 23:07:20] [gwn_predefined] Evaluation pass over 108 test batches complete in 455.8s
+- [2026-08-16 23:07:24] [gwn_predefined] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\gwn_predefined (overall 60min MAE=4.384 mph)
+- [2026-08-16 23:07:24] [gwn_predefined] === Q2 GWN (predefined only): COMPLETE. Summary: {'experiment': 'gwn_predefined', 'total_training_seconds': 18504.351681232452, 'epochs_run': 5, 'seconds_per_epoch_avg': 3700.8703362464903, 'best_val_mae': 2.9360733032226562, 'best_checkpoint': 'C:\\Users\\Student\\Downloads\\Assign2STGNN\\results\\gwn_predefined\\checkpoints\\best-epoch=2-val_mae=2.9361.ckpt', 'early_stopped': False, 'max_epochs_configured': 4, 'early_stopping_patience': 3, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-16 23:12:35] [build_all_figures] Building whatever figures/tables the currently-available results support...
+- [2026-08-16 23:13:09] [build_all_figures] fig01_adjacency_heatmap.png done (predefined graph, always available)
+- [2026-08-16 23:13:09] [build_all_figures] Models with overall metrics available: ['TTS', 'GWN (predefined)']
+- [2026-08-16 23:13:11] [build_all_figures] Overall performance table + horizon-trend figures done for ['TTS', 'GWN (predefined)']
+- [2026-08-16 23:13:12] [build_all_figures] fig03_tts_station{1,2,3}_actual_vs_predicted.png done
+- [2026-08-16 23:13:13] [build_all_figures] fig05_convergence_curves.png done for ['TTS', 'GWN (predefined)']
+- [2026-08-16 23:13:13] [build_all_figures] Training time figure/table done for ['GWN (predefined)']
+- [2026-08-16 23:13:14] [build_all_figures] Per-station comparison figures done for ['TTS', 'GWN (predefined)']
+- [2026-08-16 23:13:15] [build_all_figures] SKIPPED learned-adjacency figures/table -- results/gwn_adaptive/learned_adjacency.npy not ready
+- [2026-08-16 23:13:15] [build_all_figures] build_all_figures pass complete.
+- [2026-08-16 23:13:35] [build_tables] Wrote report/tables/overall_performance.md
+- [2026-08-16 23:13:35] [build_tables] Wrote report/tables/per_station.md
+- [2026-08-16 23:13:35] [build_tables] Wrote report/tables/training_time.md
+- [2026-08-16 23:13:35] [build_tables] SKIPPED top15_influential_nodes.md -- dependency not ready yet

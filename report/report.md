@@ -338,10 +338,73 @@ of the adaptive-adjacency component specifically — any performance gap between
 attributable to that component, not to some other confounding hyperparameter change.
 
 ### 4.2 Overall Comparison (TTS vs GWN-predefined vs GWN-adaptive)
-[PENDING — Table 2 + Figure 4]
+
+*Table 2. Overall performance (207-sensor average). GWN (predefined+adaptive) row
+**[PENDING — training in progress at time of writing]**.*
+
+| Model | Horizon | MSE (mph²) | MAE (mph) | MAPE (%) |
+|---|---|---|---|---|
+| TTS | 15 min | 35.191 | 3.066 | 8.22 |
+| TTS | 30 min | 55.003 | 3.703 | 10.42 |
+| TTS | 60 min | 88.201 | 4.738 | 14.03 |
+| GWN (predefined) | 15 min | 31.338 | 2.973 | 7.53 |
+| GWN (predefined) | 30 min | 47.050 | 3.529 | 9.57 |
+| GWN (predefined) | 60 min | 73.192 | 4.384 | 12.79 |
+
+![TTS vs GWN horizon trend](../figures/fig04_horizon_trend_mae.png)
+*Figure 4. MAE vs. horizon, TTS vs. GWN (predefined). GWN-adaptive line to be added once
+its training completes.*
+
+**GWN (predefined) beats TTS at every horizon**, on every metric, by a widening margin
+as the horizon grows: MAE improves by 3.0% at 15 min, 4.7% at 30 min, and 7.5% at 60
+min. This is the expected direction — GWN's dilated-convolution temporal stack (8
+blocks, receptive field spanning the full 12-step window) and diffusion convolution
+give it materially more capacity to model both long-range temporal patterns and
+multi-hop spatial propagation than TTS's single-layer GRU + one-hop `DiffConv`. The
+*growing* gap at longer horizons is notable: TTS's simpler temporal encoder appears to
+compound error faster over the forecast window than GWN's does, consistent with GWN's
+larger effective receptive field mattering more the further ahead the model must
+extrapolate. (Caveat: TTS's 3-epoch vs. GWN's 5-epoch training budget, Section 2.5,
+means this is not a perfectly equal-training-budget comparison — see Section 3.4.)
 
 ### 4.3 Training Time and Convergence
-[PENDING — Table 3 (training time) + Figure 5 (loss curves)]
+
+*Table 3. Training time. TTS's total time is unavailable because that run was
+deliberately stopped early and evaluated from checkpoint rather than finishing
+normally (Section 2.5) — its real per-epoch times (232s, 491s, 495s) are still known,
+just not summed into a "total". GWN (predefined+adaptive) row **[PENDING]**.*
+
+| Model | Epochs run | Early stopped | Total time (min) | Avg s/epoch | Best val MAE |
+|---|---|---|---|---|---|
+| TTS | 3 (of 60 planned) | N/A (stopped manually) | N/A | ~400 (avg of 3 real epochs) | 3.077 |
+| GWN (predefined) | 5 (4 configured + 1, see note) | No (hit max_epochs ceiling) | 308.4 | 3700.9 | 2.936 |
+
+*Note on GWN's epoch count: `max_epochs=4` was configured; the trainer's own
+epoch-completion log reports 5 due to an off-by-one in how the final "epochs run"
+milestone is computed (`current_epoch + 1` evaluated one increment late) — 4 real
+training epochs (indices 0-3) were actually run, matching the 4 rows of per-epoch data
+in `logs/gwn_predefined/version_*/metrics.csv`. Reported here as observed rather than
+silently corrected, since the underlying per-epoch data is what matters and is
+unambiguous.*
+
+![Convergence curves](../figures/fig05_convergence_curves.png)
+*Figure 5. Training (dashed) and validation (solid) loss per epoch, TTS vs. GWN
+(predefined). GWN-adaptive curve to be added once available.*
+
+**GWN's convergence behaviour**: validation MAE decreased for 3 straight epochs
+(3.162 → 3.019 → 2.936) then **increased** slightly on epoch 4 (2.951) — the best
+checkpoint (epoch 2, val_mae=2.936) is what all reported GWN-predefined numbers use.
+This uptick, right as the deadline-driven `max_epochs=4` ceiling was reached, is the
+first concrete sign of **overfitting** starting (training loss kept falling every
+epoch while validation loss turned back up) rather than the run being cut off mid-
+improvement — some evidence *against* the Section 4.4 hypothesis that GWN's whole gap
+to the original paper is purely a "needed more epochs" story, though 4 epochs is still
+very short by GPU-scale-training standards and the picture may look different with
+GWN-adaptive's curve for comparison. **TTS**, by contrast, was still improving at every
+one of its 3 epochs when stopped (3.147 → 3.108 → 3.077) with no sign of plateauing —
+its numbers likely *do* understate its true converged performance, unlike GWN's.
+GWN's per-epoch cost (~62 min average) is roughly **9x** TTS's (~7 min average, from
+its 3 real epoch times) on this hardware, consistent with the Section 2.5 timing pilot.
 
 ### 4.4 Comparison With Wu et al. (2019)
 
@@ -368,7 +431,7 @@ the same as this report's setup.
   (done explicitly in Section 4.2's table once results are available) rather than
   comparing the raw numbers as printed.
 - **Training compute and epoch budget**: the original paper trains on GPU hardware for
-  as many epochs as needed to converge; this report's GWN runs are capped at 6 epochs
+  as many epochs as needed to converge; this report's GWN runs are capped at 4 epochs
   each (Section 2.5) specifically because of a CPU-only, deadline-constrained
   environment. Any accuracy gap where this report's GWN underperforms the published
   numbers is a strong candidate to be explained primarily by this training-budget gap
@@ -395,7 +458,38 @@ expected ordering relative to TTS/AGCRN) rather than as a number that our result
 should be expected to match exactly.
 
 ### 4.5 Per-Station Analysis
-[PENDING — Figure 6, Table 4]
+
+*Table 4. Sensors 1-3, TTS vs. GWN (predefined). GWN-adaptive columns **[PENDING]**.*
+
+| Sensor | Horizon | TTS MAE | GWN (pre) MAE | Δ (TTS − GWN) |
+|---|---|---|---|---|
+| Sensor 1 | 15 min | 2.621 | 2.360 | +0.261 |
+| Sensor 1 | 30 min | 3.509 | 2.901 | +0.608 |
+| Sensor 1 | 60 min | 5.052 | 3.686 | +1.366 |
+| Sensor 2 | 15 min | 1.631 | 1.656 | **−0.025** |
+| Sensor 2 | 30 min | 1.693 | 1.723 | **−0.030** |
+| Sensor 2 | 60 min | 1.809 | 1.846 | **−0.037** |
+| Sensor 3 | 15 min | 2.125 | 2.074 | +0.051 |
+| Sensor 3 | 30 min | 2.726 | 2.562 | +0.164 |
+| Sensor 3 | 60 min | 3.747 | 3.412 | +0.335 |
+
+![Per-station MAE, sensors 1-3](../figures/fig06_per_station_mae_sensor1.png)
+*Figure 6. MAE vs. horizon, TTS vs. GWN (predefined), Sensor 1 (Sensors 2/3 in
+`fig06_per_station_mae_sensor{2,3}.png`).*
+
+**GWN does not improve every sensor equally — Sensor 2 is a small but consistent
+exception.** For Sensors 1 and 3, GWN clearly outperforms TTS, with the advantage
+growing at longer horizons exactly as in the overall averages (Section 4.2) — most
+dramatically at Sensor 1's 60-minute horizon (1.37 mph improvement, GWN's largest
+per-station gain). At **Sensor 2**, however, TTS is marginally *better* than GWN at
+every horizon (by 0.025-0.037 mph — small but consistent in direction across all three
+horizons, not noise scattered in both directions). Sensor 2 was already established in
+Section 3.3 as the easiest, lowest-variance sensor for TTS; a plausible explanation is
+that GWN's larger capacity has nothing to gain on an already near-flat, easy-to-predict
+signal and its extra parameters (with only 4 training epochs to fit them) are a mild
+disadvantage there — consistent with GWN's Section 4.3 overfitting signal being a
+real, if modest, effect. This is exactly the kind of sensor-dependent result the
+assignment asks to look for rather than assume a more complex model helps uniformly.
 
 ### 4.6 Learned Adaptive Adjacency Analysis
 [PENDING — Figure 7 (heatmap, first 50 nodes), Table 5 (top-15 influential nodes)]

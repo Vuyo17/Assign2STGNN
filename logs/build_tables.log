@@ -6,3 +6,7 @@
 [2026-08-16 17:55:54] [build_tables] Wrote report/tables/per_station.md
 [2026-08-16 17:55:54] [build_tables] Wrote report/tables/training_time.md
 [2026-08-16 17:55:54] [build_tables] SKIPPED top15_influential_nodes.md -- dependency not ready yet
+[2026-08-16 23:13:35] [build_tables] Wrote report/tables/overall_performance.md
+[2026-08-16 23:13:35] [build_tables] Wrote report/tables/per_station.md
+[2026-08-16 23:13:35] [build_tables] Wrote report/tables/training_time.md
+[2026-08-16 23:13:35] [build_tables] SKIPPED top15_influential_nodes.md -- dependency not ready yet

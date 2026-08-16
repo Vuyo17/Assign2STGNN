@@ -8,3 +8,11 @@
 [2026-08-16 17:51:19] [gwn_predefined] Building predictor (lr=0.001, max_epochs=4, seed=42)
 [2026-08-16 17:51:20] [gwn_predefined] Training started (max_epochs=4, accelerator=CPUAccelerator)
 [2026-08-16 19:05:17] [gwn_predefined] epoch 0 val_mae=3.1619 (4433.1s)
+[2026-08-16 20:22:26] [gwn_predefined] epoch 1 train_loss=3.7653 val_mae=3.0186 (4628.4s)
+[2026-08-16 21:37:42] [gwn_predefined] epoch 2 train_loss=3.5508 val_mae=2.9361 (4515.8s)
+[2026-08-16 22:59:44] [gwn_predefined] epoch 3 train_loss=3.4814 val_mae=2.9510 (4921.4s)
+[2026-08-16 22:59:44] [gwn_predefined] Training finished after 5 epochs, 308.4 min total
+[2026-08-16 22:59:44] [gwn_predefined] Training complete: 5 epochs, 308.4 min total, best_val_mae=2.9360733032226562, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\gwn_predefined\checkpoints\best-epoch=2-val_mae=2.9361.ckpt
+[2026-08-16 23:07:20] [gwn_predefined] Evaluation pass over 108 test batches complete in 455.8s
+[2026-08-16 23:07:24] [gwn_predefined] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\gwn_predefined (overall 60min MAE=4.384 mph)
+[2026-08-16 23:07:24] [gwn_predefined] === Q2 GWN (predefined only): COMPLETE. Summary: {'experiment': 'gwn_predefined', 'total_training_seconds': 18504.351681232452, 'epochs_run': 5, 'seconds_per_epoch_avg': 3700.8703362464903, 'best_val_mae': 2.9360733032226562, 'best_checkpoint': 'C:\\Users\\Student\\Downloads\\Assign2STGNN\\results\\gwn_predefined\\checkpoints\\best-epoch=2-val_mae=2.9361.ckpt', 'early_stopped': False, 'max_epochs_configured': 4, 'early_stopping_patience': 3, 'learning_rate': 0.001, 'seed': 42} ===

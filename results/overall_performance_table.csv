@@ -2,3 +2,6 @@ Model,Horizon,MSE (mph²),MAE (mph),MAPE (%)
 TTS,15 min,35.191,3.066,8.221
 TTS,30 min,55.003,3.703,10.424
 TTS,60 min,88.201,4.738,14.025
+GWN (predefined),15 min,31.338,2.973,7.526
+GWN (predefined),30 min,47.05,3.529,9.566
+GWN (predefined),60 min,73.192,4.384,12.793

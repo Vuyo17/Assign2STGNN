@@ -49,10 +49,10 @@
       "notes": "Deliberately stopped after 3 epochs (deadline resource reallocation)"
     },
     "gwn_predefined_train": {
-      "state": "running",
+      "state": "done",
       "started": "2026-08-16 17:09:52",
-      "finished": null,
-      "notes": null
+      "finished": "2026-08-16 22:59:44",
+      "notes": "5 epochs, 308.4 min, best_val_mae=2.9360733032226562"
     },
     "gwn_adaptive_train": {
       "state": "running",
@@ -71,6 +71,12 @@
       "started": "2026-08-16 17:50:48",
       "finished": "2026-08-16 17:50:57",
       "notes": "60min MAE=4.738 (from 3-epoch checkpoint)"
+    },
+    "gwn_predefined_eval": {
+      "state": "done",
+      "started": "2026-08-16 22:59:44",
+      "finished": "2026-08-16 23:07:24",
+      "notes": "60min MAE=4.384"
     }
   }
 }

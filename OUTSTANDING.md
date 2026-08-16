@@ -2,9 +2,9 @@
 
 **Auto-generated** by `code/utils/update_outstanding.py` -- do not hand-edit; it is overwritten after every pipeline stage. Reflects `results/status.json` cross-checked against files actually present on disk.
 
-Progress: **5/28** stages complete.
+Progress: **6/28** stages complete.
 
-Last regenerated: 2026-08-16 17:50:57
+Last regenerated: 2026-08-16 23:07:24
 
 ## Setup
 
@@ -22,7 +22,7 @@ Last regenerated: 2026-08-16 17:50:57
 
 ## Q2 GraphWaveNet
 
-- 🔄 **gwn_predefined_train**: GWN (predefined graph only) trained
+- ✅ **gwn_predefined_train**: GWN (predefined graph only) trained -- 5 epochs, 308.4 min, best_val_mae=2.9360733032226562
 - 🔄 **gwn_adaptive_train**: GWN (predefined + adaptive) trained
 - ⬜ **gwn_eval**: Both GWN configs evaluated: overall + per-horizon + per-node
 - ⬜ **fig_gwn_vs_tts**: TTS vs GWN-predefined vs GWN-adaptive comparison
