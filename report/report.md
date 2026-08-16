@@ -189,17 +189,125 @@ only the validation fold (`val_mae`, via `EarlyStopping`/`ModelCheckpoint`), and
 test fold is touched exactly once per model, at final evaluation.
 
 ## 3. Question 1 — TimeThenSpaceModel
+
+**A note on this section's training budget**: because of the deadline-driven CPU
+resource reallocation described in Section 2.5, TTS training was deliberately stopped
+after **3 epochs** (val_mae still improving: 3.147 → 3.108 → 3.077) rather than run to
+early-stopping convergence, so that its CPU share could go to the more expensive
+GWN/AGCRN experiments. All numbers below are real, measured evaluation output from
+that 3-epoch checkpoint — not fabricated — but should be read as an **under-trained**
+baseline; a fully-converged TTS would likely score somewhat better than what follows.
+
 ### 3.1 Adjacency Matrix
-[PENDING — Figure 1, `figures/fig01_adjacency_heatmap.png`]
+
+![Predefined adjacency matrix heatmap](../figures/fig01_adjacency_heatmap.png)
+*Figure 1. Predefined METR-LA sensor adjacency matrix (207×207), built via
+`dataset.get_connectivity(threshold=0.1, include_self=False, normalize_axis=1)`. Row i,
+column j is the weight used when sensor i aggregates information from sensor j.*
+
+This matrix encodes **spatial proximity between traffic sensors along the physical
+road network**: each entry is derived from a thresholded Gaussian kernel applied to
+pairwise road-network distances (not straight-line/Euclidean distance) between
+sensors, so two sensors are connected only if they are close *along the road*, and the
+edge weight decays with that distance. Concretely, verified directly from the built
+matrix (`results/predefined_adjacency.npy`):
+
+- **Sparse**: only 1,515 of 207² = 42,849 entries are non-zero (3.5%) — most sensor
+  pairs are simply too far apart along the network to be connected at all, which is
+  exactly what the `threshold=0.1` cutoff is for.
+- **Directed / asymmetric**: `adj ≠ adj.T` — the matrix is **not symmetric**. This
+  reflects one-way road segments and directional travel-time asymmetries (e.g. uphill
+  vs. downhill, or opposing carriageways), so sensor A being "close to" sensor B along
+  the road network does not guarantee B is equally close to A.
+  `normalize_axis=1` also **row-normalises** the matrix (each row sums to ≈1.0,
+  verified numerically), so a row represents a *relative* weighting over that sensor's
+  connected neighbours, not an absolute distance.
+  No self-loops are present (`include_self=False`, diagonal is exactly zero).
+- **High values** (close to the row's share of ≈1.0, concentrated on very few entries
+  per row given the 3.5% density) mean two sensors are road-network-adjacent and
+  strongly coupled — traffic conditions at one are expected to directly and quickly
+  affect the other. **Low/zero values** mean sensors are either far apart along the
+  network or not connected at all within the distance threshold, so no direct
+  diffusion of information is assumed between them by any model that consumes this
+  graph (TTS and both GWN configurations).
 
 ### 3.2 Overall Performance
-[PENDING — Table 1 + Figure 2, from `results/tts/metrics.json`]
+
+*Table 1. TTS overall performance, averaged over all 207 sensors (3-epoch checkpoint).*
+
+| Model | Horizon | MSE (mph²) | MAE (mph) | MAPE (%) |
+|---|---|---|---|---|
+| TTS | 15 min | 35.191 | 3.066 | 8.22 |
+| TTS | 30 min | 55.003 | 3.703 | 10.42 |
+| TTS | 60 min | 88.201 | 4.738 | 14.03 |
+
+![TTS horizon trend](../figures/fig04_horizon_trend_mae.png)
+*Figure 2. TTS MAE vs. prediction horizon, averaged over 207 sensors.*
+
+**Trend as horizon increases**: all three metrics increase monotonically and
+substantially from 15 to 60 minutes — MSE roughly **2.5×**, MAE **1.55×**, MAPE
+**1.7×** from the shortest to the longest horizon. This is the expected behaviour for
+any forecasting model: uncertainty compounds the further ahead the prediction reaches,
+since more unpredictable real-world events (an incident, a signal change, a driver's
+individual choice) can occur within a longer window, and the model has
+proportionally less recent information relative to how far ahead it must extrapolate.
+The *rate* of growth (MSE growing faster than MAE, consistent with MSE's quadratic
+penalty on the same underlying error growth) is also as expected.
 
 ### 3.3 Per-Station Analysis
-[PENDING — Figure 3, sensors 1-3, from `results/tts/predictions.npz`]
+
+*Table showing sensors 1–3 (`report/tables/per_station.md` has the full table; TTS rows
+reproduced here):*
+
+| Sensor | Horizon | MAE (mph) | MAPE (%) |
+|---|---|---|---|
+| Sensor 1 | 15 min | 2.621 | 7.03 |
+| Sensor 1 | 30 min | 3.509 | 10.00 |
+| Sensor 1 | 60 min | 5.052 | 15.46 |
+| Sensor 2 | 15 min | 1.631 | 2.79 |
+| Sensor 2 | 30 min | 1.693 | 2.90 |
+| Sensor 2 | 60 min | 1.809 | 3.09 |
+| Sensor 3 | 15 min | 2.125 | 4.80 |
+| Sensor 3 | 30 min | 2.726 | 6.55 |
+| Sensor 3 | 60 min | 3.747 | 9.68 |
+
+![TTS actual vs predicted, sensors 1-3](../figures/fig03_tts_station1_actual_vs_predicted.png)
+*Figure 3. TTS actual vs. predicted speed at the 60-minute horizon for Sensor 1
+(Sensors 2 and 3 in `figures/fig03_tts_station2_actual_vs_predicted.png` and
+`..._station3...png`), over the first day of the test window.*
+
+**How closely predictions follow actuals, and where errors occur**: the three sensors
+show **materially different difficulty**, not just noise around a common level.
+Sensor 2 is easiest across every horizon (MAE 1.63→1.81 mph, MAPE under 3.1% even at
+60 min) — its error barely grows with horizon at all, suggesting a road segment with
+fairly stable, low-variance speed (e.g. free-flowing most of the time, without sharp
+congestion transitions). Sensor 1 is hardest (MAE 2.62→5.05 mph, MAPE up to 15.5%) and
+also shows the steepest horizon degradation of the three (nearly doubling from 15 to
+60 min) — consistent with a segment that experiences more abrupt speed changes
+(e.g. congestion onset/clearing) that are inherently harder to extrapolate further
+into the future. Sensor 3 sits between the two on every metric.
+
+**Do errors increase at longer horizons, and does behaviour differ between sensors?**
+Yes to both: every sensor's error grows with horizon (Section 3.2's overall trend
+holds sensor-by-sensor too), but the *rate* of growth differs sharply — Sensor 2's
+near-flat degradation vs. Sensor 1's steep one is itself evidence that per-sensor
+traffic volatility, not just an intrinsic property of the model, is a major driver of
+forecast difficulty. This motivates the per-station analyses in Sections 4.5/5.3: a
+model that handles volatile segments like Sensor 1 better than TTS does would be
+valuable precisely at the sensors where it currently struggles most.
 
 ### 3.4 Discussion
-[PENDING]
+
+TTS establishes a working, sane baseline: predictions track the coarse level and
+diurnal shape of actual speeds (Figure 3), errors grow with horizon in the expected
+direction and at a plausible magnitude, and per-sensor differences are large enough to
+be clearly attributable to genuine differences in local traffic dynamics rather than
+noise. Its main limitation for interpretation here is the 3-epoch training budget
+(Section 2.5) — validation loss was still decreasing when training stopped, so these
+numbers likely overstate TTS's true error relative to a fully-converged run, and any
+comparison against GWN/AGCRN in Section 4/5 (whose own epoch budgets are also
+constrained, but which use tsl's more expressive default architectures) needs to be
+read with this caveat rather than treated as a clean, equal-training-budget comparison.
 
 ## 4. Question 2 — GraphWaveNet
 ### 4.1 Configurations

@@ -69,6 +69,7 @@ def run_training(
     seed: int = 42,
     limit_train_batches=None,
     limit_val_batches=None,
+    accelerator: str = "auto",
 ):
     """Trains `model` (already constructed) via a tsl `Predictor` + PyTorch
     Lightning `Trainer`, with early stopping on `val_mae`, TensorBoard + CSV
@@ -78,6 +79,12 @@ def run_training(
     `limit_train_batches`/`limit_val_batches` are only set by the timing pilot
     (Phase 3) to cap a run to a handful of batches; real experiments leave them
     as None (full data).
+
+    `accelerator="auto"` (the default) lets PyTorch Lightning pick a GPU if one
+    is available and fall back to CPU otherwise -- this is what makes the exact
+    same entrypoint scripts (run_tts.py etc.) use CUDA automatically on a GPU
+    machine (e.g. Google Colab) without any code change, while still running
+    CPU-only on this project's local (no-GPU) development machine.
     """
     import pytorch_lightning as pl
     from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
@@ -105,7 +112,7 @@ def run_training(
 
     trainer_kwargs = dict(
         max_epochs=max_epochs,
-        accelerator="cpu",
+        accelerator=accelerator,
         devices=1,
         logger=[tb_logger, csv_logger],
         callbacks=[checkpoint_cb, early_stop_cb, progress_cb],

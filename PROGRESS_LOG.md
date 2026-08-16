@@ -117,3 +117,7 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 17:55:54] [build_tables] Wrote report/tables/per_station.md
 - [2026-08-16 17:55:54] [build_tables] Wrote report/tables/training_time.md
 - [2026-08-16 17:55:54] [build_tables] SKIPPED top15_influential_nodes.md -- dependency not ready yet
+- [2026-08-16 18:29:07] [agcrn] epoch 0 val_mae=3.0867 (2207.8s)
+- [2026-08-16 19:05:17] [gwn_predefined] epoch 0 val_mae=3.1619 (4433.1s)
+- [2026-08-16 19:07:43] [agcrn] epoch 1 train_loss=4.0603 val_mae=3.0250 (2315.8s)
+- [2026-08-16 19:18:31] [gwn_adaptive] epoch 0 val_mae=3.0616 (5209.7s)
