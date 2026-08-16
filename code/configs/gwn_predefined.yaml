@@ -47,8 +47,14 @@ trainer:
   # further as a safety margin against the fix only partially recovering
   # throughput. Kept IDENTICAL to gwn_adaptive.yaml's budget so the two
   # configs remain a controlled ablation.
-  max_epochs: 6
-  early_stopping_patience: 4
+  # FURTHER REVISED AGAIN: real observed contention (TTS steady-state epoch
+  # time 495s vs isolated pilot 120s = 4.1x, not the 1.9x seen in the noisy
+  # first epoch) meant even the 6-epoch budget risked overrun. TTS was killed
+  # (using its 3-epoch checkpoint as-is) to leave only 3 concurrent processes
+  # sharing this 14-physical/20-logical-core (6P+8E hybrid) CPU, and this
+  # budget cut further as a hard safety measure.
+  max_epochs: 4
+  early_stopping_patience: 3
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1

@@ -82,3 +82,4 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 17:31:10] [build_tables] SKIPPED training_time.md -- dependency not ready yet
 - [2026-08-16 17:31:10] [build_tables] SKIPPED top15_influential_nodes.md -- dependency not ready yet
 - [2026-08-16 17:34:48] [tts] epoch 1 train_loss=4.0319 val_mae=3.1084 (490.5s)
+- [2026-08-16 17:43:03] [tts] epoch 2 train_loss=3.6199 val_mae=3.0766 (494.9s)

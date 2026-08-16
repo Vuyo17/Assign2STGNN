@@ -47,8 +47,10 @@ trainer:
   # + extra epoch-budget safety margin under 4-way concurrent execution
   # (observed 2.8x slowdown for TTS before the fix; budget sized conservatively
   # assuming the fix only partially recovers throughput).
-  max_epochs: 16
-  early_stopping_patience: 6
+  # FURTHER REVISED AGAIN -- see gwn_predefined.yaml (real 4.1x contention
+  # factor, TTS killed to leave 3 concurrent processes).
+  max_epochs: 10
+  early_stopping_patience: 5
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1

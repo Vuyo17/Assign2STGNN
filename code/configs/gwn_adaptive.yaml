@@ -33,8 +33,10 @@ trainer:
   # (only learned_adjacency differs) even under the tighter time budget.
   # FURTHER REVISED: see gwn_predefined.yaml -- thread-oversubscription fix +
   # extra epoch-budget safety margin under 4-way concurrent execution.
-  max_epochs: 6
-  early_stopping_patience: 4
+  # FURTHER REVISED AGAIN -- see gwn_predefined.yaml (real 4.1x contention
+  # factor, TTS killed to leave 3 concurrent processes).
+  max_epochs: 4
+  early_stopping_patience: 3
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1

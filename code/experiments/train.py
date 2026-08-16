@@ -22,7 +22,7 @@ import torch
 # far worse than the 4-way share alone would predict). Cap each process to a
 # fair share of the 20 logical CPUs on this machine. Safe to import even when
 # only one experiment runs at a time.
-_N_THREADS = max(1, (os.cpu_count() or 4) // 4)
+_N_THREADS = max(1, (os.cpu_count() or 4) // 3)
 os.environ.setdefault("OMP_NUM_THREADS", str(_N_THREADS))
 os.environ.setdefault("MKL_NUM_THREADS", str(_N_THREADS))
 os.environ.setdefault("OPENBLAS_NUM_THREADS", str(_N_THREADS))
