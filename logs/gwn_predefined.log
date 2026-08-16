@@ -1,3 +1,6 @@
 [2026-08-16 17:09:49] [gwn_predefined] === Q2 GWN (predefined only): full training run starting (config: code/configs/gwn_predefined.yaml) ===
 [2026-08-16 17:09:52] [gwn_predefined] Building predictor (lr=0.001, max_epochs=12, seed=42)
 [2026-08-16 17:09:52] [gwn_predefined] Training started (max_epochs=12, accelerator=CPUAccelerator)
+[2026-08-16 17:23:27] [gwn_predefined] === Q2 GWN (predefined only): full training run starting (config: code/configs/gwn_predefined.yaml) ===
+[2026-08-16 17:23:30] [gwn_predefined] Building predictor (lr=0.001, max_epochs=6, seed=42)
+[2026-08-16 17:23:30] [gwn_predefined] Training started (max_epochs=6, accelerator=CPUAccelerator)

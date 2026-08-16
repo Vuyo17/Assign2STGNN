@@ -1,3 +1,6 @@
 [2026-08-16 17:10:27] [agcrn] === Q3 AGCRN: full training run starting (config: code/configs/agcrn.yaml) ===
 [2026-08-16 17:10:39] [agcrn] Building predictor (lr=0.001, max_epochs=25, seed=42)
 [2026-08-16 17:10:42] [agcrn] Training started (max_epochs=25, accelerator=CPUAccelerator)
+[2026-08-16 17:23:55] [agcrn] === Q3 AGCRN: full training run starting (config: code/configs/agcrn.yaml) ===
+[2026-08-16 17:24:03] [agcrn] Building predictor (lr=0.001, max_epochs=16, seed=42)
+[2026-08-16 17:24:05] [agcrn] Training started (max_epochs=16, accelerator=CPUAccelerator)

@@ -64,3 +64,16 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 17:17:07] [build_all_figures] SKIPPED per-station cross-model comparison -- fewer than 2 models have predictions.npz
 - [2026-08-16 17:17:07] [build_all_figures] SKIPPED learned-adjacency figures/table -- results/gwn_adaptive/learned_adjacency.npy not ready
 - [2026-08-16 17:17:07] [build_all_figures] build_all_figures pass complete.
+- [2026-08-16 17:22:44] [tts] === Q1 TTS: full training run starting (config: code/configs/tts.yaml) ===
+- [2026-08-16 17:22:44] [tts] Building predictor (lr=0.001, max_epochs=60, seed=42)
+- [2026-08-16 17:22:45] [tts] Training started (max_epochs=60, accelerator=CPUAccelerator)
+- [2026-08-16 17:23:27] [gwn_predefined] === Q2 GWN (predefined only): full training run starting (config: code/configs/gwn_predefined.yaml) ===
+- [2026-08-16 17:23:30] [gwn_predefined] Building predictor (lr=0.001, max_epochs=6, seed=42)
+- [2026-08-16 17:23:30] [gwn_predefined] Training started (max_epochs=6, accelerator=CPUAccelerator)
+- [2026-08-16 17:23:39] [gwn_adaptive] === Q2 GWN (predefined+adaptive): full training run starting (config: code/configs/gwn_adaptive.yaml) ===
+- [2026-08-16 17:23:44] [gwn_adaptive] Building predictor (lr=0.001, max_epochs=6, seed=42)
+- [2026-08-16 17:23:45] [gwn_adaptive] Training started (max_epochs=6, accelerator=CPUAccelerator)
+- [2026-08-16 17:23:55] [agcrn] === Q3 AGCRN: full training run starting (config: code/configs/agcrn.yaml) ===
+- [2026-08-16 17:24:03] [agcrn] Building predictor (lr=0.001, max_epochs=16, seed=42)
+- [2026-08-16 17:24:05] [agcrn] Training started (max_epochs=16, accelerator=CPUAccelerator)
+- [2026-08-16 17:26:37] [tts] epoch 0 val_mae=3.1422 (232.2s)
