@@ -1,0 +1,42 @@
+{
+  "tts": {
+    "experiment": "tts",
+    "pilot_wall_seconds": 6.2153613567352295,
+    "capped_train_batches_run": 20,
+    "full_train_batches_per_epoch": 385,
+    "full_val_batches_per_epoch": 43,
+    "estimated_seconds_per_batch": 0.3107680678367615,
+    "estimated_full_epoch_seconds": 119.64570611715317,
+    "estimated_full_epoch_minutes": 1.9940951019525528
+  },
+  "gwn_predefined": {
+    "experiment": "gwn_predefined",
+    "pilot_wall_seconds": 105.75517058372498,
+    "capped_train_batches_run": 20,
+    "full_train_batches_per_epoch": 385,
+    "full_val_batches_per_epoch": 43,
+    "estimated_seconds_per_batch": 5.287758529186249,
+    "estimated_full_epoch_seconds": 2035.7870337367058,
+    "estimated_full_epoch_minutes": 33.92978389561176
+  },
+  "gwn_adaptive": {
+    "experiment": "gwn_adaptive",
+    "pilot_wall_seconds": 117.23371005058289,
+    "capped_train_batches_run": 20,
+    "full_train_batches_per_epoch": 385,
+    "full_val_batches_per_epoch": 43,
+    "estimated_seconds_per_batch": 5.861685502529144,
+    "estimated_full_epoch_seconds": 2256.7489184737206,
+    "estimated_full_epoch_minutes": 37.61248197456201
+  },
+  "agcrn": {
+    "experiment": "agcrn",
+    "pilot_wall_seconds": 46.819554805755615,
+    "capped_train_batches_run": 20,
+    "full_train_batches_per_epoch": 385,
+    "full_val_batches_per_epoch": 43,
+    "estimated_seconds_per_batch": 2.340977740287781,
+    "estimated_full_epoch_seconds": 901.2764300107957,
+    "estimated_full_epoch_minutes": 15.021273833513261
+  }
+}

@@ -8,3 +8,37 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 16:32:47] [data_pipeline_verification] Building METR-LA datamodule (downloading on first run)...
 - [2026-08-16 16:34:36] [data_pipeline_verification] Building METR-LA datamodule (downloading on first run)...
 - [2026-08-16 16:34:37] [data_pipeline_verification] Datamodule verified: 207 nodes, split 24648/2728/6849 (train/val/test), fractions 0.720/0.080/0.200
+- [2026-08-16 16:37:21] [timing_pilot] === Pilot 1/4: TTS ===
+- [2026-08-16 16:37:21] [timing_pilot] [tts] starting capped 1-epoch pilot (20 train / 5 val batches)
+- [2026-08-16 16:37:21] [tts_pilot] Building predictor (lr=0.001, max_epochs=1, seed=42)
+- [2026-08-16 16:37:23] [tts_pilot] Training started (max_epochs=1, accelerator=CPUAccelerator)
+- [2026-08-16 16:37:27] [tts_pilot] epoch 0 val_mae=5.1905 (4.2s)
+- [2026-08-16 16:37:27] [tts_pilot] Training finished after 2 epochs, 0.1 min total
+- [2026-08-16 16:37:27] [tts_pilot] Training complete: 2 epochs, 0.1 min total, best_val_mae=5.190450668334961, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\tts_pilot\checkpoints\best-epoch=0-val_mae=5.1905.ckpt
+- [2026-08-16 16:37:27] [timing_pilot] [tts] pilot done: ~0.31s/batch, 385 batches/epoch => est. 2.0 min/epoch
+- [2026-08-16 16:37:27] [timing_pilot] === Pilot 2/4: GWN (predefined) ===
+- [2026-08-16 16:37:27] [timing_pilot] [gwn_predefined] starting capped 1-epoch pilot (20 train / 5 val batches)
+- [2026-08-16 16:37:28] [gwn_predefined_pilot] Building predictor (lr=0.001, max_epochs=1, seed=42)
+- [2026-08-16 16:37:28] [gwn_predefined_pilot] Training started (max_epochs=1, accelerator=CPUAccelerator)
+- [2026-08-16 16:39:13] [gwn_predefined_pilot] epoch 0 val_mae=3.5640 (101.8s)
+- [2026-08-16 16:39:13] [gwn_predefined_pilot] Training finished after 2 epochs, 1.8 min total
+- [2026-08-16 16:39:13] [gwn_predefined_pilot] Training complete: 2 epochs, 1.8 min total, best_val_mae=3.563953161239624, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\gwn_predefined_pilot\checkpoints\best-epoch=0-val_mae=3.5640.ckpt
+- [2026-08-16 16:39:13] [timing_pilot] [gwn_predefined] pilot done: ~5.29s/batch, 385 batches/epoch => est. 33.9 min/epoch
+- [2026-08-16 16:39:13] [timing_pilot] === Pilot 3/4: GWN (predefined+adaptive) ===
+- [2026-08-16 16:39:13] [timing_pilot] [gwn_adaptive] starting capped 1-epoch pilot (20 train / 5 val batches)
+- [2026-08-16 16:39:14] [gwn_adaptive_pilot] Building predictor (lr=0.001, max_epochs=1, seed=42)
+- [2026-08-16 16:39:14] [gwn_adaptive_pilot] Training started (max_epochs=1, accelerator=CPUAccelerator)
+- [2026-08-16 16:41:11] [gwn_adaptive_pilot] epoch 0 val_mae=3.6197 (112.3s)
+- [2026-08-16 16:41:11] [gwn_adaptive_pilot] Training finished after 2 epochs, 1.9 min total
+- [2026-08-16 16:41:11] [gwn_adaptive_pilot] Training complete: 2 epochs, 1.9 min total, best_val_mae=3.619692802429199, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\gwn_adaptive_pilot\checkpoints\best-epoch=0-val_mae=3.6197.ckpt
+- [2026-08-16 16:41:11] [timing_pilot] [gwn_adaptive] pilot done: ~5.86s/batch, 385 batches/epoch => est. 37.6 min/epoch
+- [2026-08-16 16:41:11] [timing_pilot] === Pilot 4/4: AGCRN ===
+- [2026-08-16 16:41:11] [timing_pilot] [agcrn] starting capped 1-epoch pilot (20 train / 5 val batches)
+- [2026-08-16 16:41:11] [agcrn_pilot] Building predictor (lr=0.001, max_epochs=1, seed=42)
+- [2026-08-16 16:41:11] [agcrn_pilot] Training started (max_epochs=1, accelerator=CPUAccelerator)
+- [2026-08-16 16:41:58] [agcrn_pilot] epoch 0 val_mae=5.5740 (45.2s)
+- [2026-08-16 16:41:58] [agcrn_pilot] Training finished after 2 epochs, 0.8 min total
+- [2026-08-16 16:41:58] [agcrn_pilot] Training complete: 2 epochs, 0.8 min total, best_val_mae=5.574030876159668, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\agcrn_pilot\checkpoints\best-epoch=0-val_mae=5.5740.ckpt
+- [2026-08-16 16:41:58] [timing_pilot] [agcrn] pilot done: ~2.34s/batch, 385 batches/epoch => est. 15.0 min/epoch
+- [2026-08-16 16:41:58] [timing_pilot] Timing pilot complete for all 4 models.
+- [2026-08-16 16:42:43] [timing_pilot] PILOT RESULTS: TTS 0.31s/batch (~2.0 min/epoch); GWN-predefined 5.29s/batch (~33.9 min/epoch); GWN-adaptive 5.86s/batch (~37.6 min/epoch); AGCRN 2.34s/batch (~15.0 min/epoch). 385 batches/epoch for all (same dataloader). GWN is ~17x more expensive per epoch than TTS on this CPU -- this drives the epoch-budget decision for the full training runs.

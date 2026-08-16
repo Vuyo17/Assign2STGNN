@@ -1,0 +1,5 @@
+[2026-08-16 16:39:14] [gwn_adaptive_pilot] Building predictor (lr=0.001, max_epochs=1, seed=42)
+[2026-08-16 16:39:14] [gwn_adaptive_pilot] Training started (max_epochs=1, accelerator=CPUAccelerator)
+[2026-08-16 16:41:11] [gwn_adaptive_pilot] epoch 0 val_mae=3.6197 (112.3s)
+[2026-08-16 16:41:11] [gwn_adaptive_pilot] Training finished after 2 epochs, 1.9 min total
+[2026-08-16 16:41:11] [gwn_adaptive_pilot] Training complete: 2 epochs, 1.9 min total, best_val_mae=3.619692802429199, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\gwn_adaptive_pilot\checkpoints\best-epoch=0-val_mae=3.6197.ckpt

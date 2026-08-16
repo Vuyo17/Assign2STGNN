@@ -1,0 +1,14 @@
+[2026-08-16 16:37:21] [timing_pilot] === Pilot 1/4: TTS ===
+[2026-08-16 16:37:21] [timing_pilot] [tts] starting capped 1-epoch pilot (20 train / 5 val batches)
+[2026-08-16 16:37:27] [timing_pilot] [tts] pilot done: ~0.31s/batch, 385 batches/epoch => est. 2.0 min/epoch
+[2026-08-16 16:37:27] [timing_pilot] === Pilot 2/4: GWN (predefined) ===
+[2026-08-16 16:37:27] [timing_pilot] [gwn_predefined] starting capped 1-epoch pilot (20 train / 5 val batches)
+[2026-08-16 16:39:13] [timing_pilot] [gwn_predefined] pilot done: ~5.29s/batch, 385 batches/epoch => est. 33.9 min/epoch
+[2026-08-16 16:39:13] [timing_pilot] === Pilot 3/4: GWN (predefined+adaptive) ===
+[2026-08-16 16:39:13] [timing_pilot] [gwn_adaptive] starting capped 1-epoch pilot (20 train / 5 val batches)
+[2026-08-16 16:41:11] [timing_pilot] [gwn_adaptive] pilot done: ~5.86s/batch, 385 batches/epoch => est. 37.6 min/epoch
+[2026-08-16 16:41:11] [timing_pilot] === Pilot 4/4: AGCRN ===
+[2026-08-16 16:41:11] [timing_pilot] [agcrn] starting capped 1-epoch pilot (20 train / 5 val batches)
+[2026-08-16 16:41:58] [timing_pilot] [agcrn] pilot done: ~2.34s/batch, 385 batches/epoch => est. 15.0 min/epoch
+[2026-08-16 16:41:58] [timing_pilot] Timing pilot complete for all 4 models.
+[2026-08-16 16:42:43] [timing_pilot] PILOT RESULTS: TTS 0.31s/batch (~2.0 min/epoch); GWN-predefined 5.29s/batch (~33.9 min/epoch); GWN-adaptive 5.86s/batch (~37.6 min/epoch); AGCRN 2.34s/batch (~15.0 min/epoch). 385 batches/epoch for all (same dataloader). GWN is ~17x more expensive per epoch than TTS on this CPU -- this drives the epoch-budget decision for the full training runs.

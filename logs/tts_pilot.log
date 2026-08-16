@@ -1,0 +1,5 @@
+[2026-08-16 16:37:21] [tts_pilot] Building predictor (lr=0.001, max_epochs=1, seed=42)
+[2026-08-16 16:37:23] [tts_pilot] Training started (max_epochs=1, accelerator=CPUAccelerator)
+[2026-08-16 16:37:27] [tts_pilot] epoch 0 val_mae=5.1905 (4.2s)
+[2026-08-16 16:37:27] [tts_pilot] Training finished after 2 epochs, 0.1 min total
+[2026-08-16 16:37:27] [tts_pilot] Training complete: 2 epochs, 0.1 min total, best_val_mae=5.190450668334961, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\tts_pilot\checkpoints\best-epoch=0-val_mae=5.1905.ckpt

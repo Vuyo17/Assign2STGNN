@@ -11,6 +11,36 @@
       "started": null,
       "finished": "2026-08-16 16:35:56",
       "notes": "Python 3.12.10, torch 2.9.0+cpu, torch_geometric 2.8.0.post1, tsl 0.9.5, pandas pinned 2.2.3 (tsl 0.9.5 uses deprecated 5T freq alias removed in pandas 3.0), no GPU (Intel CPU, 15.7GB RAM)"
+    },
+    "timing_pilot": {
+      "state": "done",
+      "started": "2026-08-16 16:37:20",
+      "finished": "2026-08-16 16:41:58",
+      "notes": "{'TTS': 2.0, 'GWN (predefined)': 33.9, 'GWN (predefined+adaptive)': 37.6, 'AGCRN': 15.0}"
+    },
+    "tts_pilot_train": {
+      "state": "done",
+      "started": "2026-08-16 16:37:21",
+      "finished": "2026-08-16 16:37:27",
+      "notes": "2 epochs, 0.1 min, best_val_mae=5.190450668334961"
+    },
+    "gwn_predefined_pilot_train": {
+      "state": "done",
+      "started": "2026-08-16 16:37:28",
+      "finished": "2026-08-16 16:39:13",
+      "notes": "2 epochs, 1.8 min, best_val_mae=3.563953161239624"
+    },
+    "gwn_adaptive_pilot_train": {
+      "state": "done",
+      "started": "2026-08-16 16:39:14",
+      "finished": "2026-08-16 16:41:11",
+      "notes": "2 epochs, 1.9 min, best_val_mae=3.619692802429199"
+    },
+    "agcrn_pilot_train": {
+      "state": "done",
+      "started": "2026-08-16 16:41:11",
+      "finished": "2026-08-16 16:41:58",
+      "notes": "2 epochs, 0.8 min, best_val_mae=5.574030876159668"
     }
   }
 }
