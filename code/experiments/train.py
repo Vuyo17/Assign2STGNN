@@ -70,6 +70,7 @@ def run_training(
     limit_train_batches=None,
     limit_val_batches=None,
     accelerator: str = "auto",
+    resume_from_checkpoint: str | None = None,
 ):
     """Trains `model` (already constructed) via a tsl `Predictor` + PyTorch
     Lightning `Trainer`, with early stopping on `val_mae`, TensorBoard + CSV
@@ -85,6 +86,14 @@ def run_training(
     same entrypoint scripts (run_tts.py etc.) use CUDA automatically on a GPU
     machine (e.g. Google Colab) without any code change, while still running
     CPU-only on this project's local (no-GPU) development machine.
+
+    `resume_from_checkpoint`, if given a checkpoint path, restores model
+    weights, optimiser state, and the epoch counter from that checkpoint and
+    continues training from there (via Lightning's own `ckpt_path=` resume
+    mechanism) rather than starting from epoch 0 -- `max_epochs` must be set
+    higher than the checkpoint's own epoch for this to do any further training.
+    The returned `training_history.json` is the FULL curve (pre-resume epochs
+    merged with the newly-run ones), not just the newly-run portion.
     """
     import pytorch_lightning as pl
     from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
@@ -126,8 +135,11 @@ def run_training(
 
     trainer = pl.Trainer(**trainer_kwargs)
 
+    if resume_from_checkpoint:
+        log.milestone(f"Resuming from checkpoint {resume_from_checkpoint} (new ceiling max_epochs={max_epochs})")
+
     t0 = time.time()
-    trainer.fit(predictor, datamodule=dm)
+    trainer.fit(predictor, datamodule=dm, ckpt_path=resume_from_checkpoint)
     total_seconds = time.time() - t0
 
     best_ckpt_path = checkpoint_cb.best_model_path
@@ -149,11 +161,51 @@ def run_training(
                 history["train_loss"].append(float(g[train_col].dropna().mean()) if train_col and g[train_col].notna().any() else None)
                 history["val_loss"].append(float(g[val_col].dropna().mean()) if val_col and g[val_col].notna().any() else None)
 
+    out_dir = _ROOT / "results" / experiment_name
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    resumed_from_epochs = 0
+    prior_total_seconds = 0.0
+    if resume_from_checkpoint:
+        old_summary_path = out_dir / "training_summary.json"
+        if old_summary_path.exists():
+            with open(old_summary_path, encoding="utf-8") as f:
+                prior_total_seconds = json.load(f).get("total_training_seconds") or 0.0
+        old_history_path = out_dir / "training_history.json"
+        if old_history_path.exists():
+            with open(old_history_path, encoding="utf-8") as f:
+                old_history = json.load(f)
+            resumed_from_epochs = len(old_history.get("epoch", []))
+            # Merge: keep the pre-resume epochs, then append any new epoch
+            # indices not already present (avoids double-counting the
+            # checkpoint's own epoch, which Lightning may re-log on resume).
+            seen = set(old_history.get("epoch", []))
+            merged = {
+                "epoch": list(old_history.get("epoch", [])),
+                "train_loss": list(old_history.get("train_loss", [])),
+                "val_loss": list(old_history.get("val_loss", [])),
+            }
+            for e, tl, vl in zip(history["epoch"], history["train_loss"], history["val_loss"]):
+                if e not in seen:
+                    merged["epoch"].append(e)
+                    merged["train_loss"].append(tl)
+                    merged["val_loss"].append(vl)
+                    seen.add(e)
+            history = merged
+            log.milestone(
+                f"Merged pre-resume history ({resumed_from_epochs} epochs) with "
+                f"newly-run epochs -- full curve now {len(history['epoch'])} epochs"
+            )
+
+    cumulative_seconds = prior_total_seconds + total_seconds
     summary = {
         "experiment": experiment_name,
-        "total_training_seconds": total_seconds,
-        "epochs_run": epochs_run,
-        "seconds_per_epoch_avg": total_seconds / max(epochs_run, 1),
+        "total_training_seconds": cumulative_seconds,  # cumulative across resumes
+        "this_call_seconds": total_seconds,
+        "epochs_run": len(history["epoch"]),  # total, including any pre-resume epochs
+        "epochs_run_this_call": epochs_run,
+        "resumed_from_checkpoint": resume_from_checkpoint,
+        "seconds_per_epoch_avg": cumulative_seconds / max(len(history["epoch"]), 1),
         "best_val_mae": best_val_mae,
         "best_checkpoint": best_ckpt_path,
         "early_stopped": trainer.current_epoch + 1 < max_epochs,
@@ -163,8 +215,6 @@ def run_training(
         "seed": seed,
     }
 
-    out_dir = _ROOT / "results" / experiment_name
-    out_dir.mkdir(parents=True, exist_ok=True)
     with open(out_dir / "training_summary.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
     with open(out_dir / "training_history.json", "w", encoding="utf-8") as f:
