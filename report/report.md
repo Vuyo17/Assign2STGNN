@@ -203,7 +203,31 @@ test fold is touched exactly once per model, at final evaluation.
 
 ## 4. Question 2 — GraphWaveNet
 ### 4.1 Configurations
-[PENDING — from `code/API_NOTES.md` + `code/configs/gwn_*.yaml`]
+
+Both configurations use `tsl.nn.models.GraphWaveNetModel` (Wu et al., 2019) with tsl's
+own default architecture hyperparameters (`hidden_size=32, ff_size=256, n_layers=8`
+dilated-convolution blocks, `temporal_kernel_size=2, spatial_kernel_size=2, dilation=2,
+dilation_mod=2, norm='batch', dropout=0.3`), identical optimiser/lr/batch size to TTS
+(Section 2.4), and are trained/evaluated with exactly the same protocol
+(Section 2.5–2.6). The two configurations differ in **exactly one** constructor
+argument:
+
+- **Configuration A (predefined only)**: `learned_adjacency=False`. The model still
+  receives and uses the predefined graph (`edge_index`/`edge_weight`) at every forward
+  pass through its diffusion-convolution (`DiffConv`) layers — `learned_adjacency`
+  only controls whether the *additional* dense adaptive-adjacency branch (built from
+  learned node embeddings) is present at all.
+- **Configuration B (predefined + adaptive)**: `learned_adjacency=True, n_nodes=207,
+  emb_size=10`. In addition to the predefined-graph diffusion convolutions, each of
+  the 8 GWN blocks also runs a dense graph convolution over a **learned** NxN
+  adjacency matrix, computed once per forward pass as
+  `softmax(relu(E_src @ E_tgt^T), dim=1)` from two independently learned N×10 node
+  embedding tables (`E_src`, `E_tgt`) — confirmed directly from the installed tsl
+  source (`GraphWaveNetModel.get_learned_adj`), not assumed.
+
+Because only this one argument differs, Configuration A vs. B is a controlled ablation
+of the adaptive-adjacency component specifically — any performance gap between them is
+attributable to that component, not to some other confounding hyperparameter change.
 
 ### 4.2 Overall Comparison (TTS vs GWN-predefined vs GWN-adaptive)
 [PENDING — Table 2 + Figure 4]
