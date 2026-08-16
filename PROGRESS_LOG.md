@@ -176,3 +176,20 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 23:48:04] [agcrn] epoch 9 train_loss=3.1092 val_mae=2.7526 (1124.3s)
 - [2026-08-16 23:48:04] [agcrn] Training finished after 11 epochs, 355.8 min total
 - [2026-08-16 23:48:04] [agcrn] Training complete: 11 epochs, 355.8 min total, best_val_mae=2.7526419162750244, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\agcrn\checkpoints\best-epoch=9-val_mae=2.7526.ckpt
+- [2026-08-16 23:49:12] [agcrn] Evaluation pass over 108 test batches complete in 68.2s
+- [2026-08-16 23:49:14] [agcrn] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\agcrn (overall 60min MAE=3.759 mph)
+- [2026-08-16 23:49:14] [agcrn] === Q3 AGCRN: COMPLETE. Summary: {'experiment': 'agcrn', 'total_training_seconds': 21350.991227149963, 'epochs_run': 11, 'seconds_per_epoch_avg': 1940.9992024681785, 'best_val_mae': 2.7526419162750244, 'best_checkpoint': 'C:\\Users\\Student\\Downloads\\Assign2STGNN\\results\\agcrn\\checkpoints\\best-epoch=9-val_mae=2.7526.ckpt', 'early_stopped': False, 'max_epochs_configured': 10, 'early_stopping_patience': 5, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-16 23:49:39] [build_all_figures] Building whatever figures/tables the currently-available results support...
+- [2026-08-16 23:49:45] [build_all_figures] fig01_adjacency_heatmap.png done (predefined graph, always available)
+- [2026-08-16 23:49:45] [build_all_figures] Models with overall metrics available: ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-16 23:49:45] [build_all_figures] Overall performance table + horizon-trend figures done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-16 23:49:45] [build_all_figures] fig03_tts_station{1,2,3}_actual_vs_predicted.png done
+- [2026-08-16 23:49:45] [build_all_figures] fig05_convergence_curves.png done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-16 23:49:46] [build_all_figures] Training time figure/table done for ['GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-16 23:49:46] [build_all_figures] Per-station comparison figures done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-16 23:49:47] [build_all_figures] fig07/fig08 + top15_influential_nodes.csv done
+- [2026-08-16 23:49:47] [build_all_figures] build_all_figures pass complete.
+- [2026-08-16 23:49:49] [build_tables] Wrote report/tables/overall_performance.md
+- [2026-08-16 23:49:49] [build_tables] Wrote report/tables/per_station.md
+- [2026-08-16 23:49:49] [build_tables] Wrote report/tables/training_time.md
+- [2026-08-16 23:49:49] [build_tables] Wrote report/tables/top15_influential_nodes.md

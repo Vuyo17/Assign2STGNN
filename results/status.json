@@ -85,10 +85,10 @@
       "notes": "60min MAE=4.102"
     },
     "agcrn_eval": {
-      "state": "running",
+      "state": "done",
       "started": "2026-08-16 23:48:04",
-      "finished": null,
-      "notes": null
+      "finished": "2026-08-16 23:49:14",
+      "notes": "60min MAE=3.759"
     }
   }
 }

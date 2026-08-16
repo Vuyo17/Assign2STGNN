@@ -9,3 +9,6 @@
 | GWN (predefined+adaptive) | 15 min    |       29.699 |       2.928 |      7.300 |
 | GWN (predefined+adaptive) | 30 min    |       42.700 |       3.403 |      8.880 |
 | GWN (predefined+adaptive) | 60 min    |       62.525 |       4.102 |     10.980 |
+| AGCRN                     | 15 min    |       31.039 |       2.895 |      7.750 |
+| AGCRN                     | 30 min    |       43.148 |       3.297 |      9.430 |
+| AGCRN                     | 60 min    |       59.034 |       3.759 |     11.290 |

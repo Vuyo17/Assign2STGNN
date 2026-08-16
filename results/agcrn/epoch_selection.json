@@ -1,0 +1,9 @@
+{
+  "epochs_run": 11,
+  "early_stopped": false,
+  "max_epochs_ceiling": 10,
+  "early_stopping_patience": 5,
+  "best_val_mae": 2.7526419162750244,
+  "epoch_of_best_val_mae": 9,
+  "justification": "Trained with a generous ceiling (max_epochs=10) and early stopping (patience=5 epochs of no val_mae improvement). Validation MAE reached its best value at epoch 9 of 11 run; the checkpoint from that epoch is used for all reported AGCRN results, i.e. the 'selected' epoch count is the early-stopped best-validation epoch, not an arbitrary fixed number."
+}

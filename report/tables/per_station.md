@@ -27,3 +27,12 @@
 | GWN (predefined+adaptive) | Sensor 3 | 15 min    |       14.540 |       2.033 |      4.130 |
 | GWN (predefined+adaptive) | Sensor 3 | 30 min    |       19.462 |       2.242 |      4.560 |
 | GWN (predefined+adaptive) | Sensor 3 | 60 min    |       36.774 |       2.696 |      5.210 |
+| AGCRN                     | Sensor 1 | 15 min    |       32.437 |       2.475 |      6.570 |
+| AGCRN                     | Sensor 1 | 30 min    |       48.367 |       2.963 |      8.500 |
+| AGCRN                     | Sensor 1 | 60 min    |       60.817 |       3.181 |      9.650 |
+| AGCRN                     | Sensor 2 | 15 min    |        7.297 |       1.642 |      2.780 |
+| AGCRN                     | Sensor 2 | 30 min    |        7.900 |       1.637 |      2.800 |
+| AGCRN                     | Sensor 2 | 60 min    |        8.499 |       1.705 |      2.920 |
+| AGCRN                     | Sensor 3 | 15 min    |       14.253 |       1.936 |      4.140 |
+| AGCRN                     | Sensor 3 | 30 min    |       17.578 |       2.066 |      4.630 |
+| AGCRN                     | Sensor 3 | 60 min    |       29.911 |       2.398 |      5.350 |

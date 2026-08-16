@@ -8,3 +8,6 @@ GWN (predefined),60 min,73.192,4.384,12.793
 GWN (predefined+adaptive),15 min,29.699,2.928,7.3
 GWN (predefined+adaptive),30 min,42.7,3.403,8.884
 GWN (predefined+adaptive),60 min,62.525,4.102,10.977
+AGCRN,15 min,31.039,2.895,7.748
+AGCRN,30 min,43.148,3.297,9.434
+AGCRN,60 min,59.034,3.759,11.288

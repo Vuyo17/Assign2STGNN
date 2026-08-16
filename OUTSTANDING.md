@@ -2,9 +2,9 @@
 
 **Auto-generated** by `code/utils/update_outstanding.py` -- do not hand-edit; it is overwritten after every pipeline stage. Reflects `results/status.json` cross-checked against files actually present on disk.
 
-Progress: **7/28** stages complete.
+Progress: **9/28** stages complete.
 
-Last regenerated: 2026-08-16 23:48:04
+Last regenerated: 2026-08-16 23:49:14
 
 ## Setup
 
@@ -36,8 +36,8 @@ Last regenerated: 2026-08-16 23:48:04
 ## Q3 AGCRN
 
 - ⬜ **agcrn_epoch_selection**: Epoch-selection experiment + justification
-- ❌ **agcrn_train**: AGCRN final training run -- 11 epochs, 355.8 min, best_val_mae=2.7526419162750244 (marked done but expected artifact is missing!)
-- ⬜ **agcrn_eval**: AGCRN evaluated: overall + per-horizon + per-node
+- ✅ **agcrn_train**: AGCRN final training run -- 11 epochs, 355.8 min, best_val_mae=2.7526419162750244
+- ✅ **agcrn_eval**: AGCRN evaluated: overall + per-horizon + per-node -- 60min MAE=3.759
 - ⬜ **fig_agcrn_vs_gwn**: AGCRN vs GWN performance/training-time comparison
 - ⬜ **fig_agcrn_per_station**: AGCRN vs best GWN, per-station (nodes 1-3)
 - ⬜ **weather_paper_comparison**: Written reflection vs Gaibie et al. 2024 weather paper
