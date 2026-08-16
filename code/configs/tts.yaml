@@ -1,0 +1,34 @@
+# Q1 baseline: TimeThenSpaceModel
+# Hyperparameters match the tsl tutorial notebook defaults (a_gentle_introduction_to_tsl.ipynb,
+# cells 67-79), which is the reference TTS configuration for this library.
+experiment_name: tts
+
+data:
+  window: 12
+  horizon: 12
+  stride: 1
+  val_len: 0.1
+  test_len: 0.2
+  batch_size: 64
+  connectivity_threshold: 0.1
+  connectivity_include_self: false
+  connectivity_normalize_axis: 1
+  scaler_axis: [0, 1]
+
+model:
+  hidden_size: 32
+  rnn_layers: 1
+  gnn_kernel: 2
+
+optim:
+  lr: 0.001
+  optimizer: Adam
+
+trainer:
+  max_epochs: 100          # upper bound; early stopping is expected to trigger sooner
+  early_stopping_patience: 15
+  early_stopping_monitor: val_mae
+  accelerator: cpu
+  devices: 1
+
+seed: 42
