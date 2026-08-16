@@ -5,3 +5,6 @@ TTS,60 min,88.201,4.738,14.025
 GWN (predefined),15 min,31.338,2.973,7.526
 GWN (predefined),30 min,47.05,3.529,9.566
 GWN (predefined),60 min,73.192,4.384,12.793
+GWN (predefined+adaptive),15 min,29.699,2.928,7.3
+GWN (predefined+adaptive),30 min,42.7,3.403,8.884
+GWN (predefined+adaptive),60 min,62.525,4.102,10.977

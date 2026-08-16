@@ -2,9 +2,9 @@
 
 **Auto-generated** by `code/utils/update_outstanding.py` -- do not hand-edit; it is overwritten after every pipeline stage. Reflects `results/status.json` cross-checked against files actually present on disk.
 
-Progress: **6/28** stages complete.
+Progress: **7/28** stages complete.
 
-Last regenerated: 2026-08-16 23:07:24
+Last regenerated: 2026-08-16 23:48:04
 
 ## Setup
 
@@ -23,7 +23,7 @@ Last regenerated: 2026-08-16 23:07:24
 ## Q2 GraphWaveNet
 
 - ✅ **gwn_predefined_train**: GWN (predefined graph only) trained -- 5 epochs, 308.4 min, best_val_mae=2.9360733032226562
-- 🔄 **gwn_adaptive_train**: GWN (predefined + adaptive) trained
+- ✅ **gwn_adaptive_train**: GWN (predefined + adaptive) trained -- 5 epochs, 342.3 min, best_val_mae=2.8303914070129395
 - ⬜ **gwn_eval**: Both GWN configs evaluated: overall + per-horizon + per-node
 - ⬜ **fig_gwn_vs_tts**: TTS vs GWN-predefined vs GWN-adaptive comparison
 - ⬜ **fig_convergence**: Training/validation convergence curves (TTS+GWN)
@@ -36,7 +36,7 @@ Last regenerated: 2026-08-16 23:07:24
 ## Q3 AGCRN
 
 - ⬜ **agcrn_epoch_selection**: Epoch-selection experiment + justification
-- 🔄 **agcrn_train**: AGCRN final training run
+- ❌ **agcrn_train**: AGCRN final training run -- 11 epochs, 355.8 min, best_val_mae=2.7526419162750244 (marked done but expected artifact is missing!)
 - ⬜ **agcrn_eval**: AGCRN evaluated: overall + per-horizon + per-node
 - ⬜ **fig_agcrn_vs_gwn**: AGCRN vs GWN performance/training-time comparison
 - ⬜ **fig_agcrn_per_station**: AGCRN vs best GWN, per-station (nodes 1-3)

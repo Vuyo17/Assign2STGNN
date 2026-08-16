@@ -32,3 +32,13 @@
 [2026-08-16 23:13:14] [build_all_figures] Per-station comparison figures done for ['TTS', 'GWN (predefined)']
 [2026-08-16 23:13:15] [build_all_figures] SKIPPED learned-adjacency figures/table -- results/gwn_adaptive/learned_adjacency.npy not ready
 [2026-08-16 23:13:15] [build_all_figures] build_all_figures pass complete.
+[2026-08-16 23:45:40] [build_all_figures] Building whatever figures/tables the currently-available results support...
+[2026-08-16 23:45:54] [build_all_figures] fig01_adjacency_heatmap.png done (predefined graph, always available)
+[2026-08-16 23:45:54] [build_all_figures] Models with overall metrics available: ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)']
+[2026-08-16 23:45:54] [build_all_figures] Overall performance table + horizon-trend figures done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)']
+[2026-08-16 23:45:55] [build_all_figures] fig03_tts_station{1,2,3}_actual_vs_predicted.png done
+[2026-08-16 23:45:56] [build_all_figures] fig05_convergence_curves.png done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)']
+[2026-08-16 23:45:56] [build_all_figures] Training time figure/table done for ['GWN (predefined)', 'GWN (predefined+adaptive)']
+[2026-08-16 23:45:56] [build_all_figures] Per-station comparison figures done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)']
+[2026-08-16 23:45:58] [build_all_figures] fig07/fig08 + top15_influential_nodes.csv done
+[2026-08-16 23:45:58] [build_all_figures] build_all_figures pass complete.

@@ -339,8 +339,7 @@ attributable to that component, not to some other confounding hyperparameter cha
 
 ### 4.2 Overall Comparison (TTS vs GWN-predefined vs GWN-adaptive)
 
-*Table 2. Overall performance (207-sensor average). GWN (predefined+adaptive) row
-**[PENDING — training in progress at time of writing]**.*
+*Table 2. Overall performance (207-sensor average). All three models' final numbers.*
 
 | Model | Horizon | MSE (mph²) | MAE (mph) | MAPE (%) |
 |---|---|---|---|---|
@@ -350,61 +349,72 @@ attributable to that component, not to some other confounding hyperparameter cha
 | GWN (predefined) | 15 min | 31.338 | 2.973 | 7.53 |
 | GWN (predefined) | 30 min | 47.050 | 3.529 | 9.57 |
 | GWN (predefined) | 60 min | 73.192 | 4.384 | 12.79 |
+| GWN (predefined+adaptive) | 15 min | 29.699 | 2.928 | 7.30 |
+| GWN (predefined+adaptive) | 30 min | 42.700 | 3.403 | 8.88 |
+| GWN (predefined+adaptive) | 60 min | 62.525 | 4.102 | 10.98 |
 
 ![TTS vs GWN horizon trend](../figures/fig04_horizon_trend_mae.png)
-*Figure 4. MAE vs. horizon, TTS vs. GWN (predefined). GWN-adaptive line to be added once
-its training completes.*
+*Figure 4. MAE vs. horizon, all three Q1/Q2 models.*
 
-**GWN (predefined) beats TTS at every horizon**, on every metric, by a widening margin
-as the horizon grows: MAE improves by 3.0% at 15 min, 4.7% at 30 min, and 7.5% at 60
-min. This is the expected direction — GWN's dilated-convolution temporal stack (8
-blocks, receptive field spanning the full 12-step window) and diffusion convolution
-give it materially more capacity to model both long-range temporal patterns and
-multi-hop spatial propagation than TTS's single-layer GRU + one-hop `DiffConv`. The
-*growing* gap at longer horizons is notable: TTS's simpler temporal encoder appears to
-compound error faster over the forecast window than GWN's does, consistent with GWN's
-larger effective receptive field mattering more the further ahead the model must
-extrapolate. (Caveat: TTS's 3-epoch vs. GWN's 5-epoch training budget, Section 2.5,
-means this is not a perfectly equal-training-budget comparison — see Section 3.4.)
+**Clean ordering, all three horizons: TTS worst, GWN-predefined middle, GWN-adaptive
+best.** GWN-adaptive improves on GWN-predefined by 1.5% (15 min), 3.6% (30 min), and
+6.4% (60 min) MAE — the *same growing-with-horizon pattern* seen for TTS→GWN-predefined
+in the previous draft of this section, now repeating one level up: each additional
+piece of spatial-modelling capacity (fixed graph → fixed graph + adaptive graph) pays
+off more the further ahead the model must forecast. Overall, TTS→GWN-adaptive is a
+13.4% MAE improvement at 60 minutes (4.738 → 4.102 mph) from a fixed-hyperparameter,
+tsl-default-configuration comparison alone. (Caveat, as in Section 3.4: TTS's 3-epoch
+budget vs. both GWN configs' 4 real epochs means this is not a perfectly equal-budget
+comparison — the adaptive-vs-predefined comparison in Section 8/4.6, however, IS
+equal-budget, since both GWN configs used identical training settings.)
 
 ### 4.3 Training Time and Convergence
 
 *Table 3. Training time. TTS's total time is unavailable because that run was
 deliberately stopped early and evaluated from checkpoint rather than finishing
 normally (Section 2.5) — its real per-epoch times (232s, 491s, 495s) are still known,
-just not summed into a "total". GWN (predefined+adaptive) row **[PENDING]**.*
+just not summed into a "total".*
 
 | Model | Epochs run | Early stopped | Total time (min) | Avg s/epoch | Best val MAE |
 |---|---|---|---|---|---|
 | TTS | 3 (of 60 planned) | N/A (stopped manually) | N/A | ~400 (avg of 3 real epochs) | 3.077 |
-| GWN (predefined) | 5 (4 configured + 1, see note) | No (hit max_epochs ceiling) | 308.4 | 3700.9 | 2.936 |
+| GWN (predefined) | 4 (see note) | No (hit max_epochs ceiling) | 308.4 | 3700.9 | 2.936 |
+| GWN (predefined+adaptive) | 4 (see note) | No (hit max_epochs ceiling) | 342.3 | 4108.0 | 2.830 |
 
-*Note on GWN's epoch count: `max_epochs=4` was configured; the trainer's own
-epoch-completion log reports 5 due to an off-by-one in how the final "epochs run"
+*Note on epoch counts: `max_epochs=4` was configured for both GWN runs; the trainer's
+own epoch-completion log reports 5 due to an off-by-one in how the final "epochs run"
 milestone is computed (`current_epoch + 1` evaluated one increment late) — 4 real
-training epochs (indices 0-3) were actually run, matching the 4 rows of per-epoch data
-in `logs/gwn_predefined/version_*/metrics.csv`. Reported here as observed rather than
-silently corrected, since the underlying per-epoch data is what matters and is
-unambiguous.*
+training epochs (indices 0-3) were actually run for each, matching the 4 rows of
+per-epoch data in each `logs/gwn_*/version_*/metrics.csv`. Reported here as observed
+rather than silently corrected.*
 
 ![Convergence curves](../figures/fig05_convergence_curves.png)
-*Figure 5. Training (dashed) and validation (solid) loss per epoch, TTS vs. GWN
-(predefined). GWN-adaptive curve to be added once available.*
+*Figure 5. Training (dashed) and validation (solid) loss per epoch, all three models.*
 
-**GWN's convergence behaviour**: validation MAE decreased for 3 straight epochs
-(3.162 → 3.019 → 2.936) then **increased** slightly on epoch 4 (2.951) — the best
-checkpoint (epoch 2, val_mae=2.936) is what all reported GWN-predefined numbers use.
-This uptick, right as the deadline-driven `max_epochs=4` ceiling was reached, is the
-first concrete sign of **overfitting** starting (training loss kept falling every
-epoch while validation loss turned back up) rather than the run being cut off mid-
-improvement — some evidence *against* the Section 4.4 hypothesis that GWN's whole gap
-to the original paper is purely a "needed more epochs" story, though 4 epochs is still
-very short by GPU-scale-training standards and the picture may look different with
-GWN-adaptive's curve for comparison. **TTS**, by contrast, was still improving at every
-one of its 3 epochs when stopped (3.147 → 3.108 → 3.077) with no sign of plateauing —
-its numbers likely *do* understate its true converged performance, unlike GWN's.
-GWN's per-epoch cost (~62 min average) is roughly **9x** TTS's (~7 min average, from
-its 3 real epoch times) on this hardware, consistent with the Section 2.5 timing pilot.
+**Both GWN configurations show the identical convergence shape**: validation MAE falls
+for 3 straight epochs then ticks back up on epoch 4 — predefined: 3.162→3.019→2.936→
+**2.951**; adaptive: 3.062→2.931→**2.830**→2.867. This is a real, reproducible
+overfitting signal (training loss kept falling every epoch in both cases while
+validation loss turned back up), not noise, and it appears right as the deadline-driven
+`max_epochs=4` ceiling is reached for both — evidence *against* the Section 4.4
+hypothesis that GWN's entire gap to the original paper's numbers is purely a
+"needed more epochs" story (more epochs at this learning rate look more likely to
+*overfit* further than to keep improving, at least without a learning-rate decay
+schedule — which the original paper uses and this report deliberately does not,
+Section 2.4). **TTS**, by contrast, was still improving at every one of its 3 epochs
+when stopped, with no sign of plateauing — its numbers likely *do* understate its true
+converged performance, unlike either GWN config's.
+
+**Training time**: GWN-adaptive costs ~11% more per epoch than GWN-predefined (4108s
+vs. 3701s avg) — a modest, expected overhead from the extra dense adaptive-adjacency
+convolution branch — while both cost roughly **9-10x** TTS's per-epoch time (~400s avg
+from its 3 real epochs) on this hardware, consistent with the Section 2.5 timing pilot.
+**Convergence speed**: both GWN configs reach their best validation score in the same
+number of epochs (3) despite adaptive having more parameters to fit, so the extra
+adaptive-adjacency component does not appear to slow convergence — it improves the
+*ceiling* reached at a given epoch (Section 4.2) without costing extra epochs to get
+there, which is a genuinely favourable trade given the ~11% per-epoch time overhead is
+small relative to the 6.4% accuracy gain it buys at 60 minutes.
 
 ### 4.4 Comparison With Wu et al. (2019)
 
@@ -459,43 +469,125 @@ should be expected to match exactly.
 
 ### 4.5 Per-Station Analysis
 
-*Table 4. Sensors 1-3, TTS vs. GWN (predefined). GWN-adaptive columns **[PENDING]**.*
+*Table 4. Sensors 1-3, MAE (mph), all three models.*
 
-| Sensor | Horizon | TTS MAE | GWN (pre) MAE | Δ (TTS − GWN) |
-|---|---|---|---|---|
-| Sensor 1 | 15 min | 2.621 | 2.360 | +0.261 |
-| Sensor 1 | 30 min | 3.509 | 2.901 | +0.608 |
-| Sensor 1 | 60 min | 5.052 | 3.686 | +1.366 |
-| Sensor 2 | 15 min | 1.631 | 1.656 | **−0.025** |
-| Sensor 2 | 30 min | 1.693 | 1.723 | **−0.030** |
-| Sensor 2 | 60 min | 1.809 | 1.846 | **−0.037** |
-| Sensor 3 | 15 min | 2.125 | 2.074 | +0.051 |
-| Sensor 3 | 30 min | 2.726 | 2.562 | +0.164 |
-| Sensor 3 | 60 min | 3.747 | 3.412 | +0.335 |
+| Sensor | Horizon | TTS | GWN (pre) | GWN (adapt) | Adaptive Δ vs. pre |
+|---|---|---|---|---|---|
+| Sensor 1 | 15 min | 2.621 | 2.360 | 2.308 | −0.052 |
+| Sensor 1 | 30 min | 3.509 | 2.901 | 2.728 | −0.173 |
+| Sensor 1 | 60 min | 5.052 | 3.686 | 3.236 | **−0.450** |
+| Sensor 2 | 15 min | 1.631 | 1.656 | 1.654 | −0.002 |
+| Sensor 2 | 30 min | 1.693 | 1.723 | 1.693 | −0.030 |
+| Sensor 2 | 60 min | 1.809 | 1.846 | 1.803 | −0.043 |
+| Sensor 3 | 15 min | 2.125 | 2.074 | 2.033 | −0.041 |
+| Sensor 3 | 30 min | 2.726 | 2.562 | 2.242 | −0.320 |
+| Sensor 3 | 60 min | 3.747 | 3.412 | 2.696 | **−0.716** |
 
 ![Per-station MAE, sensors 1-3](../figures/fig06_per_station_mae_sensor1.png)
-*Figure 6. MAE vs. horizon, TTS vs. GWN (predefined), Sensor 1 (Sensors 2/3 in
+*Figure 6. MAE vs. horizon, all three models, Sensor 1 (Sensors 2/3 in
 `fig06_per_station_mae_sensor{2,3}.png`).*
 
-**GWN does not improve every sensor equally — Sensor 2 is a small but consistent
-exception.** For Sensors 1 and 3, GWN clearly outperforms TTS, with the advantage
-growing at longer horizons exactly as in the overall averages (Section 4.2) — most
-dramatically at Sensor 1's 60-minute horizon (1.37 mph improvement, GWN's largest
-per-station gain). At **Sensor 2**, however, TTS is marginally *better* than GWN at
-every horizon (by 0.025-0.037 mph — small but consistent in direction across all three
-horizons, not noise scattered in both directions). Sensor 2 was already established in
-Section 3.3 as the easiest, lowest-variance sensor for TTS; a plausible explanation is
-that GWN's larger capacity has nothing to gain on an already near-flat, easy-to-predict
-signal and its extra parameters (with only 4 training epochs to fit them) are a mild
-disadvantage there — consistent with GWN's Section 4.3 overfitting signal being a
-real, if modest, effect. This is exactly the kind of sensor-dependent result the
-assignment asks to look for rather than assume a more complex model helps uniformly.
+**The adaptive adjacency helps every sensor, but by wildly different amounts, and it
+specifically fixes Sensor 2's regression from Section 4.5's earlier (predefined-only)
+finding.** Recall GWN-predefined was marginally *worse* than TTS at Sensor 2 across
+every horizon; GWN-adaptive closes that gap almost entirely — matching TTS at 30 min
+(1.693=1.693) and beating both TTS and GWN-predefined at 60 min (1.803 mph, vs. TTS's
+1.809 and predefined's 1.846). At Sensors 1 and 3, the adaptive adjacency's benefit is
+far larger and grows sharply with horizon: **Sensor 3's 60-minute MAE improves by
+0.716 mph (21% relative to GWN-predefined)** and Sensor 1's by 0.450 mph — both far
+exceeding the 6.4% *overall* 60-minute improvement from Section 4.2, meaning Sensors 1
+and 3 are disproportionately responsible for the adaptive adjacency's aggregate gain.
+Put together: the adaptive graph is not a uniform "make everything slightly better"
+effect — it makes a large difference for sensors whose useful spatial dependencies
+apparently were NOT well captured by the fixed, physical-distance-based graph
+(Sensors 1, 3), and a small corrective difference for a sensor where the predefined
+graph's fixed structure was actively hurting relative to no graph refinement at all
+(Sensor 2). Section 4.6/4.7 investigate what the learned graph actually looks like,
+which is the natural next question this raises.
 
 ### 4.6 Learned Adaptive Adjacency Analysis
-[PENDING — Figure 7 (heatmap, first 50 nodes), Table 5 (top-15 influential nodes)]
+
+![Learned adjacency heatmap](../figures/fig07_learned_adjacency_heatmap.png)
+*Figure 7. Learned adaptive adjacency matrix, first 50 nodes. Row = destination/target
+node, column = source/origin node (see influence-score definition below).*
+
+The learned matrix is `softmax(relu(E_src @ E_tgt^T), dim=1)` from two independently
+trained 207×10 node-embedding tables (verified directly from the installed tsl source,
+`code/API_NOTES.md`) — **every row sums to ≈1.0** (confirmed numerically:
+`row_sum_diagnostic` in `results/gwn_adaptive/top15_influential_nodes.csv` is 1.0000
+±1e-6 for every node), which is a softmax normalisation artefact, not a meaningful
+per-node signal. **Influence score definition** (used below, and justified rather than
+arbitrary): a node's *influence* is its **column sum, excluding self** — the total
+weight it contributes across *all other nodes'* updates. This is the only quantity
+that varies meaningfully across nodes (since rows are all constrained to ≈1.0 by
+construction) and it directly captures "how much this node's state matters to the rest
+of the graph" in the graph-convolution sense (`code/visualisation/learned_adjacency.py`
+documents the full derivation from tsl's actual `DenseGraphConvOrderK` einsum).
+
+*Table 5. Top 15 most influential nodes (by column-sum influence score, see above).*
+
+| Rank | Node | Influence | Influence (norm.) | Most influenced node(s) |
+|---|---|---|---|---|
+| 1 | 9 | 3.838 | 1.000 | 176 (0.203), 77 (0.193), 88 (0.183) |
+| 2 | 183 | 3.708 | 0.966 | 107 (0.164), 92 (0.107), 45 (0.099) |
+| 3 | 77 | 2.926 | 0.762 | 9 (0.171), 176 (0.125), 88 (0.097) |
+| 4 | 6 | 2.796 | 0.728 | 119 (0.107), 97 (0.091), 175 (0.089) |
+| 5 | 93 | 2.764 | 0.720 | 198 (0.114), 97 (0.091), 162 (0.082) |
+| 6 | 118 | 2.712 | 0.707 | 136 (0.092), 93 (0.086), 89 (0.075) |
+| 7 | 78 | 2.514 | 0.655 | 108 (0.141), 64 (0.129), 67 (0.073) |
+| 8 | 176 | 2.330 | 0.607 | 28 (0.069), 77 (0.065), 2 (0.058) |
+| 9 | 149 | 2.158 | 0.562 | 119 (0.068), 74 (0.062), 97 (0.057) |
+| 10 | 28 | 2.147 | 0.559 | 183 (0.056), 201 (0.052), 108 (0.041) |
+| 11 | 84 | 2.028 | 0.528 | 56 (0.110), 102 (0.090), 77 (0.062) |
+| 12 | 105 | 1.967 | 0.512 | 107 (0.046), 65 (0.045), 136 (0.040) |
+| 13 | 88 | 1.822 | 0.475 | 9 (0.053), 77 (0.052), 78 (0.044) |
+| 14 | 97 | 1.793 | 0.467 | 161 (0.065), 162 (0.051), 157 (0.044) |
+| 15 | 29 | 1.789 | 0.466 | 56 (0.148), 91 (0.085), 196 (0.076) |
+
+*(Full table: `results/gwn_adaptive/top15_influential_nodes.csv`.)*
+
+**Structure**: influence is concentrated, not flat — node 9's score (3.838) is more
+than double the 15th-ranked node's (1.789), and the drop-off from rank 1-3 (3.84-2.93)
+to rank 10-15 (2.15-1.79) is steady rather than a sharp cliff, suggesting a genuine
+continuum of importance rather than a small clique of "hub" nodes with everyone else
+flat. **Reciprocity**: several top nodes influence *each other* — node 9 most
+strongly influences node 77 (w=0.193) and is itself most strongly influenced by node 9
+in return (rank-3 node 77's top target is node 9, w=0.171) — and node 9/176/88 form a
+mutually-reinforcing trio (9→176, 9→88, 77→176, 77→88, 88→9, 176 in 9's and 77's top
+targets). In traffic-network terms, this kind of tight mutual-influence cluster is
+plausible for a set of sensors on the same corridor or interchange, where congestion
+genuinely propagates in both directions.
 
 ### 4.7 Predefined vs Learned Adjacency
-[PENDING — Figure 8]
+
+![Predefined vs learned adjacency](../figures/fig08_predefined_vs_learned.png)
+*Figure 8. Predefined (left), learned (centre), and difference (right, learned minus
+predefined, both min-max normalised) adjacency, first 50 nodes.*
+
+**Similarities**: both graphs are sparse in structure (most node pairs carry little or
+no weight) and both are directed/asymmetric — consistent with genuine traffic flow
+having directionality that a purely undirected representation would lose.
+**Differences**: the predefined graph's structure is entirely explained by physical
+road-network distance (Section 3.1) — its top edges are, by construction, the
+geometrically closest sensor pairs. The learned graph's top-15 influential nodes
+(Section 4.6) are **not** the same nodes as those with the highest predefined-graph
+row/column sums (spot-checked directly: none of the predefined graph's most
+densely-connected nodes — which, given the uniform ≈3.5% density and thresholded
+construction, are simply nodes with many nearby neighbours — coincide with learned
+top-node 9 or 183). This means the model is **not** just reproducing a smoothed
+version of physical proximity; it is discovering a distinct notion of "which sensors
+matter" that plain road distance does not capture. Section 4.5's finding that the
+adaptive adjacency's benefit varies enormously by sensor (huge for 1/3, marginal-but-
+corrective for 2) is consistent with this: sensors whose true traffic dependencies
+diverge most from what geographic distance alone implies (e.g. sensors connected by
+a longer but faster route, or affected by a bottleneck several segments away rather
+than their immediate physical neighbours) are exactly where a learned, data-driven
+graph should outperform a fixed, distance-only one. Whether the learned graph is
+*physically* meaningful (e.g. whether node 9's connections trace an actual plausible
+traffic corridor on a real LA map) cannot be verified from the tsl-provided data alone
+(sensor IDs here are dataframe column indices, not the original geographic sensor IDs
+with coordinates) — this is flagged as a genuine limitation of this analysis rather
+than an unsupported claim either way.
 
 ## 5. Question 3 — AGCRN
 ### 5.1 Epoch-Selection Experiment

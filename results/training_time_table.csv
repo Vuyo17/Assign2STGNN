@@ -1,2 +1,3 @@
 Model,Total training time (min),Epochs run
 GWN (predefined),308.4,5
+GWN (predefined+adaptive),342.3,5

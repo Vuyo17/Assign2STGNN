@@ -15,3 +15,7 @@
 [2026-08-16 21:38:48] [agcrn] epoch 5 train_loss=3.2768 val_mae=2.8200 (2346.5s)
 [2026-08-16 22:19:41] [agcrn] epoch 6 train_loss=3.2216 val_mae=2.8018 (2453.2s)
 [2026-08-16 22:59:45] [agcrn] epoch 7 train_loss=3.1758 val_mae=2.7674 (2403.8s)
+[2026-08-16 23:29:19] [agcrn] epoch 8 train_loss=3.1402 val_mae=2.7603 (1773.6s)
+[2026-08-16 23:48:04] [agcrn] epoch 9 train_loss=3.1092 val_mae=2.7526 (1124.3s)
+[2026-08-16 23:48:04] [agcrn] Training finished after 11 epochs, 355.8 min total
+[2026-08-16 23:48:04] [agcrn] Training complete: 11 epochs, 355.8 min total, best_val_mae=2.7526419162750244, checkpoint=C:\Users\Student\Downloads\Assign2STGNN\results\agcrn\checkpoints\best-epoch=9-val_mae=2.7526.ckpt

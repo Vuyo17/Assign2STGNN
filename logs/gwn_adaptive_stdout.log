@@ -25,3 +25,6 @@ Total FLOPs: 0
 C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'val_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=19` in the `DataLoader` to improve performance.
 Only args ['edge_weight', 'edge_index', 'x'] are forwarded to the model (GraphWaveNetModel).
 C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=19` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=4` reached.
+
+Done. See results/gwn_adaptive/metrics.json and learned_adjacency.npy

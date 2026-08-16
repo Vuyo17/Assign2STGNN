@@ -55,16 +55,16 @@
       "notes": "5 epochs, 308.4 min, best_val_mae=2.9360733032226562"
     },
     "gwn_adaptive_train": {
-      "state": "running",
+      "state": "done",
       "started": "2026-08-16 17:10:25",
-      "finished": null,
-      "notes": null
+      "finished": "2026-08-16 23:33:53",
+      "notes": "5 epochs, 342.3 min, best_val_mae=2.8303914070129395"
     },
     "agcrn_train": {
-      "state": "running",
+      "state": "done",
       "started": "2026-08-16 17:10:39",
-      "finished": null,
-      "notes": null
+      "finished": "2026-08-16 23:48:04",
+      "notes": "11 epochs, 355.8 min, best_val_mae=2.7526419162750244"
     },
     "tts_eval": {
       "state": "done",
@@ -77,6 +77,18 @@
       "started": "2026-08-16 22:59:44",
       "finished": "2026-08-16 23:07:24",
       "notes": "60min MAE=4.384"
+    },
+    "gwn_adaptive_eval": {
+      "state": "done",
+      "started": "2026-08-16 23:33:53",
+      "finished": "2026-08-16 23:39:42",
+      "notes": "60min MAE=4.102"
+    },
+    "agcrn_eval": {
+      "state": "running",
+      "started": "2026-08-16 23:48:04",
+      "finished": null,
+      "notes": null
     }
   }
 }
