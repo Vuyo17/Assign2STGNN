@@ -8,44 +8,23 @@ TPU available: False, using: 0 TPU cores
 \U0001f4a1 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
 C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\callbacks\model_checkpoint.py:881: Checkpoint directory C:\Users\Student\Downloads\Assign2STGNN\results\agcrn\checkpoints exists and is not empty.
 Restoring states from the checkpoint path at results/agcrn/checkpoints\best-epoch=9-val_mae=2.7526.ckpt
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "C:\Users\Student\Downloads\Assign2STGNN\code\experiments\resume_agcrn.py", line 117, in <module>
-    main()
-  File "C:\Users\Student\Downloads\Assign2STGNN\code\experiments\resume_agcrn.py", line 64, in main
-    predictor, new_ckpt_path, summary = run_training(
-                                        ^^^^^^^^^^^^^
-  File "C:\Users\Student\Downloads\Assign2STGNN\code\experiments\train.py", line 152, in run_training
-    trainer.fit(predictor, datamodule=dm, ckpt_path=resume_from_checkpoint)
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\trainer.py", line 584, in fit
-    call._call_and_handle_interrupt(
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\call.py", line 49, in _call_and_handle_interrupt
-    return trainer_fn(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\trainer.py", line 630, in _fit_impl
-    self._run(model, ckpt_path=ckpt_path, weights_only=weights_only)
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\trainer.py", line 1046, in _run
-    self._checkpoint_connector._restore_modules_and_callbacks(ckpt_path, weights_only)
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\checkpoint_connector.py", line 410, in _restore_modules_and_callbacks
-    self.resume_start(checkpoint_path, weights_only=weights_only)
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\checkpoint_connector.py", line 83, in resume_start
-    loaded_checkpoint = self.trainer.strategy.load_checkpoint(checkpoint_path, weights_only=weights_only)
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\strategies\strategy.py", line 368, in load_checkpoint
-    return self.checkpoint_io.load_checkpoint(checkpoint_path, weights_only=weights_only)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\lightning_fabric\plugins\io\torch_io.py", line 91, in load_checkpoint
-    return pl_load(path, map_location=map_location, weights_only=weights_only)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\lightning_fabric\utilities\cloud_io.py", line 73, in _load
-    return torch.load(
-           ^^^^^^^^^^^
-  File "C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\torch\serialization.py", line 1529, in load
-    raise pickle.UnpicklingError(_get_wo_message(str(e))) from None
-_pickle.UnpicklingError: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
-	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
-	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
-	WeightsUnpickler error: Unsupported global: GLOBAL torchmetrics.metric.jit_distributed_available was not an allowed global by default. Please use `torch.serialization.add_safe_globals([torchmetrics.metric.jit_distributed_available])` or the `torch.serialization.safe_globals([torchmetrics.metric.jit_distributed_available])` context manager to allowlist this global if you trust this class/function.
-
-Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
++---------------------------------------------------------------+
+|   | Name          | Type             | Params | Mode  | FLOPs |
+|---+---------------+------------------+--------+-------+-------|
+| 0 | loss_fn       | MaskedMAE        |      0 | train |     0 |
+| 1 | train_metrics | MetricCollection |      0 | train |     0 |
+| 2 | val_metrics   | MetricCollection |      0 | train |     0 |
+| 3 | test_metrics  | MetricCollection |      0 | train |     0 |
+| 4 | model         | AGCRNModel       |  496 K | train |     0 |
++---------------------------------------------------------------+
+Trainable params: 496 K                                                        
+Non-trainable params: 0                                                        
+Total params: 496 K                                                            
+Total estimated model params size (MB): 1.986                                  
+Modules in train mode: 34                                                      
+Modules in eval mode: 0                                                        
+Total FLOPs: 0                                                                 
+Restored all states from the checkpoint at results/agcrn/checkpoints\best-epoch=9-val_mae=2.7526.ckpt
+C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'val_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=19` in the `DataLoader` to improve performance.
+Arguments ['edge_index', 'edge_weight'] are filtered out. Only args ['x'] are forwarded to the model (AGCRNModel).
+C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=19` in the `DataLoader` to improve performance.

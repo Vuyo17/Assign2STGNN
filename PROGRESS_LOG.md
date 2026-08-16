@@ -199,3 +199,12 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-17 01:06:59] [agcrn] === Q3 AGCRN: RESUMING from results/agcrn/checkpoints\best-epoch=9-val_mae=2.7526.ckpt (new ceiling max_epochs=25, patience=10) ===
 - [2026-08-17 01:07:00] [agcrn] Building predictor (lr=0.001, max_epochs=25, seed=42)
 - [2026-08-17 01:07:00] [agcrn] Resuming from checkpoint results/agcrn/checkpoints\best-epoch=9-val_mae=2.7526.ckpt (new ceiling max_epochs=25)
+- [2026-08-17 01:08:09] [agcrn] === Q3 AGCRN: RESUMING from results/agcrn/checkpoints\best-epoch=9-val_mae=2.7526.ckpt (new ceiling max_epochs=25, patience=10) ===
+- [2026-08-17 01:08:10] [agcrn] Building predictor (lr=0.001, max_epochs=25, seed=42)
+- [2026-08-17 01:08:10] [agcrn] Resuming from checkpoint results/agcrn/checkpoints\best-epoch=9-val_mae=2.7526.ckpt (new ceiling max_epochs=25)
+- [2026-08-17 01:08:11] [agcrn] Training started (max_epochs=25, accelerator=CPUAccelerator)
+- [2026-08-17 01:20:34] [agcrn] epoch 10 val_mae=2.7383 (741.8s)
+- [2026-08-17 01:32:52] [agcrn] epoch 11 train_loss=3.0669 val_mae=2.7492 (737.8s)
+- [2026-08-17 01:45:43] [agcrn] epoch 12 train_loss=3.0540 val_mae=2.7325 (771.0s)
+- [2026-08-17 01:46:15] [agcrn] AGCRN resumed-training run intentionally stopped by user at epoch 11 (best checkpoint remains epoch 10, val_mae=2.7383) to continue on a faster/separate machine instead. No corruption -- ModelCheckpoint had already safely saved the epoch-10 best checkpoint to disk before the process was stopped.
+- [2026-08-17 01:46:53] [agcrn] CORRECTION: epoch 12 (val_mae=2.7325, a new best, improving again after epoch 11s blip to 2.7492) actually completed and checkpointed just before the stop -- the true final state is 13 real epochs total (10 original + resumed epochs 10,11,12), best checkpoint is epoch 12 at val_mae=2.7325, not epoch 10 as first logged. Stopped intentionally by user to continue on a faster machine; checkpoint confirmed safely saved, no corruption.

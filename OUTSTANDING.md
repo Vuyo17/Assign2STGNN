@@ -4,7 +4,7 @@
 
 Progress: **9/28** stages complete.
 
-Last regenerated: 2026-08-16 23:49:14
+Last regenerated: 2026-08-17 01:46:53
 
 ## Setup
 
@@ -36,7 +36,7 @@ Last regenerated: 2026-08-16 23:49:14
 ## Q3 AGCRN
 
 - ⬜ **agcrn_epoch_selection**: Epoch-selection experiment + justification
-- ✅ **agcrn_train**: AGCRN final training run -- 11 epochs, 355.8 min, best_val_mae=2.7526419162750244
+- ✅ **agcrn_train**: AGCRN final training run -- Stopped by user after 13 real epochs total (best: epoch 12, val_mae=2.7325) to move to a faster machine
 - ✅ **agcrn_eval**: AGCRN evaluated: overall + per-horizon + per-node -- 60min MAE=3.759
 - ⬜ **fig_agcrn_vs_gwn**: AGCRN vs GWN performance/training-time comparison
 - ⬜ **fig_agcrn_per_station**: AGCRN vs best GWN, per-station (nodes 1-3)

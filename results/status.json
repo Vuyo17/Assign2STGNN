@@ -61,10 +61,10 @@
       "notes": "5 epochs, 342.3 min, best_val_mae=2.8303914070129395"
     },
     "agcrn_train": {
-      "state": "running",
+      "state": "done",
       "started": "2026-08-16 17:10:39",
-      "finished": "2026-08-16 23:48:04",
-      "notes": "11 epochs, 355.8 min, best_val_mae=2.7526419162750244"
+      "finished": "2026-08-17 01:46:53",
+      "notes": "Stopped by user after 13 real epochs total (best: epoch 12, val_mae=2.7325) to move to a faster machine"
     },
     "tts_eval": {
       "state": "done",
