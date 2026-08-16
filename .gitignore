@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+data/*.h5
+data/*.csv
+data/**/raw/
+data/**/*.h5
+results/**/*.ckpt
+results/**/checkpoints/
+logs/**/*.log
+logs/**/tensorboard/
+logs/**/lightning_logs/
+*.zip
+report/*.pdf
+.ipynb_checkpoints/
