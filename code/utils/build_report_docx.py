@@ -97,7 +97,11 @@ def build_docx(md_path: Path = _MD_PATH, docx_path: Path = _DOCX_PATH) -> Path:
             m = re.match(r"!\[(.*?)\]\((.*?)\)", stripped)
             if m:
                 alt, img_path = m.group(1), m.group(2)
-                full_path = (_ROOT / img_path).resolve()
+                # Image paths in report.md are relative to report.md's OWN
+                # directory (e.g. "../figures/fig01....png"), not the project
+                # root -- resolve against md_path.parent, matching how any
+                # normal Markdown renderer (and GitHub) would interpret them.
+                full_path = (md_path.parent / img_path).resolve()
                 if full_path.exists():
                     doc.add_picture(str(full_path), width=Cm(15))
                     caption = doc.add_paragraph()
