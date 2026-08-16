@@ -193,3 +193,6 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 23:49:49] [build_tables] Wrote report/tables/per_station.md
 - [2026-08-16 23:49:49] [build_tables] Wrote report/tables/training_time.md
 - [2026-08-16 23:49:49] [build_tables] Wrote report/tables/top15_influential_nodes.md
+- [2026-08-17 01:05:43] [agcrn] === Q3 AGCRN: RESUMING from results/agcrn/checkpoints\best-epoch=9-val_mae=2.7526.ckpt (new ceiling max_epochs=25, patience=10) ===
+- [2026-08-17 01:05:44] [agcrn] Building predictor (lr=0.001, max_epochs=25, seed=42)
+- [2026-08-17 01:05:44] [agcrn] Resuming from checkpoint results/agcrn/checkpoints\best-epoch=9-val_mae=2.7526.ckpt (new ceiling max_epochs=25)

@@ -136,6 +136,16 @@ def run_training(
     trainer = pl.Trainer(**trainer_kwargs)
 
     if resume_from_checkpoint:
+        # PyTorch >=2.6 defaults torch.load(weights_only=True) for security,
+        # which Lightning's own ckpt_path= resume path does not override.
+        # Our checkpoints embed tsl's metric objects (MaskedMAE etc.) inside
+        # the Predictor's state, which weights_only=True refuses to unpickle
+        # by default. Allowlisting these specific, known, trusted classes
+        # (rather than disabling weights_only globally) is the officially
+        # recommended fix.
+        from tsl.metrics.torch import MaskedMAE, MaskedMAPE, MaskedMSE
+
+        torch.serialization.add_safe_globals([MaskedMAE, MaskedMAPE, MaskedMSE])
         log.milestone(f"Resuming from checkpoint {resume_from_checkpoint} (new ceiling max_epochs={max_epochs})")
 
     t0 = time.time()

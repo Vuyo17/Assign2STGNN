@@ -61,7 +61,7 @@
       "notes": "5 epochs, 342.3 min, best_val_mae=2.8303914070129395"
     },
     "agcrn_train": {
-      "state": "done",
+      "state": "running",
       "started": "2026-08-16 17:10:39",
       "finished": "2026-08-16 23:48:04",
       "notes": "11 epochs, 355.8 min, best_val_mae=2.7526419162750244"
