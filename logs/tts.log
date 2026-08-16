@@ -8,3 +8,8 @@
 [2026-08-16 17:26:37] [tts] epoch 0 val_mae=3.1422 (232.2s)
 [2026-08-16 17:34:48] [tts] epoch 1 train_loss=4.0319 val_mae=3.1084 (490.5s)
 [2026-08-16 17:43:03] [tts] epoch 2 train_loss=3.6199 val_mae=3.0766 (494.9s)
+[2026-08-16 17:50:43] [tts] === Q1 TTS: evaluating from existing checkpoint results/tts/checkpoints\best-epoch=2-val_mae=3.0766.ckpt (training deliberately stopped early -- deadline resource reallocation) ===
+[2026-08-16 17:50:48] [tts] Loaded weights from results/tts/checkpoints\best-epoch=2-val_mae=3.0766.ckpt (checkpoint epoch info: 2, global_step: 1155)
+[2026-08-16 17:50:56] [tts] Evaluation pass over 108 test batches complete in 8.1s
+[2026-08-16 17:50:57] [tts] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\tts (overall 60min MAE=4.738 mph)
+[2026-08-16 17:50:57] [tts] === Q1 TTS: COMPLETE (from checkpoint). Overall metrics: {'15min': {'mse': 35.19108581542969, 'mae': 3.0659475326538086, 'mape': 0.08220617473125458, 'n': 1246068}, '30min': {'mse': 55.00333023071289, 'mae': 3.7029690742492676, 'mape': 0.10423935949802399, 'n': 1246052}, '60min': {'mse': 88.20137023925781, 'mae': 4.738008975982666, 'mape': 0.14025479555130005, 'n': 1246016}} ===

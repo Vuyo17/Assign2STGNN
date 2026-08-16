@@ -1,0 +1,27 @@
+C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\tsl\datasets\metr_la.py:98: FutureWarning: 'T' is deprecated and will be removed in a future version, please use 'min' instead.
+  date_range = pd.date_range(df.index[0], df.index[-1], freq='5T')
+C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\tsl\datasets\metr_la.py:109: FutureWarning: The 'method' keyword in DataFrame.replace is deprecated and will be removed in a future version.
+  df = df.replace(to_replace=0., method='ffill')
+Seed set to 42
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+\U0001f4a1 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
++----------------------------------------------------------------+
+|   | Name          | Type              | Params | Mode  | FLOPs |
+|---+---------------+-------------------+--------+-------+-------|
+| 0 | loss_fn       | MaskedMAE         |      0 | train |     0 |
+| 1 | train_metrics | MetricCollection  |      0 | train |     0 |
+| 2 | val_metrics   | MetricCollection  |      0 | train |     0 |
+| 3 | test_metrics  | MetricCollection  |      0 | train |     0 |
+| 4 | model         | GraphWaveNetModel |  301 K | train |     0 |
++----------------------------------------------------------------+
+Trainable params: 301 K                                                        
+Non-trainable params: 0                                                        
+Total params: 301 K                                                            
+Total estimated model params size (MB): 1.205                                  
+Modules in train mode: 171                                                     
+Modules in eval mode: 0                                                        
+Total FLOPs: 0                                                                 
+C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'val_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=19` in the `DataLoader` to improve performance.
+Only args ['edge_weight', 'edge_index', 'x'] are forwarded to the model (GraphWaveNetModel).
+C:\Users\Student\Downloads\Assign2STGNN\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=19` in the `DataLoader` to improve performance.

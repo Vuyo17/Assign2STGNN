@@ -83,3 +83,18 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-16 17:31:10] [build_tables] SKIPPED top15_influential_nodes.md -- dependency not ready yet
 - [2026-08-16 17:34:48] [tts] epoch 1 train_loss=4.0319 val_mae=3.1084 (490.5s)
 - [2026-08-16 17:43:03] [tts] epoch 2 train_loss=3.6199 val_mae=3.0766 (494.9s)
+- [2026-08-16 17:50:43] [tts] === Q1 TTS: evaluating from existing checkpoint results/tts/checkpoints\best-epoch=2-val_mae=3.0766.ckpt (training deliberately stopped early -- deadline resource reallocation) ===
+- [2026-08-16 17:50:48] [tts] Loaded weights from results/tts/checkpoints\best-epoch=2-val_mae=3.0766.ckpt (checkpoint epoch info: 2, global_step: 1155)
+- [2026-08-16 17:50:56] [tts] Evaluation pass over 108 test batches complete in 8.1s
+- [2026-08-16 17:50:57] [tts] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\tts (overall 60min MAE=4.738 mph)
+- [2026-08-16 17:50:57] [tts] === Q1 TTS: COMPLETE (from checkpoint). Overall metrics: {'15min': {'mse': 35.19108581542969, 'mae': 3.0659475326538086, 'mape': 0.08220617473125458, 'n': 1246068}, '30min': {'mse': 55.00333023071289, 'mae': 3.7029690742492676, 'mape': 0.10423935949802399, 'n': 1246052}, '60min': {'mse': 88.20137023925781, 'mae': 4.738008975982666, 'mape': 0.14025479555130005, 'n': 1246016}} ===
+- [2026-08-16 17:51:18] [gwn_predefined] === Q2 GWN (predefined only): full training run starting (config: code/configs/gwn_predefined.yaml) ===
+- [2026-08-16 17:51:19] [gwn_predefined] Building predictor (lr=0.001, max_epochs=4, seed=42)
+- [2026-08-16 17:51:20] [gwn_predefined] Training started (max_epochs=4, accelerator=CPUAccelerator)
+- [2026-08-16 17:51:29] [gwn_adaptive] === Q2 GWN (predefined+adaptive): full training run starting (config: code/configs/gwn_adaptive.yaml) ===
+- [2026-08-16 17:51:32] [gwn_adaptive] Building predictor (lr=0.001, max_epochs=4, seed=42)
+- [2026-08-16 17:51:33] [gwn_adaptive] Training started (max_epochs=4, accelerator=CPUAccelerator)
+- [2026-08-16 17:52:08] [agcrn] === Q3 AGCRN: full training run starting (config: code/configs/agcrn.yaml) ===
+- [2026-08-16 17:52:12] [agcrn] Building predictor (lr=0.001, max_epochs=10, seed=42)
+- [2026-08-16 17:52:14] [agcrn] Training started (max_epochs=10, accelerator=CPUAccelerator)
+- [2026-08-16 17:52:37] [orchestration] TTS training deliberately stopped after 3 epochs (val_mae 3.15->3.11->3.08) to reallocate CPU; evaluated directly from checkpoint -- results/tts/metrics.json now real (60min MAE=4.738). GWN predefined, GWN adaptive, and AGCRN relaunched with 3-way thread split (cpu_count()//3) and cut epoch budgets (GWN 4 epochs/patience 3, AGCRN 10 epochs/patience 5), all running in background under Claude Code (not user terminals) as of 17:51.

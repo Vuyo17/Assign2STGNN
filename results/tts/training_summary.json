@@ -1,0 +1,9 @@
+{
+  "experiment": "tts",
+  "epochs_run": 3,
+  "best_val_mae": 3.0766232013702397,
+  "best_checkpoint": "results/tts/checkpoints\\best-epoch=2-val_mae=3.0766.ckpt",
+  "total_training_seconds": null,
+  "seconds_per_epoch_avg": null,
+  "note": "Training was deliberately stopped early (after 3 epochs) to reallocate CPU capacity to the more expensive GWN/AGCRN runs under the submission deadline -- see PROGRESS_LOG.md ~17:46. total_training_seconds is not available because the live process (which was tracking it) was killed rather than finishing normally; per-epoch times ARE available in PROGRESS_LOG.md's [tts] entries (epoch 0: 232.2s, epoch 1: 490.5s, epoch 2: 494.9s -- all real, logged during training)."
+}

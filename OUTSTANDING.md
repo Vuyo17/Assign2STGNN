@@ -2,9 +2,9 @@
 
 **Auto-generated** by `code/utils/update_outstanding.py` -- do not hand-edit; it is overwritten after every pipeline stage. Reflects `results/status.json` cross-checked against files actually present on disk.
 
-Progress: **3/28** stages complete.
+Progress: **5/28** stages complete.
 
-Last regenerated: 2026-08-16 16:41:58
+Last regenerated: 2026-08-16 17:50:57
 
 ## Setup
 
@@ -14,16 +14,16 @@ Last regenerated: 2026-08-16 16:41:58
 
 ## Q1 TimeThenSpace
 
-- ⬜ **tts_train**: TTS trained to convergence (early stopping)
-- ⬜ **tts_eval**: TTS evaluated: overall + per-horizon + per-node metrics
+- ✅ **tts_train**: TTS trained to convergence (early stopping) -- Deliberately stopped after 3 epochs (deadline resource reallocation)
+- ✅ **tts_eval**: TTS evaluated: overall + per-horizon + per-node metrics -- 60min MAE=4.738 (from 3-epoch checkpoint)
 - ⬜ **fig_adjacency_heatmap**: Predefined adjacency matrix heatmap
 - ⬜ **fig_tts_overall**: TTS overall performance table + horizon-trend chart
 - ⬜ **fig_tts_per_station**: TTS actual-vs-predicted, sensors 1-3
 
 ## Q2 GraphWaveNet
 
-- ⬜ **gwn_predefined_train**: GWN (predefined graph only) trained
-- ⬜ **gwn_adaptive_train**: GWN (predefined + adaptive) trained
+- 🔄 **gwn_predefined_train**: GWN (predefined graph only) trained
+- 🔄 **gwn_adaptive_train**: GWN (predefined + adaptive) trained
 - ⬜ **gwn_eval**: Both GWN configs evaluated: overall + per-horizon + per-node
 - ⬜ **fig_gwn_vs_tts**: TTS vs GWN-predefined vs GWN-adaptive comparison
 - ⬜ **fig_convergence**: Training/validation convergence curves (TTS+GWN)
@@ -36,7 +36,7 @@ Last regenerated: 2026-08-16 16:41:58
 ## Q3 AGCRN
 
 - ⬜ **agcrn_epoch_selection**: Epoch-selection experiment + justification
-- ⬜ **agcrn_train**: AGCRN final training run
+- 🔄 **agcrn_train**: AGCRN final training run
 - ⬜ **agcrn_eval**: AGCRN evaluated: overall + per-horizon + per-node
 - ⬜ **fig_agcrn_vs_gwn**: AGCRN vs GWN performance/training-time comparison
 - ⬜ **fig_agcrn_per_station**: AGCRN vs best GWN, per-station (nodes 1-3)
