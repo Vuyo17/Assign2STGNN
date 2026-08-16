@@ -306,7 +306,69 @@ should be expected to match exactly.
 [PENDING — Figure 10]
 
 ### 5.4 Comparison With Gaibie et al. (2024)
-[PENDING]
+
+Gaibie et al. (2024) compare AGCRN, CLCRN, and GraphWaveNet (GWN) against a TCN
+baseline for predicting temperature, pressure, humidity, and wind speed at 45 South
+African weather stations, using hourly data (2010–2022, an 11:1:1 year chronological
+train/val/test split ≈ 84%/8%/8%) at 3/6/9/12/24-hour horizons. Their key findings,
+read directly from the paper (not from memory):
+
+- **AGCRN was the best overall performer** across temperature, wind speed, and
+  humidity (CLCRN was best specifically for pressure); AGCRN and CLCRN both clearly
+  outperformed GWN and the plain-temporal TCN baseline.
+- **GWN did *not* reliably beat even the non-spatial TCN baseline** in their setting —
+  it outperformed TCN on pressure and wind speed but *underperformed* TCN on humidity
+  and temperature. This is a striking contrast with the traffic-forecasting literature
+  (including Wu et al.'s own paper, Section 4.4), where GWN is a strong, consistently
+  graph-beneficial baseline.
+- **AGCRN's learned adjacency matrix** (initialised randomly, with no distance or
+  location information given to the model at all) was found, after training, to
+  emphasise the diagonal strongly (each station weighting its own history heavily) with
+  off-diagonal weight spread relatively evenly — and its *strongest* off-diagonal
+  dependencies predominantly pointed to geographically nearby stations, discovered
+  purely from data. Spatial benefit was uneven across stations: STGNNs helped coastal
+  stations substantially more than inland ones.
+- CLCRN's (distance-initialised) graph showed a markedly different structure — a few
+  strongly-dominant columns (stations that many others depend on) and weaker
+  self-dependence than AGCRN, with clearer long-range coastal dependency chains.
+
+**Similarities to this study's setting:** both compare the same two headline
+architectures (AGCRN and GWN) using MAE/RMSE-family metrics across multiple prediction
+horizons, on a multi-station spatio-temporal sensor network, with all models trained
+on the same data/split for a fair comparison.
+
+**Differences that plausibly explain why results could diverge between domains:**
+- **Domain dynamics**: traffic speed at a sensor is driven substantially by
+  *propagation along the road network* (congestion at one point mechanically slows
+  downstream traffic within minutes) — a strong, physically direct graph signal that
+  GWN's diffusion convolution over the predefined road-distance graph is well-suited
+  to exploit. Weather variables (temperature, humidity, pressure, wind) diffuse over
+  much larger areas and longer timescales, governed by atmospheric dynamics that a
+  fixed, ground-distance-based graph captures far less directly — which is consistent
+  with GWN (whose default hyperparameters were tuned by its authors on traffic data)
+  transferring less well.
+- **Node count and density**: 207 traffic sensors on a comparatively dense highway
+  network vs. 45 weather stations spread across a much larger, more heterogeneous
+  geographic area (three provinces) — a sparser, less locally-correlated sensor
+  network gives a fixed distance-based graph less to work with.
+- **Sampling rate and horizon scale**: this study forecasts 5-minute-resolution
+  traffic up to 60 minutes ahead (12 steps); Gaibie et al. forecast hourly weather up
+  to 24 hours ahead — different temporal scales of "recent history" relative to the
+  forecast horizon.
+- **Hyperparameters differ**: Gaibie et al. tuned each model's hyperparameters via
+  random search (their AGCRN used `n_layers=2, lr=0.01`, vs. this report's tsl-default
+  `n_layers=1, lr=0.001`, per the assignment's instruction to use tsl defaults rather
+  than tune) and trained on GPU hardware, whereas this report's models are CPU-only
+  and epoch-constrained (Section 2.5).
+
+**Whether this study's results support or contradict Gaibie et al.'s conclusions** is
+assessed directly in Section 6, once this report's own AGCRN-vs-GWN numbers are
+available — the specific claim to check is whether AGCRN's advantage over GWN, which
+Gaibie et al. found to be large and consistent in the weather domain, is present but
+*smaller* in the traffic domain (the plausible expectation, given GWN's predefined
+graph is a much more direct and informative signal for traffic than for weather), or
+whether it is absent/reversed (which would need a different explanation, since it
+would contradict the mechanism reasoned about above).
 
 ## 6. Overall Discussion
 [PENDING — synthesised only after all four models are evaluated.]
