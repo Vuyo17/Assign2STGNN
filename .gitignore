@@ -7,4 +7,6 @@ logs/**/version_*/
 *.tfevents*
 *.zip
 report/*.pdf
+report/*.docx
+report/~$*
 .ipynb_checkpoints/
