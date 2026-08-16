@@ -36,8 +36,15 @@ optim:
   optimizer: Adam
 
 trainer:
-  max_epochs: 100
-  early_stopping_patience: 15
+  # REVISED under a hard deadline (submission due 2026-08-17 10:00, config set
+  # 2026-08-16 ~17:15, ~17h available). Real CPU pilot: ~15.0 min/epoch
+  # single-process -- at max_epochs=25 that's a ~6.25h single-process worst
+  # case. This run doubles as the epoch-SELECTION experiment itself (generous-
+  # enough ceiling + early stopping), with the chosen/justified epoch count
+  # read off its actual validation curve afterwards
+  # (results/agcrn/training_history.json) rather than run twice.
+  max_epochs: 25
+  early_stopping_patience: 8
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1

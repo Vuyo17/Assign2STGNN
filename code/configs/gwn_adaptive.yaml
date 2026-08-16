@@ -26,8 +26,13 @@ optim:
   optimizer: Adam
 
 trainer:
-  max_epochs: 100
-  early_stopping_patience: 15
+  # REVISED under a hard deadline -- see gwn_predefined.yaml for full reasoning
+  # (submission due 2026-08-17 10:00, config set 2026-08-16 ~17:15). Real CPU
+  # pilot: ~37.6 min/epoch single-process. Kept IDENTICAL epoch budget/patience
+  # to gwn_predefined.yaml so the two GWN configs remain a controlled ablation
+  # (only learned_adjacency differs) even under the tighter time budget.
+  max_epochs: 12
+  early_stopping_patience: 5
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1

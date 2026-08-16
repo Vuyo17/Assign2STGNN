@@ -32,8 +32,16 @@ optim:
   optimizer: Adam
 
 trainer:
-  max_epochs: 100
-  early_stopping_patience: 15
+  # REVISED under a hard deadline (submission due 2026-08-17 10:00, this config
+  # set at 2026-08-16 ~17:15, ~17h available). Real CPU pilot:
+  # ~33.9 min/epoch single-process (results/timing_pilot.json). At max_epochs=12
+  # that's a ~6.8h single-process worst case, well inside the deadline even
+  # without early stopping firing, and leaves buffer for evaluation/report/
+  # packaging. This is a deliberate, documented computational+time-budget
+  # limitation (see report Section 2 / Section 4.3) -- NOT the epoch count that
+  # would be used given unlimited time (the original plan was max_epochs=30).
+  max_epochs: 12
+  early_stopping_patience: 5
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1

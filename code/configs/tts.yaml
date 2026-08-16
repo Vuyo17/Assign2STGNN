@@ -25,8 +25,11 @@ optim:
   optimizer: Adam
 
 trainer:
-  max_epochs: 100          # upper bound; early stopping is expected to trigger sooner
-  early_stopping_patience: 15
+  # Epoch budget set from the real CPU timing pilot (results/timing_pilot.json:
+  # TTS ~2.0 min/epoch on this machine). 60 epochs is a ~2h worst case; early
+  # stopping (patience=12) is expected to trigger well before that.
+  max_epochs: 60
+  early_stopping_patience: 12
   early_stopping_monitor: val_mae
   accelerator: cpu
   devices: 1
