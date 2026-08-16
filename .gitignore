@@ -2,7 +2,6 @@
 __pycache__/
 *.pyc
 data/
-results/**/checkpoints/
 logs/**/version_*/
 *.tfevents*
 *.zip
