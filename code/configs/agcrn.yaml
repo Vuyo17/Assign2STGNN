@@ -1,0 +1,45 @@
+# Q3: AGCRN, tsl's own default AGCRNModel hyperparameters (see code/API_NOTES.md):
+# hidden_size=64, emb_size=10, n_layers=1. lr/batch size/optimiser identical to
+# every other experiment so architecture is the only varying factor.
+#
+# Epoch budget: max_epochs is intentionally set generously with early stopping
+# (same patience as every other model) for the epoch-SELECTION run described in
+# the assignment (Q3 "determine a sensible/optimal number of epochs before the
+# final experiment"). The chosen epoch count is justified from that run's
+# validation curve (results/agcrn/epoch_selection.json,
+# results/agcrn/training_history.json) rather than picked arbitrarily -- see
+# report Section 5.1. AGCRN has no predefined-graph forward path at all (see
+# code/models/agcrn.py), so it is NOT part of the TTS/GWN adjacency-consistency
+# comparison, only of the accuracy/timing/convergence comparisons.
+experiment_name: agcrn
+display_name: "AGCRN"
+
+data:
+  window: 12
+  horizon: 12
+  stride: 1
+  val_len: 0.1
+  test_len: 0.2
+  batch_size: 64
+  connectivity_threshold: 0.1
+  connectivity_include_self: false
+  connectivity_normalize_axis: 1
+  scaler_axis: [0, 1]
+
+model:
+  hidden_size: 64
+  emb_size: 10
+  n_layers: 1
+
+optim:
+  lr: 0.001
+  optimizer: Adam
+
+trainer:
+  max_epochs: 100
+  early_stopping_patience: 15
+  early_stopping_monitor: val_mae
+  accelerator: cpu
+  devices: 1
+
+seed: 42

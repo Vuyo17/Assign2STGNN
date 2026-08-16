@@ -1,0 +1,41 @@
+# Q2 Config A: GraphWaveNet, predefined graph ONLY (learned_adjacency=False).
+# Model hyperparameters are tsl's own defaults for GraphWaveNetModel (see
+# code/API_NOTES.md, generated from the installed tsl==0.9.5 source) -- only
+# `learned_adjacency` is set explicitly, everything else is the tsl default.
+# lr/batch size/optimiser are kept identical to every other experiment
+# (code/configs/tts.yaml, gwn_adaptive.yaml, agcrn.yaml) so architecture is the
+# only varying factor across models.
+experiment_name: gwn_predefined
+display_name: "GWN (predefined)"
+
+data:
+  window: 12
+  horizon: 12
+  stride: 1
+  val_len: 0.1
+  test_len: 0.2
+  batch_size: 64
+  connectivity_threshold: 0.1
+  connectivity_include_self: false
+  connectivity_normalize_axis: 1
+  scaler_axis: [0, 1]
+
+model:
+  learned_adjacency: false
+  # all other GraphWaveNetModel args left at tsl defaults:
+  # hidden_size=32, ff_size=256, n_layers=8, temporal_kernel_size=2,
+  # spatial_kernel_size=2, emb_size=10, dilation=2, dilation_mod=2,
+  # norm=batch, dropout=0.3
+
+optim:
+  lr: 0.001
+  optimizer: Adam
+
+trainer:
+  max_epochs: 100
+  early_stopping_patience: 15
+  early_stopping_monitor: val_mae
+  accelerator: cpu
+  devices: 1
+
+seed: 42

@@ -2,78 +2,92 @@
 explicitly-defined influence score, and the top-15 influential nodes table
 (Q2 section 2.3 of the assignment).
 
-Influence-score definition (documented here, not just in the report, so the
-code and the write-up cannot drift apart):
+Influence-score definition -- and why -- verified directly against the
+installed tsl 0.9.5 source (not assumed):
 
-GraphWaveNet's adaptive adjacency `A_adp = softmax(relu(E1 @ E2^T))` is a
-directed, row-normalised (each row sums to ~1 after softmax) matrix, so
-`A_adp[i, j]` is "how much node i's representation is updated FROM node j"
-under one common convention, or the reverse under another -- the exact
-direction depends on how it is multiplied against the node features inside
-the model, which is confirmed empirically per the installed tsl source at
-implementation time (see `code/API_NOTES.md`) rather than assumed here.
+`GraphWaveNetModel.get_learned_adj()` computes
+``adj = softmax(relu(source_embeddings() @ target_embeddings().T), dim=1)``,
+i.e. **each row is softmax-normalised over its columns, so every row sums to
+~1 regardless of that node's actual importance** -- row sums are a
+normalisation artefact, not a meaningful signal.
 
-Given that direction, we define a node's **influence score** as its
-**out-degree strength**: the sum of the edge weights it *sends* to all other
-nodes, i.e. `influence[i] = sum_j A_adp[i, j] for j != i`. This is the natural
-reading of "influence" for a directed weighted graph -- a node with high
-row-sum is one whose state strongly informs many other nodes' updates, which
-is the graph-convolution-relevant notion of importance (as opposed to
-in-degree, which would instead measure how strongly a node is *listened to*
-by others -- reported alongside as a secondary, clearly-labelled score rather
-than conflated with the primary one).
+This `adj` matrix is then consumed by `DenseGraphConvOrderK.forward` via
+``torch.einsum('ncvl, wv -> ncwl', (x, a))``, i.e. the *new* representation of
+node `w` (a row index of `a`) is a weighted sum over `v` (a column index of
+`a`) of node `v`'s current representation: ``x_new[w] = sum_v a[w, v] * x[v]``.
+So **row `i` = the destination/target node being updated, column `j` = the
+origin/source node contributing to it** -- `adj[i, j]` is "how much weight
+node i's update gives to node j".
+
+Given that, and given rows are normalised to ~1 (making row sums useless),
+the only quantity that meaningfully varies across nodes and captures "how much
+this node influences the rest of the graph" is the **column sum**: how much
+total (un-normalised) weight node j contributes across *all* of its targets --
+`influence(j) = sum_i adj[i, j] for i != j`. A node with a high column sum is
+one whose state is heavily weighted by many other nodes when they update --
+exactly the graph-convolution-relevant notion of an "influential" node. The
+row sum is reported alongside, clearly labelled, purely as a diagnostic (it
+should sit close to 1 for every node by construction; a node deviating
+noticeably would indicate `include_self`/numerical edge cases worth flagging,
+not genuine importance).
 """
 from __future__ import annotations
 
 import numpy as np
 import pandas as pd
 
-from code.visualisation.style import INK_PRIMARY, SEQUENTIAL_BLUE, apply_axis_style, new_figure, save_figure
+from code.visualisation.style import INK_PRIMARY, SEQUENTIAL_BLUE, new_figure, save_figure
 
 
 def compute_influence_scores(adj: np.ndarray) -> pd.DataFrame:
     """Returns a DataFrame indexed by node id with columns:
-    out_influence (row sum, excluding self), in_influence (column sum,
-    excluding self), and out_influence_normalised (out_influence / max).
+    ``influence`` (column sum excluding self -- the primary, justified score;
+    total weight node j contributes to all other nodes' updates),
+    ``row_sum_diagnostic`` (row sum including self -- expected to be ~1 for
+    every node by construction; not used for ranking), and
+    ``influence_normalised`` (influence / max influence).
     """
     n = adj.shape[0]
     a = adj.copy().astype(float)
-    np.fill_diagonal(a, 0.0)  # exclude self-loops from the influence measure
+    a_no_self = a.copy()
+    np.fill_diagonal(a_no_self, 0.0)
 
-    out_influence = a.sum(axis=1)   # row sum: weight node i SENDS to others
-    in_influence = a.sum(axis=0)    # column sum: weight node i RECEIVES
+    influence = a_no_self.sum(axis=0)      # column sum: weight node j CONTRIBUTES to others
+    row_sum_diagnostic = a.sum(axis=1)     # should be ~1 everywhere (softmax normalisation)
 
     df = pd.DataFrame({
         "node_id": np.arange(n),
-        "out_influence": out_influence,
-        "in_influence": in_influence,
+        "influence": influence,
+        "row_sum_diagnostic": row_sum_diagnostic,
     })
-    max_out = df["out_influence"].max()
-    df["out_influence_normalised"] = df["out_influence"] / max_out if max_out > 0 else 0.0
+    max_inf = df["influence"].max()
+    df["influence_normalised"] = df["influence"] / max_inf if max_inf > 0 else 0.0
     return df
 
 
 def top_k_influential_nodes(adj: np.ndarray, k: int = 15, top_targets: int = 3) -> pd.DataFrame:
-    """Top-k nodes by out_influence (see module docstring for the justification),
-    with, for each, the `top_targets` most strongly-influenced other nodes
-    (highest outgoing edge weight from that source)."""
+    """Top-k nodes by `influence` (column sum -- see module docstring), with,
+    for each, the `top_targets` nodes whose update weights it most strongly
+    (highest `adj[target, source_j]` values in source_j's column)."""
     n = adj.shape[0]
     a = adj.copy().astype(float)
-    np.fill_diagonal(a, 0.0)
+    a_no_self = a.copy()
+    np.fill_diagonal(a_no_self, 0.0)
 
-    scores = compute_influence_scores(adj).sort_values("out_influence", ascending=False)
+    scores = compute_influence_scores(adj).sort_values("influence", ascending=False)
     top = scores.head(k).reset_index(drop=True)
 
     most_influenced = []
     for node_id in top["node_id"]:
-        row = a[node_id]
-        target_idx = np.argsort(row)[::-1][:top_targets]
-        pairs = [f"node {j} (w={row[j]:.3f})" for j in target_idx if row[j] > 0]
+        col = a_no_self[:, node_id]   # weight this source contributes to each target row
+        target_idx = np.argsort(col)[::-1][:top_targets]
+        pairs = [f"node {i} (w={col[i]:.3f})" for i in target_idx if col[i] > 0]
         most_influenced.append(", ".join(pairs) if pairs else "none")
 
     top.insert(0, "rank", np.arange(1, len(top) + 1))
     top["most_influenced_nodes"] = most_influenced
-    return top[["rank", "node_id", "out_influence", "out_influence_normalised", "most_influenced_nodes"]]
+    return top[["rank", "node_id", "influence", "influence_normalised",
+                "row_sum_diagnostic", "most_influenced_nodes"]]
 
 
 def plot_learned_adjacency_first_n(
@@ -86,10 +100,10 @@ def plot_learned_adjacency_first_n(
     fig, ax = new_figure(figsize=(7.5, 6.5))
     im = ax.imshow(sub, cmap=SEQUENTIAL_BLUE, aspect="auto", interpolation="nearest")
     ax.grid(False)
-    ax.set_xlabel("Target node index (0-49)")
-    ax.set_ylabel("Source node index (0-49)")
+    ax.set_xlabel("Source (origin) node index (0-49)")
+    ax.set_ylabel("Target (destination) node index (0-49)")
     ax.set_title(title, fontsize=11, fontweight="bold")
     cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
-    cbar.set_label("Learned edge weight (post-softmax, unitless)", color=INK_PRIMARY)
+    cbar.set_label("Learned edge weight (post row-softmax, unitless)", color=INK_PRIMARY)
     cbar.ax.tick_params(colors=INK_PRIMARY)
     save_figure(fig, save_path)

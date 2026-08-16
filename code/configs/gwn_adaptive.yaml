@@ -1,0 +1,35 @@
+# Q2 Config B: GraphWaveNet, predefined graph + learned adaptive adjacency
+# (learned_adjacency=True). Identical to gwn_predefined.yaml in every other
+# respect -- this is a controlled ablation of the adaptive-adjacency component.
+experiment_name: gwn_adaptive
+display_name: "GWN (predefined+adaptive)"
+
+data:
+  window: 12
+  horizon: 12
+  stride: 1
+  val_len: 0.1
+  test_len: 0.2
+  batch_size: 64
+  connectivity_threshold: 0.1
+  connectivity_include_self: false
+  connectivity_normalize_axis: 1
+  scaler_axis: [0, 1]
+
+model:
+  learned_adjacency: true
+  emb_size: 10   # tsl default; size of the learned source/target node embeddings
+  # all other GraphWaveNetModel args left at tsl defaults (see gwn_predefined.yaml)
+
+optim:
+  lr: 0.001
+  optimizer: Adam
+
+trainer:
+  max_epochs: 100
+  early_stopping_patience: 15
+  early_stopping_monitor: val_mae
+  accelerator: cpu
+  devices: 1
+
+seed: 42

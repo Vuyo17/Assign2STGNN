@@ -24,9 +24,13 @@ def plot_adjacency_heatmap(
 ) -> None:
     """Full NxN adjacency heatmap with a labelled colourbar and node-index ticks.
 
-    ``adj[i, j]`` is read as the weight of the edge FROM source node i TO target
-    node j (row = source, column = target), matching tsl's `edge_index_to_adj`
-    convention used when this matrix was built.
+    ``adj[i, j]`` is read as the weight used when node i aggregates information
+    FROM node j (row i = destination/target, column j = origin/source) -- this
+    is tsl's `edge_index_to_adj` convention (it builds `adj[src, dst] = weight`
+    then returns the TRANSPOSE), verified directly against the installed
+    library's source rather than assumed, and it matches the row=target,
+    column=source convention GraphWaveNet's learned adjacency also uses (see
+    `code/visualisation/learned_adjacency.py`).
     """
     n = adj.shape[0]
     fig, ax = new_figure(figsize=(8, 7))
@@ -40,8 +44,8 @@ def plot_adjacency_heatmap(
     ax.set_xticklabels(ticks)
     ax.set_yticklabels(ticks)
 
-    ax.set_xlabel("Target sensor node index")
-    ax.set_ylabel("Source sensor node index")
+    ax.set_xlabel("Source (origin) sensor node index")
+    ax.set_ylabel("Target (destination) sensor node index")
     ax.set_title(title, fontsize=11, fontweight="bold")
 
     cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
@@ -91,8 +95,8 @@ def plot_predefined_vs_learned(
     fig.colorbar(im2, ax=axes[2], fraction=0.046, pad=0.04)
 
     for ax in axes:
-        ax.set_xlabel("Target node index")
-    axes[0].set_ylabel("Source node index")
+        ax.set_xlabel("Source (origin) node index")
+    axes[0].set_ylabel("Target (destination) node index")
 
     fig.suptitle(title, fontsize=12, fontweight="bold", color=INK_PRIMARY)
     save_figure(fig, save_path)
