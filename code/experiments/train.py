@@ -37,6 +37,32 @@ from code.utils.update_outstanding import regenerate as regenerate_outstanding
 _ROOT = Path(__file__).resolve().parents[2]
 
 
+class _FreshEarlyStopping:
+    """Mixin that makes an EarlyStopping callback ignore any state baked into
+    a checkpoint it resumes from.
+
+    Lightning's own `EarlyStopping.load_state_dict()` restores not just
+    `wait_count`/`best_score` but `patience` itself from whatever was saved
+    in the checkpoint -- so a resume script's newly-configured
+    `early_stopping_patience` was silently being overwritten by whatever
+    patience the *previous* run happened to use, and the accumulated
+    wait_count carried over on top of that. In practice this made resumed
+    runs stop 2-3x sooner than the patience actually passed in (confirmed
+    empirically: a resume configured with patience=8 stopped after 3
+    non-improving epochs, patience=10 stopped after 3). Every resume in this
+    project is deliberately meant to give the model a genuinely fresh
+    patience window from its best-known checkpoint, so this callback simply
+    never restores prior early-stopping state -- a no-resumed-state fresh
+    start is exactly the desired behaviour here, not an edge case to guard.
+    """
+
+    def load_state_dict(self, state_dict):
+        pass  # deliberately do not restore wait_count/best_score/patience
+
+    def on_load_checkpoint(self, trainer, pl_module, callback_state):
+        pass
+
+
 def _build_predictor(model, lr: float):
     from tsl.engines import Predictor
     from tsl.metrics.torch import MaskedMAE, MaskedMAPE, MaskedMSE
@@ -99,6 +125,9 @@ def run_training(
     from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
     from pytorch_lightning.loggers import CSVLogger, TensorBoardLogger
 
+    class FreshEarlyStopping(_FreshEarlyStopping, EarlyStopping):
+        pass
+
     set_seed(seed)
     status_mod.set_stage(f"{experiment_name}_train", "running")
     log = ProgressLogger(experiment_name)
@@ -116,7 +145,7 @@ def run_training(
         dirpath=str(ckpt_dir), save_top_k=1, monitor="val_mae", mode="min",
         filename="best-{epoch}-{val_mae:.4f}",
     )
-    early_stop_cb = EarlyStopping(monitor="val_mae", mode="min", patience=early_stopping_patience)
+    early_stop_cb = FreshEarlyStopping(monitor="val_mae", mode="min", patience=early_stopping_patience)
     progress_cb = ProgressLogCallback(experiment_name)
 
     trainer_kwargs = dict(

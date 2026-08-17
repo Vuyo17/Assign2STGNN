@@ -52,3 +52,13 @@
 [2026-08-16 23:49:46] [build_all_figures] Per-station comparison figures done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
 [2026-08-16 23:49:47] [build_all_figures] fig07/fig08 + top15_influential_nodes.csv done
 [2026-08-16 23:49:47] [build_all_figures] build_all_figures pass complete.
+[2026-08-17 04:00:09] [build_all_figures] Building whatever figures/tables the currently-available results support...
+[2026-08-17 04:00:17] [build_all_figures] fig01_adjacency_heatmap.png done (predefined graph, always available)
+[2026-08-17 04:00:17] [build_all_figures] Models with overall metrics available: ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+[2026-08-17 04:00:18] [build_all_figures] Overall performance table + horizon-trend figures done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+[2026-08-17 04:00:18] [build_all_figures] fig03_tts_station{1,2,3}_actual_vs_predicted.png done
+[2026-08-17 04:00:19] [build_all_figures] fig05_convergence_curves.png done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+[2026-08-17 04:00:19] [build_all_figures] Training time figure/table done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+[2026-08-17 04:00:20] [build_all_figures] Per-station comparison figures done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+[2026-08-17 04:00:21] [build_all_figures] fig07/fig08 + top15_influential_nodes.csv done
+[2026-08-17 04:00:21] [build_all_figures] build_all_figures pass complete.

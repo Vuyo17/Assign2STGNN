@@ -1,4 +1,5 @@
 Model,Total training time (min),Epochs run
-GWN (predefined),308.4,5
-GWN (predefined+adaptive),342.3,5
-AGCRN,355.8,11
+TTS,3.2,30
+GWN (predefined),329.6,25
+GWN (predefined+adaptive),355.3,15
+AGCRN,361.4,21

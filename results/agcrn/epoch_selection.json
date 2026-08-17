@@ -1,9 +1,10 @@
 {
-  "epochs_run": 11,
+  "epochs_run_total": 21,
+  "resumed_from_checkpoint": "results/agcrn/checkpoints\\best-epoch=12-val_mae=2.7325.ckpt",
   "early_stopped": false,
-  "max_epochs_ceiling": 10,
-  "early_stopping_patience": 5,
-  "best_val_mae": 2.7526419162750244,
-  "epoch_of_best_val_mae": 9,
-  "justification": "Trained with a generous ceiling (max_epochs=10) and early stopping (patience=5 epochs of no val_mae improvement). Validation MAE reached its best value at epoch 9 of 11 run; the checkpoint from that epoch is used for all reported AGCRN results, i.e. the 'selected' epoch count is the early-stopped best-validation epoch, not an arbitrary fixed number."
+  "max_epochs_ceiling": 25,
+  "early_stopping_patience": 8,
+  "best_val_mae": 2.7074668407440186,
+  "epoch_of_best_val_mae": 18,
+  "justification": "AGCRN was first trained for 11 epochs on CPU (deadline-constrained) with validation MAE still improving and no plateau observed, then resumed once more on the same CPU to epoch 12 before being stopped to switch to a GPU machine. Training was resumed again from the best checkpoint on GPU with the ceiling raised to 25 and patience raised to 8. Training again reached the new epoch ceiling (25) while still improving (best epoch 18), so a genuine plateau still was not observed within this extended budget; this remains an honestly-reported limitation rather than a claimed convergence."
 }

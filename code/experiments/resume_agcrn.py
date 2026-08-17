@@ -1,14 +1,20 @@
-"""Resumes AGCRN training from its existing best checkpoint (epoch 9,
-val_mae=2.753, still improving with no plateau -- see report Section 5.1)
-rather than restarting from scratch. Extends the epoch ceiling and gives it a
-fresh early-stopping patience so it can actually reach a genuine plateau,
+"""Resumes AGCRN training from its existing best checkpoint rather than
+restarting from scratch. Extends the epoch ceiling and gives it a fresh
+early-stopping patience so it can actually reach a genuine plateau,
 strengthening the epoch-selection justification the assignment asks for.
+
+`results/agcrn/checkpoints/` currently holds checkpoints from two prior
+separate runs (the original 11-epoch run, best at epoch 9/val_mae=2.7526,
+and an earlier resume that reached epoch 12/val_mae=2.7325 before being
+stopped to switch machines) -- `find_best_checkpoint` picks whichever has
+the lowest val_mae encoded in its filename, not just the most recent file,
+so this always resumes from the genuinely best checkpoint regardless of how
+many old files are sitting in that directory (see resume_utils.py).
 
 Run: .venv/Scripts/python.exe -m code.experiments.resume_agcrn
 """
 from __future__ import annotations
 
-import glob
 import json
 
 import yaml
@@ -17,18 +23,15 @@ from code.data.datamodule import DataConfig, build_datamodule
 from code.evaluation.evaluate import run_evaluation
 from code.models.agcrn import build_agcrn_model
 from code.experiments.train import run_training
+from code.experiments.resume_utils import find_best_checkpoint, epoch_of
 from code.utils.progress_logger import ProgressLogger
 from code.utils import status as status_mod
 from code.utils.update_outstanding import regenerate as regenerate_outstanding
 
 _CONFIG_PATH = "code/configs/agcrn.yaml"
 
-# New ceiling: 9h remain until the 10:00 deadline as of this run (~01:03).
-# AGCRN alone (no contention from the other 3, which are all finished) ran its
-# last epoch in ~18.7 min -- 16 more epochs at that pace is ~5h worst case,
-# leaving a real buffer for report updates and packaging.
-NEW_MAX_EPOCHS = 25
-NEW_PATIENCE = 10
+NEW_MAX_EPOCHS = 80
+NEW_PATIENCE = 12
 
 
 def main():
@@ -36,13 +39,11 @@ def main():
         cfg = yaml.safe_load(f)
 
     log = ProgressLogger("agcrn")
-    ckpts = sorted(glob.glob("results/agcrn/checkpoints/best-*.ckpt"))
-    if not ckpts:
-        raise FileNotFoundError("No existing AGCRN checkpoint found to resume from.")
-    ckpt_path = ckpts[-1]
+    ckpt_path = find_best_checkpoint("agcrn")
     log.milestone(
-        f"=== Q3 AGCRN: RESUMING from {ckpt_path} (new ceiling max_epochs="
-        f"{NEW_MAX_EPOCHS}, patience={NEW_PATIENCE}) ==="
+        f"=== Q3 AGCRN: RESUMING from {ckpt_path} (epoch {epoch_of(ckpt_path)}, "
+        f"new ceiling max_epochs={NEW_MAX_EPOCHS}, patience={NEW_PATIENCE}, "
+        f"now on GPU) ==="
     )
 
     data_cfg = DataConfig(
@@ -70,7 +71,7 @@ def main():
 
     status_mod.set_stage("agcrn_eval", "running")
     overall = run_evaluation(predictor, dm, "agcrn", n_nodes=torch_dataset.n_nodes, out_dir="results/agcrn")
-    status_mod.set_stage("agcrn_eval", "done", notes=f"60min MAE={overall['60min']['mae']:.3f} (resumed run)")
+    status_mod.set_stage("agcrn_eval", "done", notes=f"60min MAE={overall['60min']['mae']:.3f} (resumed run, GPU)")
 
     with open("results/agcrn/training_history.json", encoding="utf-8") as f:
         history = json.load(f)
@@ -86,11 +87,13 @@ def main():
         "best_val_mae": summary["best_val_mae"],
         "epoch_of_best_val_mae": best_epoch,
         "justification": (
-            f"AGCRN was first trained for 10 epochs (max_epochs=10, deadline-"
+            f"AGCRN was first trained for 11 epochs on CPU (deadline-"
             f"constrained) with validation MAE still improving and no plateau "
-            f"observed. Training was resumed from that checkpoint with the "
-            f"ceiling raised to {NEW_MAX_EPOCHS} and patience raised to "
-            f"{NEW_PATIENCE}. " + (
+            f"observed, then resumed once more on the same CPU to epoch 12 "
+            f"before being stopped to switch to a GPU machine. Training was "
+            f"resumed again from the best checkpoint on GPU with the ceiling "
+            f"raised to {NEW_MAX_EPOCHS} and patience raised to {NEW_PATIENCE}. "
+            + (
                 f"Early stopping triggered after {NEW_PATIENCE} epochs with no "
                 f"improvement, giving a genuine, validation-curve-justified "
                 f"epoch count (best epoch {best_epoch}), not an arbitrary or "
@@ -99,9 +102,8 @@ def main():
                 f"Training again reached the new epoch ceiling "
                 f"({NEW_MAX_EPOCHS}) while still improving (best epoch "
                 f"{best_epoch}), so a genuine plateau still was not observed "
-                f"within the extended, still deadline-bounded budget; this "
-                f"remains an honestly-reported limitation rather than a "
-                f"claimed convergence."
+                f"within this extended budget; this remains an honestly-"
+                f"reported limitation rather than a claimed convergence."
             )
         ),
     }

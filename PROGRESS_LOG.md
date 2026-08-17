@@ -208,3 +208,260 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-17 01:45:43] [agcrn] epoch 12 train_loss=3.0540 val_mae=2.7325 (771.0s)
 - [2026-08-17 01:46:15] [agcrn] AGCRN resumed-training run intentionally stopped by user at epoch 11 (best checkpoint remains epoch 10, val_mae=2.7383) to continue on a faster/separate machine instead. No corruption -- ModelCheckpoint had already safely saved the epoch-10 best checkpoint to disk before the process was stopped.
 - [2026-08-17 01:46:53] [agcrn] CORRECTION: epoch 12 (val_mae=2.7325, a new best, improving again after epoch 11s blip to 2.7492) actually completed and checkpointed just before the stop -- the true final state is 13 real epochs total (10 original + resumed epochs 10,11,12), best checkpoint is epoch 12 at val_mae=2.7325, not epoch 10 as first logged. Stopped intentionally by user to continue on a faster machine; checkpoint confirmed safely saved, no corruption.
+- [2026-08-17 02:46:02] [tts] === Q1 TTS: RESUMING from results/tts/checkpoints\best-epoch=2-val_mae=3.0766.ckpt (epoch 2, new ceiling max_epochs=30, patience=10, now on GPU) ===
+- [2026-08-17 02:46:03] [tts] Building predictor (lr=0.001, max_epochs=30, seed=42)
+- [2026-08-17 02:46:03] [tts] Resuming from checkpoint results/tts/checkpoints\best-epoch=2-val_mae=3.0766.ckpt (new ceiling max_epochs=30)
+- [2026-08-17 02:46:04] [tts] Training started (max_epochs=30, accelerator=CUDAAccelerator)
+- [2026-08-17 02:46:11] [tts] epoch 3 val_mae=3.0677 (7.2s)
+- [2026-08-17 02:46:19] [tts] epoch 4 train_loss=3.5558 val_mae=3.0376 (7.1s)
+- [2026-08-17 02:46:26] [tts] epoch 5 train_loss=3.5360 val_mae=3.0390 (7.1s)
+- [2026-08-17 02:46:33] [tts] epoch 6 train_loss=3.5208 val_mae=3.0339 (7.2s)
+- [2026-08-17 02:46:40] [tts] epoch 7 train_loss=3.5033 val_mae=3.0180 (7.0s)
+- [2026-08-17 02:46:47] [tts] epoch 8 train_loss=3.4891 val_mae=3.0122 (7.1s)
+- [2026-08-17 02:46:54] [tts] epoch 9 train_loss=3.4794 val_mae=3.0075 (7.0s)
+- [2026-08-17 02:47:01] [tts] epoch 10 train_loss=3.4737 val_mae=2.9981 (7.2s)
+- [2026-08-17 02:47:08] [tts] epoch 11 train_loss=3.4647 val_mae=3.0104 (6.9s)
+- [2026-08-17 02:47:15] [tts] epoch 12 train_loss=3.4572 val_mae=2.9929 (6.9s)
+- [2026-08-17 02:47:22] [tts] epoch 13 train_loss=3.4546 val_mae=2.9901 (6.9s)
+- [2026-08-17 02:47:29] [tts] epoch 14 train_loss=3.4484 val_mae=2.9796 (7.0s)
+- [2026-08-17 02:47:36] [tts] epoch 15 train_loss=3.4396 val_mae=2.9897 (7.0s)
+- [2026-08-17 02:47:43] [tts] epoch 16 train_loss=3.4369 val_mae=3.0040 (6.9s)
+- [2026-08-17 02:47:50] [tts] epoch 17 train_loss=3.4319 val_mae=2.9732 (6.9s)
+- [2026-08-17 02:47:57] [tts] epoch 18 train_loss=3.4311 val_mae=2.9800 (7.0s)
+- [2026-08-17 02:48:04] [tts] epoch 19 train_loss=3.4241 val_mae=2.9834 (7.0s)
+- [2026-08-17 02:48:11] [tts] epoch 20 train_loss=3.4235 val_mae=2.9694 (7.0s)
+- [2026-08-17 02:48:18] [tts] epoch 21 train_loss=3.4190 val_mae=2.9963 (6.9s)
+- [2026-08-17 02:48:25] [tts] epoch 22 train_loss=3.4159 val_mae=2.9638 (7.0s)
+- [2026-08-17 02:48:32] [tts] epoch 23 train_loss=3.4130 val_mae=2.9646 (7.1s)
+- [2026-08-17 02:48:39] [tts] epoch 24 train_loss=3.4088 val_mae=2.9632 (6.9s)
+- [2026-08-17 02:48:46] [tts] epoch 25 train_loss=3.4099 val_mae=2.9649 (6.9s)
+- [2026-08-17 02:48:53] [tts] epoch 26 train_loss=3.4039 val_mae=2.9656 (7.0s)
+- [2026-08-17 02:49:00] [tts] epoch 27 train_loss=3.4029 val_mae=2.9717 (7.1s)
+- [2026-08-17 02:49:07] [tts] epoch 28 train_loss=3.4012 val_mae=2.9590 (7.0s)
+- [2026-08-17 02:49:14] [tts] epoch 29 train_loss=3.4004 val_mae=2.9660 (6.9s)
+- [2026-08-17 02:49:14] [tts] Training finished after 31 epochs, 3.2 min total
+- [2026-08-17 02:49:14] [tts] Merged pre-resume history (3 epochs) with newly-run epochs -- full curve now 30 epochs
+- [2026-08-17 02:49:14] [tts] Training complete: 31 epochs, 3.2 min total, best_val_mae=2.9589951038360596, checkpoint=C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\results\tts\checkpoints\best-epoch=28-val_mae=2.9590.ckpt
+- [2026-08-17 02:49:24] [tts] Evaluation pass over 108 test batches complete in 10.0s
+- [2026-08-17 02:49:26] [tts] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\tts (overall 60min MAE=4.483 mph)
+- [2026-08-17 02:49:26] [tts] === Q1 TTS: RESUME COMPLETE. Summary: {'experiment': 'tts', 'total_training_seconds': 190.8350749015808, 'this_call_seconds': 190.8350749015808, 'epochs_run': 30, 'epochs_run_this_call': 31, 'resumed_from_checkpoint': 'results/tts/checkpoints\\best-epoch=2-val_mae=3.0766.ckpt', 'seconds_per_epoch_avg': 6.361169163386027, 'best_val_mae': 2.9589951038360596, 'best_checkpoint': 'C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\tts\\checkpoints\\best-epoch=28-val_mae=2.9590.ckpt', 'early_stopped': False, 'max_epochs_configured': 30, 'early_stopping_patience': 10, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-17 02:49:33] [gwn_predefined] === Q2 GWN (predefined only): RESUMING from results/gwn_predefined/checkpoints\best-epoch=2-val_mae=2.9361.ckpt (epoch 2, new ceiling max_epochs=12, patience=5, now on GPU) ===
+- [2026-08-17 02:49:34] [gwn_predefined] Building predictor (lr=0.001, max_epochs=12, seed=42)
+- [2026-08-17 02:49:34] [gwn_predefined] Resuming from checkpoint results/gwn_predefined/checkpoints\best-epoch=2-val_mae=2.9361.ckpt (new ceiling max_epochs=12)
+- [2026-08-17 02:49:35] [gwn_predefined] Training started (max_epochs=12, accelerator=CUDAAccelerator)
+- [2026-08-17 02:50:34] [gwn_predefined] epoch 3 val_mae=3.0261 (57.9s)
+- [2026-08-17 02:51:31] [gwn_predefined] epoch 4 train_loss=3.4176 val_mae=3.7554 (57.2s)
+- [2026-08-17 02:52:28] [gwn_predefined] epoch 5 train_loss=3.3812 val_mae=2.8648 (57.2s)
+- [2026-08-17 02:53:26] [gwn_predefined] epoch 6 train_loss=3.3433 val_mae=2.8778 (57.3s)
+- [2026-08-17 02:54:23] [gwn_predefined] epoch 7 train_loss=3.3119 val_mae=2.8216 (57.3s)
+- [2026-08-17 02:55:22] [gwn_predefined] epoch 8 train_loss=3.2789 val_mae=2.8173 (58.6s)
+- [2026-08-17 02:56:20] [gwn_predefined] epoch 9 train_loss=3.2506 val_mae=2.8564 (58.3s)
+- [2026-08-17 02:57:19] [gwn_predefined] epoch 10 train_loss=3.2237 val_mae=2.7753 (58.4s)
+- [2026-08-17 02:58:18] [gwn_predefined] epoch 11 train_loss=3.2017 val_mae=2.7570 (59.0s)
+- [2026-08-17 02:58:18] [gwn_predefined] Training finished after 13 epochs, 8.7 min total
+- [2026-08-17 02:58:18] [gwn_predefined] Merged pre-resume history (4 epochs) with newly-run epochs -- full curve now 12 epochs
+- [2026-08-17 02:58:18] [gwn_predefined] Training complete: 13 epochs, 8.7 min total, best_val_mae=2.7570221424102783, checkpoint=C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\results\gwn_predefined\checkpoints\best-epoch=11-val_mae=2.7570.ckpt
+- [2026-08-17 03:02:13] [gwn_predefined] Evaluation pass over 108 test batches complete in 235.1s
+- [2026-08-17 03:02:15] [gwn_predefined] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\gwn_predefined (overall 60min MAE=3.995 mph)
+- [2026-08-17 03:02:15] [gwn_predefined] === Q2 GWN (predefined only): RESUME COMPLETE. Summary: {'experiment': 'gwn_predefined', 'total_training_seconds': 19027.584419488907, 'this_call_seconds': 523.2327382564545, 'epochs_run': 12, 'epochs_run_this_call': 13, 'resumed_from_checkpoint': 'results/gwn_predefined/checkpoints\\best-epoch=2-val_mae=2.9361.ckpt', 'seconds_per_epoch_avg': 1585.632034957409, 'best_val_mae': 2.7570221424102783, 'best_checkpoint': 'C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\gwn_predefined\\checkpoints\\best-epoch=11-val_mae=2.7570.ckpt', 'early_stopped': False, 'max_epochs_configured': 12, 'early_stopping_patience': 5, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-17 03:02:22] [gwn_adaptive] === Q2 GWN (predefined+adaptive): RESUMING from results/gwn_adaptive/checkpoints\best-epoch=2-val_mae=2.8304.ckpt (epoch 2, new ceiling max_epochs=12, patience=5, now on GPU) ===
+- [2026-08-17 03:02:23] [gwn_adaptive] Building predictor (lr=0.001, max_epochs=12, seed=42)
+- [2026-08-17 03:02:23] [gwn_adaptive] Resuming from checkpoint results/gwn_adaptive/checkpoints\best-epoch=2-val_mae=2.8304.ckpt (new ceiling max_epochs=12)
+- [2026-08-17 03:02:24] [gwn_adaptive] Training started (max_epochs=12, accelerator=CUDAAccelerator)
+- [2026-08-17 03:03:29] [gwn_adaptive] epoch 3 val_mae=2.8821 (64.7s)
+- [2026-08-17 03:04:34] [gwn_adaptive] epoch 4 train_loss=3.2280 val_mae=2.8106 (64.1s)
+- [2026-08-17 03:05:38] [gwn_adaptive] epoch 5 train_loss=3.1783 val_mae=2.7487 (64.2s)
+- [2026-08-17 03:06:42] [gwn_adaptive] epoch 6 train_loss=3.1358 val_mae=2.8010 (64.2s)
+- [2026-08-17 03:07:47] [gwn_adaptive] epoch 7 train_loss=3.1043 val_mae=2.6777 (64.4s)
+- [2026-08-17 03:08:51] [gwn_adaptive] epoch 8 train_loss=3.0721 val_mae=2.6560 (64.4s)
+- [2026-08-17 03:09:55] [gwn_adaptive] epoch 9 train_loss=3.0458 val_mae=2.6787 (64.4s)
+- [2026-08-17 03:11:00] [gwn_adaptive] epoch 10 train_loss=3.0272 val_mae=2.6406 (64.5s)
+- [2026-08-17 03:12:05] [gwn_adaptive] epoch 11 train_loss=3.0043 val_mae=2.6228 (64.8s)
+- [2026-08-17 03:12:05] [gwn_adaptive] Training finished after 13 epochs, 9.7 min total
+- [2026-08-17 03:12:05] [gwn_adaptive] Merged pre-resume history (4 epochs) with newly-run epochs -- full curve now 12 epochs
+- [2026-08-17 03:12:05] [gwn_adaptive] Training complete: 13 epochs, 9.7 min total, best_val_mae=2.6228384971618652, checkpoint=C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\results\gwn_adaptive\checkpoints\best-epoch=11-val_mae=2.6228.ckpt
+- [2026-08-17 03:16:30] [gwn_adaptive] Evaluation pass over 108 test batches complete in 265.3s
+- [2026-08-17 03:16:32] [gwn_adaptive] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\gwn_adaptive (overall 60min MAE=3.665 mph)
+- [2026-08-17 03:16:32] [gwn_adaptive] Saved learned adjacency matrix ((207, 207)) to results/gwn_adaptive/learned_adjacency.npy (resumed run)
+- [2026-08-17 03:16:32] [gwn_adaptive] === Q2 GWN (predefined+adaptive): RESUME COMPLETE. Summary: {'experiment': 'gwn_adaptive', 'total_training_seconds': 21121.753965854645, 'this_call_seconds': 581.7462854385376, 'epochs_run': 12, 'epochs_run_this_call': 13, 'resumed_from_checkpoint': 'results/gwn_adaptive/checkpoints\\best-epoch=2-val_mae=2.8304.ckpt', 'seconds_per_epoch_avg': 1760.1461638212204, 'best_val_mae': 2.6228384971618652, 'best_checkpoint': 'C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\gwn_adaptive\\checkpoints\\best-epoch=11-val_mae=2.6228.ckpt', 'early_stopped': False, 'max_epochs_configured': 12, 'early_stopping_patience': 5, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-17 03:16:39] [agcrn] === Q3 AGCRN: RESUMING from results/agcrn/checkpoints\best-epoch=12-val_mae=2.7325.ckpt (epoch 12, new ceiling max_epochs=25, patience=8, now on GPU) ===
+- [2026-08-17 03:16:41] [agcrn] Building predictor (lr=0.001, max_epochs=25, seed=42)
+- [2026-08-17 03:16:41] [agcrn] Resuming from checkpoint results/agcrn/checkpoints\best-epoch=12-val_mae=2.7325.ckpt (new ceiling max_epochs=25)
+- [2026-08-17 03:16:41] [agcrn] Training started (max_epochs=25, accelerator=CUDAAccelerator)
+- [2026-08-17 03:17:12] [agcrn] epoch 13 val_mae=2.7285 (30.7s)
+- [2026-08-17 03:17:43] [agcrn] epoch 14 train_loss=3.0227 val_mae=2.7360 (31.0s)
+- [2026-08-17 03:18:14] [agcrn] epoch 15 train_loss=3.0146 val_mae=2.7233 (30.2s)
+- [2026-08-17 03:18:44] [agcrn] epoch 16 train_loss=3.0059 val_mae=2.7223 (30.3s)
+- [2026-08-17 03:19:14] [agcrn] epoch 17 train_loss=2.9931 val_mae=2.7330 (30.0s)
+- [2026-08-17 03:19:45] [agcrn] epoch 18 train_loss=2.9821 val_mae=2.7075 (30.5s)
+- [2026-08-17 03:20:15] [agcrn] epoch 19 train_loss=2.9741 val_mae=2.7138 (30.6s)
+- [2026-08-17 03:20:45] [agcrn] epoch 20 train_loss=2.9658 val_mae=2.7097 (30.3s)
+- [2026-08-17 03:21:16] [agcrn] epoch 21 train_loss=2.9571 val_mae=2.7162 (30.4s)
+- [2026-08-17 03:21:46] [agcrn] epoch 22 train_loss=2.9466 val_mae=2.7171 (30.3s)
+- [2026-08-17 03:22:17] [agcrn] epoch 23 train_loss=2.9402 val_mae=2.7104 (30.6s)
+- [2026-08-17 03:22:17] [agcrn] Training finished after 25 epochs, 5.6 min total
+- [2026-08-17 03:22:17] [agcrn] Merged pre-resume history (10 epochs) with newly-run epochs -- full curve now 21 epochs
+- [2026-08-17 03:22:17] [agcrn] Training complete: 25 epochs, 5.6 min total, best_val_mae=2.7074668407440186, checkpoint=C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\results\agcrn\checkpoints\best-epoch=18-val_mae=2.7075.ckpt
+- [2026-08-17 03:23:37] [agcrn] Evaluation pass over 108 test batches complete in 79.9s
+- [2026-08-17 03:23:39] [agcrn] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\agcrn (overall 60min MAE=3.673 mph)
+- [2026-08-17 03:23:39] [agcrn] === Q3 AGCRN: RESUME COMPLETE. Summary: {'experiment': 'agcrn', 'total_training_seconds': 21686.80599284172, 'this_call_seconds': 335.8147656917572, 'epochs_run': 21, 'epochs_run_this_call': 25, 'resumed_from_checkpoint': 'results/agcrn/checkpoints\\best-epoch=12-val_mae=2.7325.ckpt', 'seconds_per_epoch_avg': 1032.705047278177, 'best_val_mae': 2.7074668407440186, 'best_checkpoint': 'C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\agcrn\\checkpoints\\best-epoch=18-val_mae=2.7075.ckpt', 'early_stopped': False, 'max_epochs_configured': 25, 'early_stopping_patience': 8, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-17 03:23:58] [gwn_predefined] === Q2 GWN (predefined only): RESUMING from results/gwn_predefined/checkpoints\best-epoch=11-val_mae=2.7570.ckpt (epoch 11, new ceiling max_epochs=45, patience=10, now on GPU) ===
+- [2026-08-17 03:23:59] [gwn_predefined] Building predictor (lr=0.001, max_epochs=45, seed=42)
+- [2026-08-17 03:24:00] [gwn_predefined] Resuming from checkpoint results/gwn_predefined/checkpoints\best-epoch=11-val_mae=2.7570.ckpt (new ceiling max_epochs=45)
+- [2026-08-17 03:24:00] [gwn_predefined] Training started (max_epochs=45, accelerator=CUDAAccelerator)
+- [2026-08-17 03:24:59] [gwn_predefined] epoch 12 val_mae=2.7840 (58.0s)
+- [2026-08-17 03:25:57] [gwn_predefined] epoch 13 train_loss=3.1565 val_mae=2.7932 (57.5s)
+- [2026-08-17 03:26:54] [gwn_predefined] epoch 14 train_loss=3.1483 val_mae=2.7310 (57.4s)
+- [2026-08-17 03:27:52] [gwn_predefined] epoch 15 train_loss=3.1294 val_mae=2.7566 (57.4s)
+- [2026-08-17 03:28:49] [gwn_predefined] epoch 16 train_loss=3.1172 val_mae=2.7303 (57.5s)
+- [2026-08-17 03:29:47] [gwn_predefined] epoch 17 train_loss=3.1009 val_mae=2.7297 (57.4s)
+- [2026-08-17 03:30:44] [gwn_predefined] epoch 18 train_loss=3.0901 val_mae=2.7600 (57.4s)
+- [2026-08-17 03:31:42] [gwn_predefined] epoch 19 train_loss=3.0773 val_mae=2.7052 (57.5s)
+- [2026-08-17 03:32:39] [gwn_predefined] epoch 20 train_loss=3.0685 val_mae=2.7138 (57.5s)
+- [2026-08-17 03:33:37] [gwn_predefined] epoch 21 train_loss=3.0575 val_mae=2.6850 (57.6s)
+- [2026-08-17 03:34:34] [gwn_predefined] epoch 22 train_loss=3.0492 val_mae=2.7327 (57.6s)
+- [2026-08-17 03:35:32] [gwn_predefined] epoch 23 train_loss=3.0390 val_mae=2.7559 (57.4s)
+- [2026-08-17 03:36:29] [gwn_predefined] epoch 24 train_loss=3.0320 val_mae=2.6976 (57.5s)
+- [2026-08-17 03:36:29] [gwn_predefined] Training finished after 26 epochs, 12.5 min total
+- [2026-08-17 03:36:29] [gwn_predefined] Merged pre-resume history (12 epochs) with newly-run epochs -- full curve now 25 epochs
+- [2026-08-17 03:36:29] [gwn_predefined] Training complete: 26 epochs, 12.5 min total, best_val_mae=2.685002326965332, checkpoint=C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\results\gwn_predefined\checkpoints\best-epoch=21-val_mae=2.6850.ckpt
+- [2026-08-17 03:40:25] [gwn_predefined] Evaluation pass over 108 test batches complete in 236.0s
+- [2026-08-17 03:40:27] [gwn_predefined] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\gwn_predefined (overall 60min MAE=3.873 mph)
+- [2026-08-17 03:40:27] [gwn_predefined] === Q2 GWN (predefined only): RESUME COMPLETE. Summary: {'experiment': 'gwn_predefined', 'total_training_seconds': 19777.22807908058, 'this_call_seconds': 749.6436595916748, 'epochs_run': 25, 'epochs_run_this_call': 26, 'resumed_from_checkpoint': 'results/gwn_predefined/checkpoints\\best-epoch=11-val_mae=2.7570.ckpt', 'seconds_per_epoch_avg': 791.0891231632232, 'best_val_mae': 2.685002326965332, 'best_checkpoint': 'C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\gwn_predefined\\checkpoints\\best-epoch=21-val_mae=2.6850.ckpt', 'early_stopped': True, 'max_epochs_configured': 45, 'early_stopping_patience': 10, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-17 03:40:34] [gwn_adaptive] === Q2 GWN (predefined+adaptive): RESUMING from results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt (epoch 11, new ceiling max_epochs=45, patience=10, now on GPU) ===
+- [2026-08-17 03:40:36] [gwn_adaptive] Building predictor (lr=0.001, max_epochs=45, seed=42)
+- [2026-08-17 03:40:36] [gwn_adaptive] Resuming from checkpoint results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt (new ceiling max_epochs=45)
+- [2026-08-17 03:40:37] [gwn_adaptive] Training started (max_epochs=45, accelerator=CUDAAccelerator)
+- [2026-08-17 03:41:42] [gwn_adaptive] epoch 12 val_mae=2.6432 (64.9s)
+- [2026-08-17 03:42:33] [gwn_adaptive] === Q2 GWN (predefined+adaptive): RESUMING from results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt (epoch 11, new ceiling max_epochs=25, patience=8, now on GPU) ===
+- [2026-08-17 03:42:35] [gwn_adaptive] Building predictor (lr=0.001, max_epochs=25, seed=42)
+- [2026-08-17 03:42:35] [gwn_adaptive] Resuming from checkpoint results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt (new ceiling max_epochs=25)
+- [2026-08-17 03:42:35] [gwn_adaptive] Training started (max_epochs=25, accelerator=CUDAAccelerator)
+- [2026-08-17 03:43:41] [gwn_adaptive] epoch 12 val_mae=2.6430 (65.0s)
+- [2026-08-17 03:44:46] [gwn_adaptive] epoch 13 train_loss=2.9679 val_mae=2.6289 (64.3s)
+- [2026-08-17 03:45:50] [gwn_adaptive] epoch 14 train_loss=2.9625 val_mae=2.6444 (64.3s)
+- [2026-08-17 03:45:50] [gwn_adaptive] Training finished after 16 epochs, 3.2 min total
+- [2026-08-17 03:45:50] [gwn_adaptive] Merged pre-resume history (12 epochs) with newly-run epochs -- full curve now 15 epochs
+- [2026-08-17 03:45:50] [gwn_adaptive] Training complete: 16 epochs, 3.3 min total, best_val_mae=2.6228384971618652, checkpoint=C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\results\gwn_adaptive\checkpoints\best-epoch=11-val_mae=2.6228.ckpt
+- [2026-08-17 03:50:16] [gwn_adaptive] Evaluation pass over 108 test batches complete in 265.6s
+- [2026-08-17 03:50:18] [gwn_adaptive] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\gwn_adaptive (overall 60min MAE=3.650 mph)
+- [2026-08-17 03:50:18] [gwn_adaptive] Saved learned adjacency matrix ((207, 207)) to results/gwn_adaptive/learned_adjacency.npy (resumed run)
+- [2026-08-17 03:50:18] [gwn_adaptive] === Q2 GWN (predefined+adaptive): RESUME COMPLETE. Summary: {'experiment': 'gwn_adaptive', 'total_training_seconds': 21316.86047911644, 'this_call_seconds': 195.10651326179504, 'epochs_run': 15, 'epochs_run_this_call': 16, 'resumed_from_checkpoint': 'results/gwn_adaptive/checkpoints\\best-epoch=11-val_mae=2.6228.ckpt', 'seconds_per_epoch_avg': 1421.124031941096, 'best_val_mae': 2.6228384971618652, 'best_checkpoint': 'C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\gwn_adaptive\\checkpoints\\best-epoch=11-val_mae=2.6228.ckpt', 'early_stopped': True, 'max_epochs_configured': 25, 'early_stopping_patience': 8, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-17 03:56:50] [tts] === Q1 TTS: RESUMING from results/tts/checkpoints\best-epoch=28-val_mae=2.9590.ckpt (epoch 28, new ceiling max_epochs=100, patience=15, now on GPU) ===
+- [2026-08-17 03:56:52] [tts] Building predictor (lr=0.001, max_epochs=100, seed=42)
+- [2026-08-17 03:56:52] [tts] Resuming from checkpoint results/tts/checkpoints\best-epoch=28-val_mae=2.9590.ckpt (new ceiling max_epochs=100)
+- [2026-08-17 03:56:52] [tts] Training started (max_epochs=100, accelerator=CUDAAccelerator)
+- [2026-08-17 03:57:00] [tts] epoch 29 val_mae=2.9735 (7.3s)
+- [2026-08-17 03:57:07] [tts] epoch 30 train_loss=3.3974 val_mae=2.9539 (7.2s)
+- [2026-08-17 03:57:14] [tts] epoch 31 train_loss=3.3970 val_mae=2.9591 (7.0s)
+- [2026-08-17 03:57:22] [tts] epoch 32 train_loss=3.3965 val_mae=2.9560 (7.1s)
+- [2026-08-17 03:57:29] [tts] epoch 33 train_loss=3.3925 val_mae=2.9480 (7.1s)
+- [2026-08-17 03:57:36] [tts] epoch 34 train_loss=3.3893 val_mae=2.9531 (7.1s)
+- [2026-08-17 03:57:43] [tts] epoch 35 train_loss=3.3878 val_mae=2.9524 (7.0s)
+- [2026-08-17 03:57:50] [tts] epoch 36 train_loss=3.3872 val_mae=2.9492 (7.1s)
+- [2026-08-17 03:57:57] [tts] epoch 37 train_loss=3.3858 val_mae=2.9618 (7.2s)
+- [2026-08-17 03:58:04] [tts] epoch 38 train_loss=3.3837 val_mae=2.9497 (7.0s)
+- [2026-08-17 03:58:11] [tts] epoch 39 train_loss=3.3839 val_mae=2.9480 (7.0s)
+- [2026-08-17 03:58:18] [tts] epoch 40 train_loss=3.3824 val_mae=2.9469 (7.0s)
+- [2026-08-17 03:58:25] [tts] epoch 41 train_loss=3.3781 val_mae=2.9639 (7.2s)
+- [2026-08-17 03:58:32] [tts] epoch 42 train_loss=3.3783 val_mae=2.9605 (7.0s)
+- [2026-08-17 03:58:39] [tts] epoch 43 train_loss=3.3764 val_mae=2.9462 (7.0s)
+- [2026-08-17 03:58:46] [tts] epoch 44 train_loss=3.3770 val_mae=2.9482 (7.1s)
+- [2026-08-17 03:58:54] [tts] epoch 45 train_loss=3.3736 val_mae=2.9538 (7.1s)
+- [2026-08-17 03:59:01] [tts] epoch 46 train_loss=3.3744 val_mae=2.9465 (7.4s)
+- [2026-08-17 03:59:08] [tts] epoch 47 train_loss=3.3726 val_mae=2.9725 (7.0s)
+- [2026-08-17 03:59:15] [tts] epoch 48 train_loss=3.3706 val_mae=2.9411 (7.0s)
+- [2026-08-17 03:59:22] [tts] epoch 49 train_loss=3.3697 val_mae=2.9438 (7.2s)
+- [2026-08-17 03:59:29] [tts] epoch 50 train_loss=3.3672 val_mae=2.9414 (7.1s)
+- [2026-08-17 03:59:37] [tts] epoch 51 train_loss=3.3693 val_mae=2.9432 (7.1s)
+- [2026-08-17 03:59:44] [tts] epoch 52 train_loss=3.3647 val_mae=2.9480 (7.0s)
+- [2026-08-17 03:59:51] [tts] epoch 53 train_loss=3.3652 val_mae=2.9454 (7.2s)
+- [2026-08-17 03:59:58] [tts] epoch 54 train_loss=3.3645 val_mae=2.9398 (7.1s)
+- [2026-08-17 04:00:05] [tts] epoch 55 train_loss=3.3653 val_mae=2.9449 (7.1s)
+- [2026-08-17 04:00:09] [build_all_figures] Building whatever figures/tables the currently-available results support...
+- [2026-08-17 04:00:12] [tts] epoch 56 train_loss=3.3635 val_mae=2.9511 (7.3s)
+- [2026-08-17 04:00:17] [build_all_figures] fig01_adjacency_heatmap.png done (predefined graph, always available)
+- [2026-08-17 04:00:17] [build_all_figures] Models with overall metrics available: ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-17 04:00:18] [build_all_figures] Overall performance table + horizon-trend figures done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-17 04:00:18] [build_all_figures] fig03_tts_station{1,2,3}_actual_vs_predicted.png done
+- [2026-08-17 04:00:19] [build_all_figures] fig05_convergence_curves.png done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-17 04:00:19] [build_all_figures] Training time figure/table done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-17 04:00:20] [build_all_figures] Per-station comparison figures done for ['TTS', 'GWN (predefined)', 'GWN (predefined+adaptive)', 'AGCRN']
+- [2026-08-17 04:00:20] [tts] epoch 57 train_loss=3.3625 val_mae=2.9523 (7.6s)
+- [2026-08-17 04:00:21] [build_all_figures] fig07/fig08 + top15_influential_nodes.csv done
+- [2026-08-17 04:00:21] [build_all_figures] build_all_figures pass complete.
+- [2026-08-17 04:00:27] [tts] epoch 58 train_loss=3.3621 val_mae=2.9515 (7.4s)
+- [2026-08-17 04:00:35] [tts] epoch 59 train_loss=3.3600 val_mae=2.9401 (7.1s)
+- [2026-08-17 04:00:42] [tts] epoch 60 train_loss=3.3603 val_mae=2.9331 (7.2s)
+- [2026-08-17 04:00:49] [tts] epoch 61 train_loss=3.3574 val_mae=2.9345 (7.2s)
+- [2026-08-17 04:00:53] [build_tables] Wrote report/tables/overall_performance.md
+- [2026-08-17 04:00:53] [build_tables] Wrote report/tables/per_station.md
+- [2026-08-17 04:00:53] [build_tables] Wrote report/tables/training_time.md
+- [2026-08-17 04:00:53] [build_tables] Wrote report/tables/top15_influential_nodes.md
+- [2026-08-17 04:00:56] [tts] epoch 62 train_loss=3.3578 val_mae=2.9400 (7.5s)
+- [2026-08-17 04:01:04] [tts] epoch 63 train_loss=3.3556 val_mae=2.9454 (7.2s)
+- [2026-08-17 04:01:11] [tts] epoch 64 train_loss=3.3553 val_mae=2.9407 (7.3s)
+- [2026-08-17 04:01:18] [tts] epoch 65 train_loss=3.3541 val_mae=2.9356 (7.2s)
+- [2026-08-17 04:01:25] [tts] epoch 66 train_loss=3.3549 val_mae=2.9320 (7.2s)
+- [2026-08-17 04:01:32] [tts] epoch 67 train_loss=3.3529 val_mae=2.9356 (7.0s)
+- [2026-08-17 04:01:39] [tts] epoch 68 train_loss=3.3532 val_mae=2.9332 (7.0s)
+- [2026-08-17 04:01:46] [tts] epoch 69 train_loss=3.3513 val_mae=2.9385 (7.0s)
+- [2026-08-17 04:01:54] [tts] epoch 70 train_loss=3.3510 val_mae=2.9408 (7.1s)
+- [2026-08-17 04:02:01] [tts] epoch 71 train_loss=3.3511 val_mae=2.9380 (7.1s)
+- [2026-08-17 04:02:08] [tts] epoch 72 train_loss=3.3500 val_mae=2.9354 (7.2s)
+- [2026-08-17 04:02:15] [tts] epoch 73 train_loss=3.3493 val_mae=2.9555 (7.2s)
+- [2026-08-17 04:02:22] [tts] epoch 74 train_loss=3.3482 val_mae=2.9326 (7.2s)
+- [2026-08-17 04:02:29] [tts] epoch 75 train_loss=3.3482 val_mae=2.9298 (7.2s)
+- [2026-08-17 04:02:36] [tts] epoch 76 train_loss=3.3456 val_mae=2.9364 (7.0s)
+- [2026-08-17 04:02:43] [tts] epoch 77 train_loss=3.3457 val_mae=2.9453 (7.0s)
+- [2026-08-17 04:02:51] [tts] epoch 78 train_loss=3.3472 val_mae=2.9319 (7.1s)
+- [2026-08-17 04:02:58] [tts] epoch 79 train_loss=3.3450 val_mae=2.9312 (7.2s)
+- [2026-08-17 04:03:05] [tts] epoch 80 train_loss=3.3461 val_mae=2.9327 (7.0s)
+- [2026-08-17 04:03:12] [tts] epoch 81 train_loss=3.3444 val_mae=2.9291 (7.1s)
+- [2026-08-17 04:03:19] [tts] epoch 82 train_loss=3.3453 val_mae=2.9340 (7.0s)
+- [2026-08-17 04:03:26] [tts] epoch 83 train_loss=3.3431 val_mae=2.9485 (7.3s)
+- [2026-08-17 04:03:33] [tts] epoch 84 train_loss=3.3426 val_mae=2.9302 (7.0s)
+- [2026-08-17 04:03:40] [tts] epoch 85 train_loss=3.3419 val_mae=2.9296 (7.0s)
+- [2026-08-17 04:03:47] [tts] epoch 86 train_loss=3.3416 val_mae=2.9321 (7.0s)
+- [2026-08-17 04:03:55] [tts] epoch 87 train_loss=3.3395 val_mae=2.9298 (7.2s)
+- [2026-08-17 04:04:02] [tts] epoch 88 train_loss=3.3409 val_mae=2.9402 (7.2s)
+- [2026-08-17 04:04:09] [tts] epoch 89 train_loss=3.3396 val_mae=2.9463 (7.0s)
+- [2026-08-17 04:04:16] [tts] epoch 90 train_loss=3.3402 val_mae=2.9267 (7.1s)
+- [2026-08-17 04:04:23] [tts] epoch 91 train_loss=3.3384 val_mae=2.9526 (7.1s)
+- [2026-08-17 04:04:30] [tts] epoch 92 train_loss=3.3387 val_mae=2.9319 (7.1s)
+- [2026-08-17 04:04:37] [tts] epoch 93 train_loss=3.3368 val_mae=2.9242 (7.1s)
+- [2026-08-17 04:04:44] [tts] epoch 94 train_loss=3.3368 val_mae=2.9340 (7.1s)
+- [2026-08-17 04:04:52] [tts] epoch 95 train_loss=3.3381 val_mae=2.9260 (7.1s)
+- [2026-08-17 04:04:59] [tts] epoch 96 train_loss=3.3384 val_mae=2.9248 (7.1s)
+- [2026-08-17 04:05:06] [tts] epoch 97 train_loss=3.3350 val_mae=2.9402 (7.1s)
+- [2026-08-17 04:05:13] [tts] epoch 98 train_loss=3.3362 val_mae=2.9319 (7.0s)
+- [2026-08-17 04:05:20] [tts] epoch 99 train_loss=3.3361 val_mae=2.9247 (7.0s)
+- [2026-08-17 04:05:20] [tts] Training finished after 101 epochs, 8.5 min total
+- [2026-08-17 04:05:20] [tts] Merged pre-resume history (30 epochs) with newly-run epochs -- full curve now 100 epochs
+- [2026-08-17 04:05:20] [tts] Training complete: 101 epochs, 8.5 min total, best_val_mae=2.924220561981201, checkpoint=C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\results\tts\checkpoints\best-epoch=93-val_mae=2.9242.ckpt
+- [2026-08-17 04:05:31] [tts] Evaluation pass over 108 test batches complete in 10.7s
+- [2026-08-17 04:05:33] [tts] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\tts (overall 60min MAE=4.383 mph)
+- [2026-08-17 04:05:33] [tts] === Q1 TTS: RESUME COMPLETE. Summary: {'experiment': 'tts', 'total_training_seconds': 698.5671391487122, 'this_call_seconds': 507.73206424713135, 'epochs_run': 100, 'epochs_run_this_call': 101, 'resumed_from_checkpoint': 'results/tts/checkpoints\\best-epoch=28-val_mae=2.9590.ckpt', 'seconds_per_epoch_avg': 6.985671391487122, 'best_val_mae': 2.924220561981201, 'best_checkpoint': 'C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\tts\\checkpoints\\best-epoch=93-val_mae=2.9242.ckpt', 'early_stopped': False, 'max_epochs_configured': 100, 'early_stopping_patience': 15, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-17 04:05:39] [gwn_predefined] === Q2 GWN (predefined only): RESUMING from results/gwn_predefined/checkpoints\best-epoch=21-val_mae=2.6850.ckpt (epoch 21, new ceiling max_epochs=60, patience=12, now on GPU) ===
+- [2026-08-17 04:05:41] [gwn_predefined] Building predictor (lr=0.001, max_epochs=60, seed=42)
+- [2026-08-17 04:05:41] [gwn_predefined] Resuming from checkpoint results/gwn_predefined/checkpoints\best-epoch=21-val_mae=2.6850.ckpt (new ceiling max_epochs=60)
+- [2026-08-17 04:05:41] [gwn_predefined] Training started (max_epochs=60, accelerator=CUDAAccelerator)
+- [2026-08-17 04:06:40] [gwn_predefined] epoch 22 val_mae=2.7199 (58.0s)
+- [2026-08-17 04:07:38] [gwn_predefined] epoch 23 train_loss=3.0343 val_mae=2.7093 (57.4s)
+- [2026-08-17 04:08:35] [gwn_predefined] epoch 24 train_loss=3.0341 val_mae=2.7442 (57.6s)
+- [2026-08-17 04:09:33] [gwn_predefined] epoch 25 train_loss=3.0268 val_mae=2.7034 (57.6s)
+- [2026-08-17 04:10:31] [gwn_predefined] epoch 26 train_loss=3.0161 val_mae=2.6998 (58.4s)
+- [2026-08-17 04:11:29] [gwn_predefined] epoch 27 train_loss=3.0058 val_mae=2.7004 (57.7s)
+- [2026-08-17 04:12:27] [gwn_predefined] epoch 28 train_loss=3.0012 val_mae=2.7270 (57.7s)
+- [2026-08-17 04:13:25] [gwn_predefined] epoch 29 train_loss=2.9946 val_mae=2.6846 (57.7s)
+- [2026-08-17 04:14:22] [gwn_predefined] epoch 30 train_loss=2.9887 val_mae=2.6946 (57.6s)
+- [2026-08-17 04:15:20] [gwn_predefined] epoch 31 train_loss=2.9833 val_mae=2.6724 (57.7s)
+- [2026-08-17 04:16:18] [gwn_predefined] epoch 32 train_loss=2.9771 val_mae=2.7023 (58.2s)
+- [2026-08-17 04:17:17] [gwn_predefined] epoch 33 train_loss=2.9737 val_mae=2.7582 (58.6s)
+- [2026-08-17 04:18:15] [gwn_predefined] epoch 34 train_loss=2.9715 val_mae=2.6856 (57.7s)
+- [2026-08-17 04:19:12] [gwn_predefined] epoch 35 train_loss=2.9625 val_mae=2.7076 (57.8s)
+- [2026-08-17 04:20:10] [gwn_predefined] epoch 36 train_loss=2.9649 val_mae=2.6723 (57.7s)
+- [2026-08-17 04:21:08] [gwn_predefined] epoch 37 train_loss=2.9552 val_mae=2.6999 (58.3s)
+- [2026-08-17 04:22:06] [gwn_predefined] epoch 38 train_loss=2.9459 val_mae=2.6940 (57.9s)
+- [2026-08-17 04:23:04] [gwn_predefined] epoch 39 train_loss=2.9482 val_mae=2.6963 (57.8s)
+- [2026-08-17 04:24:02] [gwn_predefined] epoch 40 train_loss=2.9479 val_mae=2.6910 (57.9s)

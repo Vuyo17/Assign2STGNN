@@ -4,7 +4,7 @@
 
 Progress: **9/28** stages complete.
 
-Last regenerated: 2026-08-17 01:46:53
+Last regenerated: 2026-08-17 04:05:33
 
 ## Setup
 
@@ -14,16 +14,16 @@ Last regenerated: 2026-08-17 01:46:53
 
 ## Q1 TimeThenSpace
 
-- ✅ **tts_train**: TTS trained to convergence (early stopping) -- Deliberately stopped after 3 epochs (deadline resource reallocation)
-- ✅ **tts_eval**: TTS evaluated: overall + per-horizon + per-node metrics -- 60min MAE=4.738 (from 3-epoch checkpoint)
+- ✅ **tts_train**: TTS trained to convergence (early stopping) -- 101 epochs, 8.5 min, best_val_mae=2.924220561981201
+- ✅ **tts_eval**: TTS evaluated: overall + per-horizon + per-node metrics -- 60min MAE=4.383 (resumed run, GPU)
 - ⬜ **fig_adjacency_heatmap**: Predefined adjacency matrix heatmap
 - ⬜ **fig_tts_overall**: TTS overall performance table + horizon-trend chart
 - ⬜ **fig_tts_per_station**: TTS actual-vs-predicted, sensors 1-3
 
 ## Q2 GraphWaveNet
 
-- ✅ **gwn_predefined_train**: GWN (predefined graph only) trained -- 5 epochs, 308.4 min, best_val_mae=2.9360733032226562
-- ✅ **gwn_adaptive_train**: GWN (predefined + adaptive) trained -- 5 epochs, 342.3 min, best_val_mae=2.8303914070129395
+- ✅ **gwn_predefined_train**: GWN (predefined graph only) trained -- 26 epochs, 12.5 min, best_val_mae=2.685002326965332
+- ✅ **gwn_adaptive_train**: GWN (predefined + adaptive) trained -- 16 epochs, 3.3 min, best_val_mae=2.6228384971618652
 - ⬜ **gwn_eval**: Both GWN configs evaluated: overall + per-horizon + per-node
 - ⬜ **fig_gwn_vs_tts**: TTS vs GWN-predefined vs GWN-adaptive comparison
 - ⬜ **fig_convergence**: Training/validation convergence curves (TTS+GWN)
@@ -36,8 +36,8 @@ Last regenerated: 2026-08-17 01:46:53
 ## Q3 AGCRN
 
 - ⬜ **agcrn_epoch_selection**: Epoch-selection experiment + justification
-- ✅ **agcrn_train**: AGCRN final training run -- Stopped by user after 13 real epochs total (best: epoch 12, val_mae=2.7325) to move to a faster machine
-- ✅ **agcrn_eval**: AGCRN evaluated: overall + per-horizon + per-node -- 60min MAE=3.759
+- ✅ **agcrn_train**: AGCRN final training run -- 25 epochs, 5.6 min, best_val_mae=2.7074668407440186
+- ✅ **agcrn_eval**: AGCRN evaluated: overall + per-horizon + per-node -- 60min MAE=3.673 (resumed run, GPU)
 - ⬜ **fig_agcrn_vs_gwn**: AGCRN vs GWN performance/training-time comparison
 - ⬜ **fig_agcrn_per_station**: AGCRN vs best GWN, per-station (nodes 1-3)
 - ⬜ **weather_paper_comparison**: Written reflection vs Gaibie et al. 2024 weather paper

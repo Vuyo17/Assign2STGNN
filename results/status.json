@@ -45,50 +45,50 @@
     "tts_train": {
       "state": "done",
       "started": "2026-08-16 17:09:21",
-      "finished": "2026-08-16 17:50:57",
-      "notes": "Deliberately stopped after 3 epochs (deadline resource reallocation)"
+      "finished": "2026-08-17 04:05:20",
+      "notes": "101 epochs, 8.5 min, best_val_mae=2.924220561981201"
     },
     "gwn_predefined_train": {
-      "state": "done",
+      "state": "running",
       "started": "2026-08-16 17:09:52",
-      "finished": "2026-08-16 22:59:44",
-      "notes": "5 epochs, 308.4 min, best_val_mae=2.9360733032226562"
+      "finished": "2026-08-17 03:36:29",
+      "notes": "26 epochs, 12.5 min, best_val_mae=2.685002326965332"
     },
     "gwn_adaptive_train": {
       "state": "done",
       "started": "2026-08-16 17:10:25",
-      "finished": "2026-08-16 23:33:53",
-      "notes": "5 epochs, 342.3 min, best_val_mae=2.8303914070129395"
+      "finished": "2026-08-17 03:45:50",
+      "notes": "16 epochs, 3.3 min, best_val_mae=2.6228384971618652"
     },
     "agcrn_train": {
       "state": "done",
       "started": "2026-08-16 17:10:39",
-      "finished": "2026-08-17 01:46:53",
-      "notes": "Stopped by user after 13 real epochs total (best: epoch 12, val_mae=2.7325) to move to a faster machine"
+      "finished": "2026-08-17 03:22:17",
+      "notes": "25 epochs, 5.6 min, best_val_mae=2.7074668407440186"
     },
     "tts_eval": {
       "state": "done",
       "started": "2026-08-16 17:50:48",
-      "finished": "2026-08-16 17:50:57",
-      "notes": "60min MAE=4.738 (from 3-epoch checkpoint)"
+      "finished": "2026-08-17 04:05:33",
+      "notes": "60min MAE=4.383 (resumed run, GPU)"
     },
     "gwn_predefined_eval": {
       "state": "done",
       "started": "2026-08-16 22:59:44",
-      "finished": "2026-08-16 23:07:24",
-      "notes": "60min MAE=4.384"
+      "finished": "2026-08-17 03:40:27",
+      "notes": "60min MAE=3.873 (resumed run, GPU)"
     },
     "gwn_adaptive_eval": {
       "state": "done",
       "started": "2026-08-16 23:33:53",
-      "finished": "2026-08-16 23:39:42",
-      "notes": "60min MAE=4.102"
+      "finished": "2026-08-17 03:50:18",
+      "notes": "60min MAE=3.650 (resumed run, GPU)"
     },
     "agcrn_eval": {
       "state": "done",
       "started": "2026-08-16 23:48:04",
-      "finished": "2026-08-16 23:49:14",
-      "notes": "60min MAE=3.759"
+      "finished": "2026-08-17 03:23:39",
+      "notes": "60min MAE=3.673 (resumed run, GPU)"
     }
   }
 }

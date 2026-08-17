@@ -66,6 +66,7 @@ pyparsing==3.3.2
 pypdf==6.16.1
 python-bidi==0.6.11
 python-dateutil==2.9.0.post0
+python-docx==1.2.0
 pytorch-lightning==2.6.5
 pytz==2026.3.post1
 PyYAML==6.0.3
@@ -80,14 +81,15 @@ six==1.17.0
 svglib==2.2.0
 sympy==1.14.0
 tables==3.11.1
+tabulate==0.10.0
 tensorboard==2.21.0
 tensorboard-data-server==0.7.2
 threadpoolctl==3.6.0
 tinycss2==1.5.1
-torch==2.9.0+cpu
+torch==2.9.0+cu128
 torch-geometric==2.8.0.post1
-torch_scatter==2.1.2+pt29cpu
-torch_sparse==0.6.18+pt29cpu
+torch_scatter==2.1.2+pt29cu128
+torch_sparse==0.6.18+pt29cu128
 torch_spatiotemporal==0.9.5
 torchmetrics==1.9.0
 tqdm==4.70.0

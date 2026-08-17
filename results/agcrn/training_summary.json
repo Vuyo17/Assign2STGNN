@@ -1,13 +1,16 @@
 {
   "experiment": "agcrn",
-  "total_training_seconds": 21350.991227149963,
-  "epochs_run": 11,
-  "seconds_per_epoch_avg": 1940.9992024681785,
-  "best_val_mae": 2.7526419162750244,
-  "best_checkpoint": "C:\\Users\\Student\\Downloads\\Assign2STGNN\\results\\agcrn\\checkpoints\\best-epoch=9-val_mae=2.7526.ckpt",
+  "total_training_seconds": 21686.80599284172,
+  "this_call_seconds": 335.8147656917572,
+  "epochs_run": 21,
+  "epochs_run_this_call": 25,
+  "resumed_from_checkpoint": "results/agcrn/checkpoints\\best-epoch=12-val_mae=2.7325.ckpt",
+  "seconds_per_epoch_avg": 1032.705047278177,
+  "best_val_mae": 2.7074668407440186,
+  "best_checkpoint": "C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\agcrn\\checkpoints\\best-epoch=18-val_mae=2.7075.ckpt",
   "early_stopped": false,
-  "max_epochs_configured": 10,
-  "early_stopping_patience": 5,
+  "max_epochs_configured": 25,
+  "early_stopping_patience": 8,
   "learning_rate": 0.001,
   "seed": 42
 }

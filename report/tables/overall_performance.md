@@ -1,14 +1,14 @@
 | Model                     | Horizon   |   MSE (mph²) |   MAE (mph) |   MAPE (%) |
 |:--------------------------|:----------|-------------:|------------:|-----------:|
-| TTS                       | 15 min    |       35.191 |       3.066 |      8.220 |
-| TTS                       | 30 min    |       55.003 |       3.703 |     10.420 |
-| TTS                       | 60 min    |       88.201 |       4.738 |     14.030 |
-| GWN (predefined)          | 15 min    |       31.338 |       2.973 |      7.530 |
-| GWN (predefined)          | 30 min    |       47.050 |       3.529 |      9.570 |
-| GWN (predefined)          | 60 min    |       73.192 |       4.384 |     12.790 |
-| GWN (predefined+adaptive) | 15 min    |       29.699 |       2.928 |      7.300 |
-| GWN (predefined+adaptive) | 30 min    |       42.700 |       3.403 |      8.880 |
-| GWN (predefined+adaptive) | 60 min    |       62.525 |       4.102 |     10.980 |
-| AGCRN                     | 15 min    |       31.039 |       2.895 |      7.750 |
-| AGCRN                     | 30 min    |       43.148 |       3.297 |      9.430 |
-| AGCRN                     | 60 min    |       59.034 |       3.759 |     11.290 |
+| TTS                       | 15 min    |       33.444 |       2.967 |      7.910 |
+| TTS                       | 30 min    |       51.314 |       3.566 |     10.140 |
+| TTS                       | 60 min    |       80.221 |       4.483 |     13.840 |
+| GWN (predefined)          | 15 min    |       28.252 |       2.792 |      7.200 |
+| GWN (predefined)          | 30 min    |       41.773 |       3.252 |      8.950 |
+| GWN (predefined)          | 60 min    |       61.930 |       3.873 |     11.320 |
+| GWN (predefined+adaptive) | 15 min    |       27.277 |       2.774 |      7.350 |
+| GWN (predefined+adaptive) | 30 min    |       38.775 |       3.170 |      8.860 |
+| GWN (predefined+adaptive) | 60 min    |       53.810 |       3.650 |     10.730 |
+| AGCRN                     | 15 min    |       30.337 |       2.850 |      7.630 |
+| AGCRN                     | 30 min    |       42.475 |       3.238 |      9.140 |
+| AGCRN                     | 60 min    |       57.561 |       3.673 |     10.760 |

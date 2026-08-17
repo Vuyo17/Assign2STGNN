@@ -1,6 +1,6 @@
-| Model                     |   Epochs run | Early stopped   | Total time (min)   | Avg s/epoch   |   Best val MAE |
-|:--------------------------|-------------:|:----------------|:-------------------|:--------------|---------------:|
-| TTS                       |            3 | N/A             | N/A*               | N/A*          |          3.077 |
-| GWN (predefined)          |            5 | False           | 308.4              | 3700.9        |          2.936 |
-| GWN (predefined+adaptive) |            5 | False           | 342.3              | 4108.0        |          2.830 |
-| AGCRN                     |           11 | False           | 355.8              | 1941.0        |          2.753 |
+| Model                     |   Epochs run | Early stopped   |   Total time (min) |   Avg s/epoch |   Best val MAE |
+|:--------------------------|-------------:|:----------------|-------------------:|--------------:|---------------:|
+| TTS                       |           30 | False           |              3.200 |         6.400 |          2.959 |
+| GWN (predefined)          |           25 | True            |            329.600 |       791.100 |          2.685 |
+| GWN (predefined+adaptive) |           15 | True            |            355.300 |      1421.100 |          2.623 |
+| AGCRN                     |           21 | False           |            361.400 |      1032.700 |          2.708 |

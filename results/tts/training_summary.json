@@ -1,9 +1,16 @@
 {
   "experiment": "tts",
-  "epochs_run": 3,
-  "best_val_mae": 3.0766232013702397,
-  "best_checkpoint": "results/tts/checkpoints\\best-epoch=2-val_mae=3.0766.ckpt",
-  "total_training_seconds": null,
-  "seconds_per_epoch_avg": null,
-  "note": "Training was deliberately stopped early (after 3 epochs) to reallocate CPU capacity to the more expensive GWN/AGCRN runs under the submission deadline -- see PROGRESS_LOG.md ~17:46. total_training_seconds is not available because the live process (which was tracking it) was killed rather than finishing normally; per-epoch times ARE available in PROGRESS_LOG.md's [tts] entries (epoch 0: 232.2s, epoch 1: 490.5s, epoch 2: 494.9s -- all real, logged during training)."
+  "total_training_seconds": 698.5671391487122,
+  "this_call_seconds": 507.73206424713135,
+  "epochs_run": 100,
+  "epochs_run_this_call": 101,
+  "resumed_from_checkpoint": "results/tts/checkpoints\\best-epoch=28-val_mae=2.9590.ckpt",
+  "seconds_per_epoch_avg": 6.985671391487122,
+  "best_val_mae": 2.924220561981201,
+  "best_checkpoint": "C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\tts\\checkpoints\\best-epoch=93-val_mae=2.9242.ckpt",
+  "early_stopped": false,
+  "max_epochs_configured": 100,
+  "early_stopping_patience": 15,
+  "learning_rate": 0.001,
+  "seed": 42
 }
