@@ -465,3 +465,22 @@ Auto-updated running log of every experiment/script executed for this assignment
 - [2026-08-17 04:22:06] [gwn_predefined] epoch 38 train_loss=2.9459 val_mae=2.6940 (57.9s)
 - [2026-08-17 04:23:04] [gwn_predefined] epoch 39 train_loss=2.9482 val_mae=2.6963 (57.8s)
 - [2026-08-17 04:24:02] [gwn_predefined] epoch 40 train_loss=2.9479 val_mae=2.6910 (57.9s)
+- [2026-08-17 04:25:00] [gwn_predefined] epoch 41 train_loss=2.9372 val_mae=2.6990 (58.0s)
+- [2026-08-17 04:25:58] [gwn_predefined] epoch 42 train_loss=2.9362 val_mae=2.6824 (57.5s)
+- [2026-08-17 04:26:55] [gwn_predefined] epoch 43 train_loss=2.9325 val_mae=2.6900 (57.4s)
+- [2026-08-17 04:27:53] [gwn_predefined] epoch 44 train_loss=2.9298 val_mae=2.6911 (57.8s)
+- [2026-08-17 04:28:51] [gwn_predefined] epoch 45 train_loss=2.9202 val_mae=2.7041 (58.0s)
+- [2026-08-17 04:29:49] [gwn_predefined] epoch 46 train_loss=2.9201 val_mae=2.6922 (58.0s)
+- [2026-08-17 04:30:47] [gwn_predefined] epoch 47 train_loss=2.9185 val_mae=2.6899 (57.9s)
+- [2026-08-17 04:31:45] [gwn_predefined] epoch 48 train_loss=2.9181 val_mae=2.6782 (58.0s)
+- [2026-08-17 04:31:45] [gwn_predefined] Training finished after 50 epochs, 26.1 min total
+- [2026-08-17 04:31:45] [gwn_predefined] Merged pre-resume history (25 epochs) with newly-run epochs -- full curve now 49 epochs
+- [2026-08-17 04:31:45] [gwn_predefined] Training complete: 50 epochs, 26.1 min total, best_val_mae=2.672276258468628, checkpoint=C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\results\gwn_predefined\checkpoints\best-epoch=36-val_mae=2.6723.ckpt
+- [2026-08-17 04:36:01] [gwn_predefined] Evaluation pass over 108 test batches complete in 256.6s
+- [2026-08-17 04:36:03] [gwn_predefined] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\gwn_predefined (overall 60min MAE=3.808 mph)
+- [2026-08-17 04:36:03] [gwn_predefined] === Q2 GWN (predefined only): RESUME COMPLETE. Summary: {'experiment': 'gwn_predefined', 'total_training_seconds': 21340.932050704956, 'this_call_seconds': 1563.7039716243744, 'epochs_run': 49, 'epochs_run_this_call': 50, 'resumed_from_checkpoint': 'results/gwn_predefined/checkpoints\\best-epoch=21-val_mae=2.6850.ckpt', 'seconds_per_epoch_avg': 435.5292255245909, 'best_val_mae': 2.672276258468628, 'best_checkpoint': 'C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\gwn_predefined\\checkpoints\\best-epoch=36-val_mae=2.6723.ckpt', 'early_stopped': True, 'max_epochs_configured': 60, 'early_stopping_patience': 12, 'learning_rate': 0.001, 'seed': 42} ===
+- [2026-08-17 04:36:11] [gwn_adaptive] === Q2 GWN (predefined+adaptive): RESUMING from results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt (epoch 11, new ceiling max_epochs=60, patience=12, now on GPU) ===
+- [2026-08-17 04:36:12] [gwn_adaptive] Building predictor (lr=0.001, max_epochs=60, seed=42)
+- [2026-08-17 04:36:12] [gwn_adaptive] Resuming from checkpoint results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt (new ceiling max_epochs=60)
+- [2026-08-17 04:36:13] [gwn_adaptive] Training started (max_epochs=60, accelerator=CUDAAccelerator)
+- [2026-08-17 04:37:19] [gwn_adaptive] epoch 12 val_mae=2.6455 (65.0s)

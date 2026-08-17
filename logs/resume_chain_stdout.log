@@ -334,3 +334,40 @@ Restored all states from the checkpoint at results/gwn_predefined/checkpoints\be
 C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'val_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=5` in the `DataLoader` to improve performance.
 Only args ['edge_index', 'x', 'edge_weight'] are forwarded to the model (GraphWaveNetModel).
 C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=5` in the `DataLoader` to improve performance.
+
+Done. See results/gwn_predefined/metrics.json, training_history.json
+C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\.venv\Lib\site-packages\tsl\datasets\metr_la.py:98: FutureWarning: 'T' is deprecated and will be removed in a future version, please use 'min' instead.
+  date_range = pd.date_range(df.index[0], df.index[-1], freq='5T')
+C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\.venv\Lib\site-packages\tsl\datasets\metr_la.py:109: FutureWarning: The 'method' keyword in DataFrame.replace is deprecated and will be removed in a future version.
+  df = df.replace(to_replace=0., method='ffill')
+Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+\U0001f4a1 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\.venv\Lib\site-packages\torch\__init__.py:1551: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\Context.cpp:85.)
+  return _C._get_float32_matmul_precision()
+You are using a CUDA device ('NVIDIA GeForce RTX 3070') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\.venv\Lib\site-packages\pytorch_lightning\callbacks\model_checkpoint.py:881: Checkpoint directory C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\results\gwn_adaptive\checkpoints exists and is not empty.
+Restoring states from the checkpoint path at results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt
+C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\.venv\Lib\site-packages\pytorch_lightning\trainer\call.py:283: Be aware that when using `ckpt_path`, callbacks used to create the checkpoint need to be provided during `Trainer` instantiation. Please add the following callbacks: ["EarlyStopping{'monitor': 'val_mae', 'mode': 'min'}"].
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
++----------------------------------------------------------------+
+|   | Name          | Type              | Params | Mode  | FLOPs |
+|---+---------------+-------------------+--------+-------+-------|
+| 0 | loss_fn       | MaskedMAE         |      0 | train |     0 |
+| 1 | train_metrics | MetricCollection  |      0 | train |     0 |
+| 2 | val_metrics   | MetricCollection  |      0 | train |     0 |
+| 3 | test_metrics  | MetricCollection  |      0 | train |     0 |
+| 4 | model         | GraphWaveNetModel |  301 K | train |     0 |
++----------------------------------------------------------------+
+Trainable params: 301 K                                                        
+Non-trainable params: 0                                                        
+Total params: 301 K                                                            
+Total estimated model params size (MB): 1.205                                  
+Modules in train mode: 171                                                     
+Modules in eval mode: 0                                                        
+Total FLOPs: 0                                                                 
+Restored all states from the checkpoint at results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt
+C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'val_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=5` in the `DataLoader` to improve performance.
+Only args ['x', 'edge_index', 'edge_weight'] are forwarded to the model (GraphWaveNetModel).
+C:\Users\CSC5030Z\Downloads\Assign2STGNN-master\Assign2STGNN-master\.venv\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=5` in the `DataLoader` to improve performance.

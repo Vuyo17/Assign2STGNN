@@ -56,3 +56,8 @@
 [2026-08-17 03:50:18] [gwn_adaptive] Saved metrics.json / metrics_per_node.csv / predictions.npz to results\gwn_adaptive (overall 60min MAE=3.650 mph)
 [2026-08-17 03:50:18] [gwn_adaptive] Saved learned adjacency matrix ((207, 207)) to results/gwn_adaptive/learned_adjacency.npy (resumed run)
 [2026-08-17 03:50:18] [gwn_adaptive] === Q2 GWN (predefined+adaptive): RESUME COMPLETE. Summary: {'experiment': 'gwn_adaptive', 'total_training_seconds': 21316.86047911644, 'this_call_seconds': 195.10651326179504, 'epochs_run': 15, 'epochs_run_this_call': 16, 'resumed_from_checkpoint': 'results/gwn_adaptive/checkpoints\\best-epoch=11-val_mae=2.6228.ckpt', 'seconds_per_epoch_avg': 1421.124031941096, 'best_val_mae': 2.6228384971618652, 'best_checkpoint': 'C:\\Users\\CSC5030Z\\Downloads\\Assign2STGNN-master\\Assign2STGNN-master\\results\\gwn_adaptive\\checkpoints\\best-epoch=11-val_mae=2.6228.ckpt', 'early_stopped': True, 'max_epochs_configured': 25, 'early_stopping_patience': 8, 'learning_rate': 0.001, 'seed': 42} ===
+[2026-08-17 04:36:11] [gwn_adaptive] === Q2 GWN (predefined+adaptive): RESUMING from results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt (epoch 11, new ceiling max_epochs=60, patience=12, now on GPU) ===
+[2026-08-17 04:36:12] [gwn_adaptive] Building predictor (lr=0.001, max_epochs=60, seed=42)
+[2026-08-17 04:36:12] [gwn_adaptive] Resuming from checkpoint results/gwn_adaptive/checkpoints\best-epoch=11-val_mae=2.6228.ckpt (new ceiling max_epochs=60)
+[2026-08-17 04:36:13] [gwn_adaptive] Training started (max_epochs=60, accelerator=CUDAAccelerator)
+[2026-08-17 04:37:19] [gwn_adaptive] epoch 12 val_mae=2.6455 (65.0s)

@@ -49,13 +49,13 @@
       "notes": "101 epochs, 8.5 min, best_val_mae=2.924220561981201"
     },
     "gwn_predefined_train": {
-      "state": "running",
+      "state": "done",
       "started": "2026-08-16 17:09:52",
-      "finished": "2026-08-17 03:36:29",
-      "notes": "26 epochs, 12.5 min, best_val_mae=2.685002326965332"
+      "finished": "2026-08-17 04:31:45",
+      "notes": "50 epochs, 26.1 min, best_val_mae=2.672276258468628"
     },
     "gwn_adaptive_train": {
-      "state": "done",
+      "state": "running",
       "started": "2026-08-16 17:10:25",
       "finished": "2026-08-17 03:45:50",
       "notes": "16 epochs, 3.3 min, best_val_mae=2.6228384971618652"
@@ -75,8 +75,8 @@
     "gwn_predefined_eval": {
       "state": "done",
       "started": "2026-08-16 22:59:44",
-      "finished": "2026-08-17 03:40:27",
-      "notes": "60min MAE=3.873 (resumed run, GPU)"
+      "finished": "2026-08-17 04:36:03",
+      "notes": "60min MAE=3.808 (resumed run, GPU)"
     },
     "gwn_adaptive_eval": {
       "state": "done",

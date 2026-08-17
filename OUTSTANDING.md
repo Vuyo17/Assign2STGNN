@@ -4,7 +4,7 @@
 
 Progress: **9/28** stages complete.
 
-Last regenerated: 2026-08-17 04:05:33
+Last regenerated: 2026-08-17 04:36:03
 
 ## Setup
 
@@ -22,7 +22,7 @@ Last regenerated: 2026-08-17 04:05:33
 
 ## Q2 GraphWaveNet
 
-- ✅ **gwn_predefined_train**: GWN (predefined graph only) trained -- 26 epochs, 12.5 min, best_val_mae=2.685002326965332
+- ✅ **gwn_predefined_train**: GWN (predefined graph only) trained -- 50 epochs, 26.1 min, best_val_mae=2.672276258468628
 - ✅ **gwn_adaptive_train**: GWN (predefined + adaptive) trained -- 16 epochs, 3.3 min, best_val_mae=2.6228384971618652
 - ⬜ **gwn_eval**: Both GWN configs evaluated: overall + per-horizon + per-node
 - ⬜ **fig_gwn_vs_tts**: TTS vs GWN-predefined vs GWN-adaptive comparison
